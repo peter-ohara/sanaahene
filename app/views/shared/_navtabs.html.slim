@@ -1,0 +1,6 @@
+nav.fixed.bottom-0.inset-x-0.bg-white.flex.justify-between.text-sm.text-blue-900.font-mono.shadow-lg
+  - links.each do |link|
+      a[class="flex flex-col w-full block py-2 px-3 text-center hover:text-blue-800 transition duration-300" href="#{link[1]}"]
+        span.material-icons.w-6.h-6.mx-auto list
+        span[class="#{'border-b-4 border-indigo-700 mx-5' if current_page?(link[1])}" href="#{link[1]}"]= link[0]
+

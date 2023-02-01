@@ -1,10 +1,9 @@
-p style="color: green" = notice
+= content_for(:appbar_top, toolbar(navication_icon=link_to(icon(:arrow_back), users_path), menu_items=[button_to(icon(:delete), @user, method: :delete)]))
 
-== render @user
+= panel do
+  == render @user
 
-div
-  => link_to "Edit this user", edit_user_path(@user)
-  '|
-  =< link_to "Back to users", users_path
+= fab(icon='edit', url=edit_user_path(@user))
 
-  = button_to "Destroy this user", @user, method: :delete
+
+= no_content_for(:bottom_bar)

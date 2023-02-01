@@ -9,46 +9,25 @@ html
     == javascript_include_tag "application", "data-turbo-track": "reload", defer: true
     link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"
   body
-    header.fixed.top-0.z-20.inset-x-0.bg-white.shadow[data-controller="slideover" data-slideover-open-value="false" data-slideover-invisible-class="-translate-x-full,opacity-0" data-slideover-visible-class="translate-x-0,opacity-100" data-slideover-entering-class="" data-slideover-enter-timeout="300,300" data-slideover-leaving-class="" data-slideover-leave-timeout="300,0" data-slideover-active-target="#slideover-target"]
-      button.w-10.h-10.rounded-full.text-gray-500.hover:bg-gray-200 data-action="click->slideover#toggle click@window->slideover#hide"
-        span.material-icons
-          | menu
-      #sidebar-mobile
-        .fixed.inset-0.flex.z-40.transition-opacity.ease-linear.duration-300.opacity-0.hidden[data-slideover-target="overlay"]
-          .fixed.inset-0
-            .absolute.inset-0.bg-gray-600.opacity-75
-          #slideover-target.relative.flex-1.flex.flex-col.max-w-xs.w-full.pt-5.pb-4.bg-white.transition.ease-in-out.duration-300.transform.-translate-x-full.hidden[data-slideover-target="menu"]
-            .absolute.top-0.right-0.-mr-14.p-1
-              button.flex.items-center.justify-center.h-12.w-12.rounded-full.focus:outline-none.focus:bg-gray-600[data-action="slideover#toggle" aria-label="Close sidebar"]
-                svg.h-6.w-6.text-white[stroke="currentColor" fill="none" viewbox="0 0 24 24"]
-                  path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"]
-            .flex-shrink-0.flex.items-center.px-4
-              h1.text-2xl.font-bold
-                span.material-icons.w-6.h-6.mx-auto
-                  | home
-                | Sanaahene
-            .mt-5.flex-1.h-0.overflow-y-auto
-              nav.space-y-1
-                a.flex.px-3.py-5.text-gray-600.font-medium.hover:bg-gray-100.transition.duration-300[href="#{root_path}"]
-                  span.material-icons.mr-2
-                    | home
-                  |  Attendees
-              .border-b.mx-5
-          .flex-shrink-0.w-14
+    -if notice
+      = alert(notice)
 
-    .min-h-screen.bg-gray-100.pt-10.text-blue-800
-      == yield
+    div[
+      data-controller="slideover"
+      data-slideover-open-value="false"
+      data-slideover-invisible-class="-translate-x-full,opacity-0"
+      data-slideover-visible-class="translate-x-0,opacity-100"
+      data-slideover-entering-class=""
+      data-slideover-enter-timeout="300,300"
+      data-slideover-leaving-class=""
+      data-slideover-leave-timeout="300,0"
+      data-slideover-active-target="#slideover-target"
+    ]
+      == yield(:appbar_top).presence || toolbar(sidenav_icon, menu_items=[], title="Sanaahene")
 
-    / navbar bottom
-    nav.fixed.bottom-0.inset-x-0.bg-white.flex.justify-between.text-sm.text-blue-900.font-mono.shadow-lg
-      a.flex.flex-col.w-full.block.py-2.px-3.text-center.hover:text-blue-800.transition.duration-300[href="#{root_path}"]
-        span.material-icons.w-6.h-6.mx-auto
-          | list
-        |  Users
-      a.flex.flex-col.w-full.block.py-2.px-3.text-center.hover:text-blue-800.transition.duration-300[href="#"]
-        span.material-icons.w-6.h-6.mx-auto
-          | list
-        |  Home
+      = sidenav()
 
+      .min-h-screen.bg-gray-100.pt-16
+        == yield
 
-
+      == yield(:bottom_bar).presence || navtabs([["User", users_path], ["Home", root_path]])

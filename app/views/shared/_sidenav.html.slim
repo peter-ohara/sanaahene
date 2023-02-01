@@ -1,0 +1,20 @@
+#sidebar-mobile
+  .fixed.inset-0.flex.z-40.transition-opacity.ease-linear.duration-300.opacity-0.hidden[data-slideover-target="overlay"]
+    .fixed.inset-0
+      .absolute.inset-0.bg-gray-600.opacity-75
+    #slideover-target.relative.flex-1.flex.flex-col.max-w-xs.w-full.pt-5.pb-4.bg-white.transition.ease-in-out.duration-300.transform.-translate-x-full.hidden[data-slideover-target="menu"]
+      .absolute.top-0.right-0.-mr-14.p-1
+        button.flex.items-center.justify-center.h-12.w-12.rounded-full.focus:outline-none.focus:bg-gray-600[data-action="slideover#toggle" aria-label="Close sidebar"]
+          svg.h-6.w-6.text-white[stroke="currentColor" fill="none" viewbox="0 0 24 24"]
+            path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"]
+      .flex-shrink-0.flex.items-center.px-4
+        h1.text-2xl.font-bold
+          span.material-icons.w-6.h-6.mx-auto home
+          | Sanaahene
+      .mt-5.flex-1.h-0.overflow-y-auto
+        nav.space-y-1
+          a.flex.px-3.py-5.text-gray-600.font-medium.hover:bg-gray-100.transition.duration-300[href="#{users_path}"]
+            span.material-icons.mr-2 people
+            |  Attendees
+        .border-b.mx-5
+    .flex-shrink-0.w-14
