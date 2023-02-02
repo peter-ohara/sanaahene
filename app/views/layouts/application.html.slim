@@ -25,7 +25,7 @@ html
     ]
       == yield(:top_app_bar).presence || toolbar(navigation_icon: sidenav_icon, title: "Sanaahene")
 
-      = sidenav
+      = navigation_drawer
 
       .min-h-screen.bg-gray-100.pt-16.pb-20
         == yield

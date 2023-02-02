@@ -46,7 +46,7 @@ module ApplicationHelper
 		render 'shared/sidenav_icon'
 	end
 
-	def sidenav
+	def navigation_drawer
 		render 'shared/sidenav'
 	end
 
