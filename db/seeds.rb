@@ -5,3 +5,25 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+
+def load_fixtures
+  Rake::Task["db:fixtures:load"].invoke
+end
+
+def confirmed?
+  return true if ENV["CONFIRM_FIXTURE_LOAD"]
+
+  puts <<~EXPLAIN
+ERROR!
+
+Loading fixtures into the database will clobber all existing data in the tables.
+To confirm this is what you want to do, set the environment variable CONFIRM_FIXTURE_LOAD
+
+$ CONFIRM_FIXTURE_LOAD=yeppers bin/rails db:seed
+  EXPLAIN
+
+  false
+end
+
+load_fixtures if confirmed?
