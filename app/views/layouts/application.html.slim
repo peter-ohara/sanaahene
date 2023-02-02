@@ -23,11 +23,11 @@ html
       data-slideover-leave-timeout="300,0"
       data-slideover-active-target="#slideover-target"
     ]
-      == yield(:appbar_top).presence || toolbar(sidenav_icon, menu_items=[], title="Sanaahene")
+      == yield(:appbar_top).presence || toolbar(navigation_icon: sidenav_icon, title: "Sanaahene")
 
       = sidenav()
 
-      .min-h-screen.bg-gray-100.pt-16
+      .min-h-screen.bg-gray-100.pt-16.pb-20
         == yield
 
       == yield(:bottom_bar).presence || navtabs([["User", users_path], ["Home", root_path]])

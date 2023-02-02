@@ -1,4 +1,4 @@
-= content_for(:appbar_top, toolbar(navication_icon=link_to(icon(:arrow_back), @user)))
+= content_for(:appbar_top, toolbar(navigation_icon: link_to(icon(:arrow_back), @user)))
 
 = panel do
   == render "form", user: @user

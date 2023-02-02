@@ -1,0 +1,17 @@
+- groups.each do |header, items|
+  .px-3.pb-2
+    span.text-xl.mr-3
+      = header
+    span.text-gray-500.bg-gray-200
+      = items.count
+
+  .border-y.divide-y.bg-white
+    - items.each do |item|
+      = link_to(item, class: "flex px-3 py-3 items-center text-gray-600 font-medium transition duration-300") do
+
+        = resolve_leading_content(item, leading_content)
+        .grow.mx-3
+          div = item.send(headline_text) if headline_text.present?
+          .text-sm = item.send(supporting_text) if supporting_text.present?
+        .self-start
+          = item.send(trailing_content) if trailing_content.present?

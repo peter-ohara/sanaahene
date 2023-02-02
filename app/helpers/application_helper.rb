@@ -7,8 +7,8 @@ module ApplicationHelper
   end
 
 
-	def toolbar(navication_icon, menu_items=[], title="")
-		render('shared/toolbar', navication_icon: navication_icon, title: title, menu_items: menu_items)
+	def toolbar(navigation_icon:, title: nil, menu_items: [])
+		render('shared/toolbar', navigation_icon: navigation_icon, title: title, menu_items: menu_items)
 	end
 
 	def tw_text_field(form, field_name)
@@ -22,18 +22,18 @@ module ApplicationHelper
 		render 'shared/navtabs', links: links
 	end
 
-	def panel()
+	def panel
 		render 'shared/panel' do
 			 yield
 		end
 	end
 
-	def fab(icon, url)
-		render 'shared/fab', icon: icon, url: url
+	def fab(icon_name, url)
+		render 'shared/fab', icon_name: icon_name, url: url
 	end
 
-	def icon(name, class_names="text-gray-500")
-			content_tag(:span, name, class: "material-icons #{class_names}")
+	def icon(name, classes: nil, color: 'text-gray-500')
+			content_tag(:span, name, class: "material-icons #{classes} #{color}")
 	end
 
 	def no_content_for(symbol)
@@ -48,13 +48,25 @@ module ApplicationHelper
 		render 'shared/sidenav'
 	end
 
-	def cancel_form_path(resource)
-		return resource_path(resource) if resource.persisted?
-
-		return users_path
-	end
-
 	def alert(message)
 		render 'shared/alert', message: message
+	end
+
+	def deck(items, headline_text: nil, supporting_text: nil, leading_content: nil, trailing_content: nil)
+		render('shared/deck',
+				items: items, headline_text: headline_text, supporting_text: supporting_text, leading_content: leading_content, trailing_content: trailing_content
+		)
+	end
+
+	def grouped_deck(groups, headline_text: nil, supporting_text: nil, leading_content: nil, trailing_content: nil)
+		render('shared/grouped_deck', groups: groups, headline_text: headline_text, supporting_text: supporting_text, leading_content: leading_content, trailing_content: trailing_content)
+	end
+
+	def resolve_leading_content(item, leading_content)
+		return nil if leading_content.blank?
+
+		return image_tag(item.send(leading_content), class: "flex-none w-6 h-full") if item.respond_to?(leading_content)
+
+		content_tag(:div, icon(leading_content), class: "flex-none w-6 h-full")
 	end
 end

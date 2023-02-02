@@ -1,4 +1,6 @@
-= content_for(:appbar_top, toolbar(navication_icon=link_to(icon(:arrow_back), users_path), menu_items=[button_to(icon(:delete), @user, method: :delete)]))
+= content_for(:appbar_top,
+        toolbar(navigation_icon: link_to(icon(:arrow_back), users_path, class: "flex items-center justify-center"),
+                menu_items: [button_to(icon(:delete), @user, method: :delete)]))
 
 = panel do
   == render @user

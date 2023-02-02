@@ -1,16 +1,8 @@
-#users
-  - @users.group_by(&:day).each do |day, users|
-    .px-3.pb-2
-      span.text-xl.mr-3
-        = day
-      span.text-gray-500.bg-gray-200
-        = users.count
-    .border-y.divide-y.bg-white
-      - users.each do |user|
-        a.flex.px-3.py-5.text-gray-600.font-medium.transition.duration-300[href="#{user_path user}"]
-          span.material-icons.mr-3
-            | people
-          = user.name
+= grouped_deck(@users.group_by(&:creation_date),
+    headline_text: :name,
+    supporting_text: :email,
+    leading_content: :people,
+    trailing_content: :creation_date)
 
 = fab(icon='add', url=new_user_path)
 

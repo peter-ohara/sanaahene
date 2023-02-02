@@ -1,6 +1,6 @@
-nav.fixed.bottom-0.inset-x-0.bg-white.flex.justify-between.text-sm.text-blue-900.font-mono.shadow-lg
+nav.fixed.bottom-0.inset-x-0.bg-white.flex.justify-between.text-sm.text-gray-500.z-20.font-mono.shadow-t
   - links.each do |link|
-      a[class="flex flex-col w-full block py-2 px-3 text-center hover:text-blue-800 transition duration-300" href="#{link[1]}"]
-        span.material-icons.w-6.h-6.mx-auto list
-        span[class="#{'border-b-4 border-indigo-700 mx-5' if current_page?(link[1])}" href="#{link[1]}"]= link[0]
+      a[class="#{'border-b-4 border-indigo-500 text-indigo-500 mx-5' if current_page?(link[1])} flex flex-col w-full block pt-2 px-3 text-center transition duration-300" href="#{link[1]}"]
+        = icon(:list, color: nil)
+        = link[0]
 

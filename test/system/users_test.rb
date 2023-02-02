@@ -7,42 +7,44 @@ class UsersTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit users_url
-    assert_selector "h1", text: "Users"
+    users.each do |user|
+      assert_text user.name
+    end
   end
 
   test "should create user" do
     visit users_url
-    click_on "New user"
+    click_on "add"
 
-    fill_in "Email", with: @user.email
+    fill_in "Email", with: "gob3@gmail.com"
     fill_in "First name", with: @user.first_name
     fill_in "Last name", with: @user.last_name
     fill_in "Other names", with: @user.other_names
-    fill_in "Phone number", with: @user.phone_number
-    click_on "Create User"
+    fill_in "Phone number", with: "+233987456789"
+    click_on "Save"
 
     assert_text "User was successfully created"
-    click_on "Back"
+    click_on "arrow_back"
   end
 
   test "should update User" do
     visit user_url(@user)
-    click_on "Edit this user", match: :first
+    click_on "edit", match: :first
 
     fill_in "Email", with: @user.email
     fill_in "First name", with: @user.first_name
     fill_in "Last name", with: @user.last_name
     fill_in "Other names", with: @user.other_names
     fill_in "Phone number", with: @user.phone_number
-    click_on "Update User"
+    click_on "Save"
 
     assert_text "User was successfully updated"
-    click_on "Back"
+    click_on "arrow_back"
   end
 
   test "should destroy User" do
     visit user_url(@user)
-    click_on "Destroy this user", match: :first
+    click_on "delete", match: :first
 
     assert_text "User was successfully destroyed"
   end
