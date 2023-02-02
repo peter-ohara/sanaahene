@@ -13,7 +13,7 @@
   = tw_text_field form, :phone_number
 
 = content_for :bottom_bar do
-  nav.fixed.bottom-0.inset-x-0.bg-white.flex.justify-between.text-md.shadow-lg.py-3
-    = link_to('Cancel', @user.persisted? ? @user : users_path, class: "flex flex-col w-full block py-2 px-3 text-center hover:text-blue-800 transition duration-300")
-    = button_tag('Save', type: :submit, form: dom_id(@user), class: "flex flex-col w-full block py-2 px-3 text-indigo-500 font-bold transition duration-300")
+  = navigation_bar do
+    = link_to('Cancel', @user.persisted? ? @user : users_path, class: "flex flex-col text-center text-lg text-gray-700")
+    = button_tag('Save', type: :submit, form: dom_id(@user), class: "flex flex-col text-center block py-2 px-3 text-indigo-700 text-lg font-extrabold")
 

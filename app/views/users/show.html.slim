@@ -1,4 +1,4 @@
-= content_for(:appbar_top,
+= content_for(:top_app_bar,
         toolbar(navigation_icon: link_to(icon(:arrow_back), users_path, class: "flex items-center justify-center"),
                 menu_items: [button_to(icon(:delete), @user, method: :delete)]))
 

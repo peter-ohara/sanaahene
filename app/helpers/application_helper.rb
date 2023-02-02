@@ -18,8 +18,10 @@ module ApplicationHelper
 		end
 	end
 
-	def navtabs(links)
-		render 'shared/navtabs', links: links
+	def navigation_bar
+		content_tag(:nav, class: "fixed bottom-0 inset-x-0 bg-white h-16 flex justify-around items-center text-gray-500 z-20 font-mono shadow-t") do
+			yield
+		end
 	end
 
 	def panel
