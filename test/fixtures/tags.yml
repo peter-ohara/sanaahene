@@ -1,0 +1,35 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: "Rental Arbitrage"
+
+two:
+  name: "Tina's Court"
+
+three:
+  name: "Brickhouse"
+
+four:
+  name: "CityDia"
+
+five:
+  name: "4006"
+
+six:
+  name: "4010"
+
+seven:
+  name: "4014"
+
+eight:
+  name: "Master bedroom"
+
+nine:
+  name: "Small bedroom"
+
+ten:
+  name: "CityDia 1"
+
+eleven:
+  name: "CityDia Storeroom"
+
