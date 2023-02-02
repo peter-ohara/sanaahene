@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  entered_at: 2023-01-02 14:57:42
+  attendee: one
+  notes: MyText
+  item: one
+  amount: 9.99
+  quantity: 1
+  type: Purchase
+
+two:
+  entered_at: 2023-02-02 14:57:42
+  attendee: two
+  notes: MyText
+  item: two
+  amount: -9.99
+  quantity: 1
+  type: Purchase

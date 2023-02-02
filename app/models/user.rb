@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 
+  has_many :inventory_entries, foreign_key: "attendee_id", dependent: :destroy
+
   def name
     "#{first_name} #{other_names} #{last_name}"
   end
