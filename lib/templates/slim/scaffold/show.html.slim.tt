@@ -1,0 +1,7 @@
+= content_for(:top_app_bar) do
+  = toolbar(navigation_icon: link_to(icon(:arrow_back), <%= index_helper(type: :path) %>, class: "flex items-center"), menu_items: [delete_button(<%= model_resource_name(prefix: "@") %>)])
+
+= panel do
+  == render @<%= singular_table_name %>
+
+= fab(icon='edit', url=<%= edit_helper(type: :path) %>)

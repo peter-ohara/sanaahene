@@ -1,0 +1,1 @@
+= detail_view(<%= singular_name %>, [<%= attributes.map{ |a| ":#{a.column_name}" }.join(", ") %>])

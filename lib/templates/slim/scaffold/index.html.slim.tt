@@ -1,0 +1,12 @@
+= content_for(:top_app_bar) do
+  = toolbar(navigation_icon: sidenav_icon)
+
+= deck(@<%= plural_table_name %>,
+    headline_text: :<%= attributes[0].column_name %>,
+    supporting_text: :updated_at,
+    leading_content: :person,
+    trailing_content: :created_at)
+
+= fab(icon='add', url=<%= new_helper(type: :path) %>)
+
+= render('shared/navigation_bar')
