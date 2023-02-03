@@ -1,11 +1,7 @@
-= content_for(:top_app_bar,
-        toolbar(navigation_icon: link_to(icon(:arrow_back), users_path, class: "flex items-center justify-center"),
-                menu_items: [button_to(icon(:delete), @user, method: :delete)]))
-
+= content_for(:top_app_bar) do
+  = toolbar(navigation_icon: link_to(icon(:arrow_back), users_path, class: "flex items-center"), menu_items: [delete_button(@user)])
+  
 = panel do
   == render @user
 
 = fab(icon='edit', url=edit_user_path(@user))
-
-
-= no_content_for(:bottom_bar)

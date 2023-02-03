@@ -2,7 +2,7 @@ module ApplicationHelper
 	def tailwind_classes_for(flash_type)
     {
       notice: "bg-green-400 border-l-4 border-green-700 text-white",
-      error:   "bg-red-400 border-l-4 border-red-700 text-black",
+			alert:   "bg-red-400 border-l-4 border-red-700 text-black",
     }.stringify_keys[flash_type.to_s] || flash_type.to_s
   end
 
@@ -34,6 +34,10 @@ module ApplicationHelper
 		render 'shared/fab', icon_name: icon_name, url: url
 	end
 
+	def delete_button(resource)
+		button_to(icon(:delete), resource, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: "flex items-center")
+	end
+
 	def icon(name, classes: nil, color: 'text-gray-500')
 			content_tag(:span, name, class: "material-icons #{classes} #{color}")
 	end
@@ -44,14 +48,6 @@ module ApplicationHelper
 
 	def sidenav_icon
 		render 'shared/sidenav_icon'
-	end
-
-	def navigation_drawer
-		render 'shared/sidenav'
-	end
-
-	def alert(message)
-		render 'shared/alert', message: message
 	end
 
 	def deck(items, headline_text: nil, supporting_text: nil, leading_content: nil, trailing_content: nil)

@@ -1,0 +1,16 @@
+= navigation_bar do
+  = link_to(root_path, class: "flex flex-col text-center text-sm") do
+    = icon(:home, color: nil)
+    | Home
+  = link_to(users_path, class: "flex flex-col text-center text-sm") do
+    = icon(:bolt, color: nil)
+    | Electricity
+  = link_to(users_path, class: "flex flex-col text-center text-sm") do
+    = icon(:water_drop, color: nil)
+    | Water
+  = link_to(users_path, class: "flex flex-col text-center text-sm") do
+    = icon(:wifi, color: nil)
+    | Internet
+  = link_to(users_path, class: "flex flex-col text-center text-sm") do
+    = icon(:category, color: nil)
+    | Supplies

@@ -12,8 +12,6 @@
   = tw_text_field form, :email
   = tw_text_field form, :phone_number
 
-= content_for :bottom_bar do
-  = navigation_bar do
-    = link_to('Cancel', @user.persisted? ? @user : users_path, class: "flex flex-col text-center text-lg text-gray-700")
-    = button_tag('Save', type: :submit, form: dom_id(@user), class: "flex flex-col text-center block py-2 px-3 text-indigo-700 text-lg font-extrabold")
-
+= navigation_bar do
+  = link_to('Cancel', @user.persisted? ? @user : users_path, class: "flex flex-col text-center text-lg text-gray-700")
+  = button_tag('Save', type: :submit, form: dom_id(@user), class: "flex flex-col text-center block py-2 px-3 text-indigo-700 text-lg font-extrabold")

@@ -9,8 +9,7 @@ html
     == javascript_include_tag "application", "data-turbo-track": "reload", defer: true
     link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"
   body
-    -if notice
-      = alert(notice)
+    = render'shared/alert'
 
     div[
       data-controller="slideover"
@@ -23,26 +22,9 @@ html
       data-slideover-leave-timeout="300,0"
       data-slideover-active-target="#slideover-target"
     ]
-      == yield(:top_app_bar).presence || toolbar(navigation_icon: sidenav_icon, title: "Sanaahene")
+      = render 'shared/navigation_drawer'
 
-      = navigation_drawer
+      == yield(:top_app_bar).presence || toolbar(navigation_icon: sidenav_icon, title: "Sanaahene")
 
       .min-h-screen.bg-gray-100.pt-16.pb-20
         == yield
-
-      - if content_for?(:bottom_bar)
-        == yield(:bottom_bar)
-      - else
-        = navigation_bar do
-          = link_to(users_path, class: "flex flex-col text-center text-sm") do
-            = icon(:bolt, color: nil)
-            | Electricity
-          = link_to(users_path, class: "flex flex-col text-center text-sm") do
-            = icon(:water_drop, color: nil)
-            | Water
-          = link_to(users_path, class: "flex flex-col text-center text-sm") do
-            = icon(:wifi, color: nil)
-            | Internet
-          = link_to(users_path, class: "flex flex-col text-center text-sm") do
-            = icon(:category, color: nil)
-            | Supplies

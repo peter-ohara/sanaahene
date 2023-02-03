@@ -1,4 +1,5 @@
-= content_for(:top_app_bar, toolbar(navigation_icon: link_to(icon(:arrow_back), @user)))
+= content_for(:top_app_bar) do
+  = toolbar(navigation_icon: link_to(icon(:arrow_back), @user, class: "flex items-center"))
 
 = panel do
   == render "form", user: @user
