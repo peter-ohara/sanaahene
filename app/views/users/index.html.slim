@@ -1,11 +1,11 @@
 = content_for(:top_app_bar) do
-  = toolbar(navigation_icon: sidenav_icon, title: "Users")
+  = toolbar(navigation_icon: sidenav_icon)
 
-= grouped_deck(@users.group_by(&:creation_date),
-    headline_text: :name,
-    supporting_text: :email,
-    leading_content: :people,
-    trailing_content: :creation_date)
+= deck(@users,
+    headline_text: :first_name,
+    supporting_text: :updated_at,
+    leading_content: :person,
+    trailing_content: :created_at)
 
 = fab(icon='add', url=new_user_path)
 

@@ -1,11 +1,12 @@
-p style="color: green" = notice
+= content_for(:top_app_bar) do
+  = toolbar(navigation_icon: sidenav_icon)
 
-h1 Items
+= deck(@items,
+    headline_text: :name,
+    supporting_text: :updated_at,
+    leading_content: :person,
+    trailing_content: :created_at)
 
-#items
-  - @items.each do |item|
-    == render item
-    p
-      = link_to "Show this item", item
+= fab(icon='add', url=new_item_path)
 
-= link_to "New item", new_item_path
+= render('shared/navigation_bar')

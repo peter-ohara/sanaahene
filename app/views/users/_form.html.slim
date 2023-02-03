@@ -1,4 +1,4 @@
-= form_with(model: @user, id: dom_id(@user)) do |form|
+= form_with(model: @user) do |form|
   - if @user.errors.any?
     div style="color: red"
       h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
@@ -12,6 +12,5 @@
   = tw_text_field form, :email
   = tw_text_field form, :phone_number
 
-= navigation_bar do
-  = link_to('Cancel', @user.persisted? ? @user : users_path, class: "flex flex-col text-center text-lg text-gray-700")
-  = button_tag('Save', type: :submit, form: dom_id(@user), class: "flex flex-col text-center block py-2 px-3 text-indigo-700 text-lg font-extrabold")
+  = navigation_bar do
+    = form.submit(class: "flex flex-col text-center block py-2 px-3 text-indigo-700 text-lg font-extrabold")

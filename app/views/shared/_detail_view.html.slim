@@ -1,0 +1,7 @@
+.table.w-full
+  - fields.each do |field|
+    .table-row
+      .table-cell.text-gray-700
+        = field.to_s.humanize
+      .table-cell.text-lg
+        = item.send(field)

@@ -6,9 +6,7 @@
         - @item.errors.each do |error|
           li = error.full_message
 
-  div
-    = form.label :name, style: "display: block"
-    = form.text_field :name
+  = tw_text_field form, :name
 
-  div
-    = form.submit
+  = navigation_bar do
+    = form.submit(class: "flex flex-col text-center block py-2 px-3 text-indigo-700 text-lg font-extrabold")

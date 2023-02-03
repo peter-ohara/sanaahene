@@ -1,10 +1,5 @@
-h1 Editing item
+= content_for(:top_app_bar) do
+  = toolbar(navigation_icon: link_to(icon(:arrow_back), @item, class: "flex items-center"))
 
-== render "form", item: @item
-
-br
-
-div
-  => link_to "Show this item", @item
-  '|
-  =< link_to "Back to items", items_path
+= panel do
+  == render "form", item: @item

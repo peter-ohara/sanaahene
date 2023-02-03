@@ -24,6 +24,10 @@ module ApplicationHelper
 		end
 	end
 
+	def detail_view(item, fields)
+		render 'shared/detail_view', item: item, fields: fields
+	end
+
 	def panel
 		render 'shared/panel' do
 			 yield
