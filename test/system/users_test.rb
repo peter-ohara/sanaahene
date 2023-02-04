@@ -21,7 +21,7 @@ class UsersTest < ApplicationSystemTestCase
     fill_in "Last name", with: @user.last_name
     fill_in "Other names", with: @user.other_names
     fill_in "Phone number", with: "+233987456789"
-    click_on "Save"
+    click_on "Create User"
 
     assert_text "User was successfully created"
     click_on "arrow_back"
@@ -36,7 +36,7 @@ class UsersTest < ApplicationSystemTestCase
     fill_in "Last name", with: @user.last_name
     fill_in "Other names", with: @user.other_names
     fill_in "Phone number", with: @user.phone_number
-    click_on "Save"
+    click_on "Update User"
 
     assert_text "User was successfully updated"
     click_on "arrow_back"
@@ -44,7 +44,9 @@ class UsersTest < ApplicationSystemTestCase
 
   test "should destroy User" do
     visit user_url(@user)
-    click_on "delete", match: :first
+    accept_alert do
+      click_on "delete", match: :first
+    end
 
     assert_text "User was successfully destroyed"
   end

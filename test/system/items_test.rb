@@ -7,34 +7,38 @@ class ItemsTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit items_url
-    assert_selector "h1", text: "Items"
+    items.each do |item|
+      assert_text item.name
+    end
   end
 
   test "should create item" do
     visit items_url
-    click_on "New item"
+    click_on "add"
 
     fill_in "Name", with: "Bleach"
     click_on "Create Item"
 
     assert_text "Item was successfully created"
-    click_on "Back"
+    click_on "arrow_back"
   end
 
   test "should update Item" do
     visit item_url(@item)
-    click_on "Edit this item", match: :first
+    click_on "edit", match: :first
 
     fill_in "Name", with: @item.name
     click_on "Update Item"
 
     assert_text "Item was successfully updated"
-    click_on "Back"
+    click_on "arrow_back"
   end
 
   test "should destroy Item" do
     visit item_url(@item)
-    click_on "Destroy this item", match: :first
+    accept_alert do
+      click_on "delete", match: :first
+    end
 
     assert_text "Item was successfully destroyed"
   end
