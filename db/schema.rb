@@ -10,23 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_02_145742) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_02_144510) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "inventory_entries", force: :cascade do |t|
-    t.datetime "entered_at", null: false
-    t.bigint "attendee_id", null: false
-    t.text "notes"
-    t.bigint "item_id", null: false
-    t.decimal "amount", precision: 8, scale: 2, null: false
-    t.decimal "quantity", precision: 8, scale: 2, null: false
-    t.string "type", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["attendee_id"], name: "index_inventory_entries_on_attendee_id"
-    t.index ["item_id"], name: "index_inventory_entries_on_item_id"
-  end
 
   create_table "items", force: :cascade do |t|
     t.string "name"
@@ -54,6 +40,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_02_145742) do
     t.index ["phone_number"], name: "index_users_on_phone_number", unique: true
   end
 
-  add_foreign_key "inventory_entries", "items"
-  add_foreign_key "inventory_entries", "users", column: "attendee_id"
 end
