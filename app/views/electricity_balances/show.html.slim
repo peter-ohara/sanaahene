@@ -1,0 +1,7 @@
+= content_for(:top_app_bar) do
+  = toolbar(navigation_icon: link_to(icon(:arrow_back), electricity_balances_path, class: "flex items-center"), menu_items: [delete_button(@electricity_balance)])
+
+= panel do
+  == render @electricity_balance
+
+= fab(icon='edit', url=edit_electricity_balance_path(@electricity_balance))

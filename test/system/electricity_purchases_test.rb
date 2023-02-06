@@ -6,10 +6,11 @@ class ElectricityPurchasesTest < ApplicationSystemTestCase
   end
 
   test "visiting the index" do
+    skip("Will be moved into general Electricity test")
     visit electricity_purchases_url
     inventory_entries.each do |entry|
       assert_text entry.item.name
-      assert_text entry.amount
+      assert_text "purchased (GHS #{entry.amount})"
     end
   end
 

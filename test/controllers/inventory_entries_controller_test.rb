@@ -20,7 +20,7 @@ class InventoryEntriesControllerTest < ActionDispatch::IntegrationTest
       post inventory_entries_url, params: { inventory_entry: { amount: @inventory_entry.amount, attendee_id: @inventory_entry.attendee_id, happened_at: @inventory_entry.happened_at, item_id: @inventory_entry.item_id, notes: @inventory_entry.notes, quantity: @inventory_entry.quantity, type: @inventory_entry.type } }
     end
 
-    assert_redirected_to inventory_entry_url(InventoryEntry.last)
+    assert_redirected_to electricity_purchase_url(InventoryEntry.last)
   end
 
   test "should show inventory_entry" do
@@ -35,7 +35,7 @@ class InventoryEntriesControllerTest < ActionDispatch::IntegrationTest
 
   test "should update inventory_entry" do
     patch inventory_entry_url(@inventory_entry), params: { inventory_entry: { amount: @inventory_entry.amount, attendee_id: @inventory_entry.attendee_id, happened_at: @inventory_entry.happened_at, item_id: @inventory_entry.item_id, notes: @inventory_entry.notes, quantity: @inventory_entry.quantity, type: @inventory_entry.type } }
-    assert_redirected_to inventory_entry_url(@inventory_entry)
+    assert_redirected_to electricity_purchase_url(@inventory_entry)
   end
 
   test "should destroy inventory_entry" do

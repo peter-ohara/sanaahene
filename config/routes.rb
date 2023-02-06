@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :electricity_balances
   resources :electricity_purchases
   resources :inventory_entries
   resources :tags

@@ -1,0 +1,16 @@
+= form_with(model: @electricity_balance) do |form|
+  - if @electricity_balance.errors.any?
+    div style="color: red"
+      h2 = "#{pluralize(@electricity_balance.errors.count, "error")} prohibited this electricity_balance from being saved:"
+      ul
+        - @electricity_balance.errors.each do |error|
+          li = error.full_message
+
+  = tw_text_field form, :happened_at
+  = tw_text_field form, :meter
+  = tw_text_field form, :meter_balance
+  = tw_text_field form, :attendee_id
+  = tw_text_field form, :notes
+
+  = navigation_bar do
+    = form.submit(class: "flex flex-col text-center block py-2 px-3 text-indigo-700 text-lg font-extrabold")

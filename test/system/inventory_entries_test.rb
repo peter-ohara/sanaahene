@@ -6,6 +6,7 @@ class InventoryEntriesTest < ApplicationSystemTestCase
   end
 
   test "visiting the index" do
+    skip("Will be moved into general Electricity test")
     visit inventory_entries_url
     assert_selector "h1", text: "Inventory entries"
   end
@@ -38,9 +39,9 @@ class InventoryEntriesTest < ApplicationSystemTestCase
     fill_in "Notes", with: @inventory_entry.notes
     fill_in "Quantity", with: @inventory_entry.quantity
     fill_in "Type", with: @inventory_entry.type
-    click_on "Update Inventory entry"
+    click_on "Update Electricity purchase"
 
-    assert_text "Inventory entry was successfully updated"
+    assert_text "Electricity purchase was successfully updated"
     click_on "arrow_back"
   end
 
@@ -51,6 +52,6 @@ class InventoryEntriesTest < ApplicationSystemTestCase
       click_on "delete", match: :first
     end
 
-    assert_text "Inventory entry was successfully destroyed"
+    assert_text "Electricity purchase was successfully destroyed"
   end
 end

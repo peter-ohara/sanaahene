@@ -1,10 +1,10 @@
-class ElectricityPurchase < InventoryEntry
+class ElectricityBalance < InventoryEntry
 
   after_initialize do
     self.item = Item.find_or_create_by! name: "Electricity"
   end
 
-  alias_attribute :purchased_amount, :amount
+  alias_attribute :meter_balance, :amount
 
   attribute :meter, :string, default: '4006'
 
@@ -13,14 +13,15 @@ class ElectricityPurchase < InventoryEntry
   end
 
   def supporting_text
-    "#{attendee.first_name} purchased (GHS #{purchased_amount})"
+    "#{attendee.first_name} purchased (GHS #{meter_balance})"
   end
 
   def leading_content
-    :cart
+    :dial
   end
 
   def trailing_content
-    "GHS #{purchased_amount}"
+    "GHS #{meter_balance}"
   end
+
 end
