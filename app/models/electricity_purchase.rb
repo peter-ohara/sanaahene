@@ -13,7 +13,7 @@ class ElectricityPurchase < InventoryEntry
   end
 
   def supporting_text
-    "#{attendee.first_name} purchased (GHS #{purchased_amount})"
+    "#{attendee.first_name} purchased GHS #{purchased_amount}"
   end
 
   def leading_content

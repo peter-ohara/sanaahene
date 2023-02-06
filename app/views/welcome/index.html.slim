@@ -1,5 +1,4 @@
-h1 Welcome#index
-p.text-green-500 Find me in app/views/welcome/index.html.slim
-
-
 = render('shared/navigation_bar')
+
+.mt-5
+  = link_to 'Add Electricity Purchase', new_electricity_purchase_path, class: 'rounded bg-red-500 text-white p-2 mx-3'

@@ -13,7 +13,7 @@ class ElectricityBalance < InventoryEntry
   end
 
   def supporting_text
-    "#{attendee.first_name} purchased (GHS #{meter_balance})"
+    "#{attendee.first_name} checked balance. (GHS #{meter_balance} used)"
   end
 
   def leading_content
