@@ -4,4 +4,7 @@
       .table-cell.text-gray-700
         = field.to_s.humanize
       .table-cell.text-lg
-        = item.send(field)
+        - if item.send(field).class == 'datetime'
+          = l(item.send(field), format: :short)
+        - else
+          = item.send(field)

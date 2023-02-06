@@ -12,7 +12,7 @@ class InventoryEntriesTest < ApplicationSystemTestCase
 
   test "should create inventory entry" do
     visit inventory_entries_url
-    click_on "New inventory entry"
+    click_on "add"
 
     fill_in "Amount", with: @inventory_entry.amount
     fill_in "Attendee", with: @inventory_entry.attendee_id
@@ -24,12 +24,12 @@ class InventoryEntriesTest < ApplicationSystemTestCase
     click_on "Create Inventory entry"
 
     assert_text "Inventory entry was successfully created"
-    click_on "Back"
+    click_on "arrow_back"
   end
 
   test "should update Inventory entry" do
     visit inventory_entry_url(@inventory_entry)
-    click_on "Edit this inventory entry", match: :first
+    click_on "edit", match: :first
 
     fill_in "Amount", with: @inventory_entry.amount
     fill_in "Attendee", with: @inventory_entry.attendee_id
@@ -41,12 +41,15 @@ class InventoryEntriesTest < ApplicationSystemTestCase
     click_on "Update Inventory entry"
 
     assert_text "Inventory entry was successfully updated"
-    click_on "Back"
+    click_on "arrow_back"
   end
 
   test "should destroy Inventory entry" do
     visit inventory_entry_url(@inventory_entry)
-    click_on "Destroy this inventory entry", match: :first
+
+    accept_alert do
+      click_on "delete", match: :first
+    end
 
     assert_text "Inventory entry was successfully destroyed"
   end

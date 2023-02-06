@@ -67,7 +67,7 @@ module ApplicationHelper
 	def resolve_leading_content(item, leading_content)
 		return nil if leading_content.blank?
 
-		return image_tag(item.send(leading_content), class: "flex-none w-6 h-full") if item.respond_to?(leading_content)
+		# return image_tag(item.send(leading_content), class: "flex-none w-6 h-full") if item.respond_to?(leading_content)
 
 		content_tag(:div, icon(leading_content), class: "flex-none w-6 h-full")
 	end
