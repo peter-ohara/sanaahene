@@ -1,16 +1,13 @@
-= form_with(model: @electricity_purchase) do |form|
-  - if @electricity_purchase.errors.any?
-    div style="color: red"
-      h2 = "#{pluralize(@electricity_purchase.errors.count, "error")} prohibited this electricity_purchase from being saved:"
-      ul
-        - @electricity_purchase.errors.each do |error|
-          li = error.full_message
-
-  = tw_text_field form, :happened_at
-  = tw_text_field form, :meter
-  = tw_text_field form, :purchased_amount
-  = tw_text_field form, :attendee_id
-  = tw_text_field form, :notes
-
+= simple_form_for(@electricity_purchase) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+  
+  .form-inputs
+    = f.input :happened_at, html5: true
+    = f.input :meter, collection: ElectricityPurchase.meters, as: :radio_buttons
+    = f.input :purchased_amount, prepend: "GHS"
+    = f.association :attendee
+    = f.input :notes
+  
   = navigation_bar do
-    = form.submit(class: "flex flex-col text-center block py-2 px-3 text-indigo-700 text-lg font-extrabold")
+    = f.button :submit, class: "flex flex-col text-center block py-2 px-3 text-indigo-700 text-lg font-extrabold"
