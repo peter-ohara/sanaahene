@@ -6,7 +6,8 @@ module ElectricityEntry
       '4006': '4006',
       '4010': '4010',
       '4014': '4014',
-      'CityDia': 'citydia',
+      'CityDia': 'CityDia',
+      'Brickhouse': 'Brickhouse',
     }
 
     attribute :meter, :string, default: '4006'
@@ -17,6 +18,14 @@ module ElectricityEntry
 
     def headline_text
       meter
+    end
+
+    def meter=(name)
+      self.tags = [Tag.find_or_create_by!(name: name)]
+    end
+
+    def meter
+      self.tags.first&.name
     end
 
     def trailing_content

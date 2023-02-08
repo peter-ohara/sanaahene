@@ -1,7 +1,7 @@
 = content_for(:top_app_bar) do
   = toolbar(navigation_icon: sidenav_icon)
 
-= grouped_deck(@electricity_purchases.group_by(&:creation_date),
+= grouped_deck(@electricity_purchases,
         headline_text: :headline_text,
         supporting_text: :supporting_text,
         leading_content: :leading_content,

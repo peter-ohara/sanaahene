@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  happened_at: 2023-01-04 12:17:36
+  happened_at: 2023-01-04 12:17:35
   item: one
   amount: 500.00
   attendee: one
@@ -9,7 +9,7 @@ one:
   type: ElectricityPurchase
 
 two:
-  happened_at: 2023-02-04 12:17:36
+  happened_at: 2023-01-04 12:17:36
   item: two
   amount: 500.00
   attendee: two
@@ -18,10 +18,10 @@ two:
 
 
 three:
-  happened_at: 2023-01-05 12:17:36
+  happened_at: 2023-02-06 12:17:35
   item: two
   amount: 400.00
-  attendee: two
+  attendee: one
   notes: Some notes I left
   type: ElectricityBalance
 

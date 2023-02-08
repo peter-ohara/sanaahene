@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tag: five
+  inventory_entry: one
+
+two:
+  tag: six
+  inventory_entry: two
+
+three:
+  tag: five
+  inventory_entry: three
+
+four:
+  tag: six
+  inventory_entry: four
