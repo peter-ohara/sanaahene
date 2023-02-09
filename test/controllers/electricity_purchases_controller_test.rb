@@ -17,7 +17,7 @@ class ElectricityPurchasesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create electricity_purchase" do
     assert_difference("ElectricityPurchase.count") do
-      post electricity_purchases_url, params: { electricity_purchase: { attendee_id: @electricity_purchase.attendee_id, happened_at: @electricity_purchase.happened_at, meter: @electricity_purchase.meter, notes: @electricity_purchase.notes, purchased_amount: @electricity_purchase.purchased_amount } }
+      post electricity_purchases_url, params: { electricity_purchase: { attendee_id: @electricity_purchase.attendee_id, happened_at: @electricity_purchase.happened_at, meter_id: @electricity_purchase.meter_id, notes: @electricity_purchase.notes, purchased_amount: @electricity_purchase.purchased_amount } }
     end
 
     assert_redirected_to electricity_purchase_url(ElectricityPurchase.last)
@@ -34,7 +34,7 @@ class ElectricityPurchasesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update electricity_purchase" do
-    patch electricity_purchase_url(@electricity_purchase), params: { electricity_purchase: { attendee_id: @electricity_purchase.attendee_id, happened_at: @electricity_purchase.happened_at, meter: @electricity_purchase.meter, notes: @electricity_purchase.notes, purchased_amount: @electricity_purchase.purchased_amount } }
+    patch electricity_purchase_url(@electricity_purchase), params: { electricity_purchase: { attendee_id: @electricity_purchase.attendee_id, happened_at: @electricity_purchase.happened_at, meter_id: @electricity_purchase.meter_id, notes: @electricity_purchase.notes, purchased_amount: @electricity_purchase.purchased_amount } }
     assert_redirected_to electricity_purchase_url(@electricity_purchase)
   end
 

@@ -17,7 +17,7 @@ class ElectricityBalancesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create electricity_balance" do
     assert_difference("ElectricityBalance.count") do
-      post electricity_balances_url, params: { electricity_balance: { attendee_id: @electricity_balance.attendee_id, happened_at: @electricity_balance.happened_at, meter: @electricity_balance.meter, meter_balance: @electricity_balance.meter_balance, notes: @electricity_balance.notes } }
+      post electricity_balances_url, params: { electricity_balance: { attendee_id: @electricity_balance.attendee_id, happened_at: @electricity_balance.happened_at, meter_id: @electricity_balance.meter_id, meter_balance: @electricity_balance.meter_balance, notes: @electricity_balance.notes } }
     end
 
     assert_redirected_to electricity_balance_url(ElectricityBalance.last)
@@ -34,7 +34,7 @@ class ElectricityBalancesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update electricity_balance" do
-    patch electricity_balance_url(@electricity_balance), params: { electricity_balance: { attendee_id: @electricity_balance.attendee_id, happened_at: @electricity_balance.happened_at, meter: @electricity_balance.meter, meter_balance: @electricity_balance.meter_balance, notes: @electricity_balance.notes } }
+    patch electricity_balance_url(@electricity_balance), params: { electricity_balance: { attendee_id: @electricity_balance.attendee_id, happened_at: @electricity_balance.happened_at, meter_id: @electricity_balance.meter_id, meter_balance: @electricity_balance.meter_balance, notes: @electricity_balance.notes } }
     assert_redirected_to electricity_balance_url(@electricity_balance)
   end
 

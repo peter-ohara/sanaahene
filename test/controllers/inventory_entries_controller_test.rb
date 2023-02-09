@@ -3,6 +3,7 @@ require "test_helper"
 class InventoryEntriesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @inventory_entry = inventory_entries(:one)
+    @meter = electricity_meters(:one)
   end
 
   test "should get index" do
@@ -17,7 +18,7 @@ class InventoryEntriesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create inventory_entry" do
     assert_difference("InventoryEntry.count") do
-      post inventory_entries_url, params: { inventory_entry: { amount: @inventory_entry.amount, attendee_id: @inventory_entry.attendee_id, happened_at: @inventory_entry.happened_at, item_id: @inventory_entry.item_id, notes: @inventory_entry.notes, quantity: @inventory_entry.quantity, type: @inventory_entry.type } }
+      post inventory_entries_url, params: { inventory_entry: { amount: @inventory_entry.amount, attendee_id: @inventory_entry.attendee_id, meter_id: @meter.id, happened_at: @inventory_entry.happened_at, item_id: @inventory_entry.item_id, notes: @inventory_entry.notes, quantity: @inventory_entry.quantity, type: @inventory_entry.type } }
     end
 
     assert_redirected_to electricity_purchase_url(InventoryEntry.last)

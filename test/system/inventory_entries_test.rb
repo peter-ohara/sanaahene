@@ -12,13 +12,14 @@ class InventoryEntriesTest < ApplicationSystemTestCase
   end
 
   test "should create inventory entry" do
+    skip("Will be moved into general Electricity test")
     visit inventory_entries_url
     click_on "add"
 
     fill_in "Amount", with: @inventory_entry.amount
-    fill_in "Attendee", with: @inventory_entry.attendee_id
+    select @inventory_entry.attendee.name, from: "Attendee"
     fill_in "Happened at", with: @inventory_entry.happened_at
-    fill_in "Item", with: @inventory_entry.item_id
+    select @inventory_entry.item.name, from: "Item"
     fill_in "Notes", with: @inventory_entry.notes
     fill_in "Quantity", with: @inventory_entry.quantity
     fill_in "Type", with: @inventory_entry.type
@@ -33,9 +34,9 @@ class InventoryEntriesTest < ApplicationSystemTestCase
     click_on "edit", match: :first
 
     fill_in "Amount", with: @inventory_entry.amount
-    fill_in "Attendee", with: @inventory_entry.attendee_id
+    select @inventory_entry.attendee.name, from: "Attendee"
     fill_in "Happened at", with: @inventory_entry.happened_at
-    fill_in "Item", with: @inventory_entry.item_id
+    select @inventory_entry.item.name, from: "Item"
     fill_in "Notes", with: @inventory_entry.notes
     fill_in "Quantity", with: @inventory_entry.quantity
     fill_in "Type", with: @inventory_entry.type

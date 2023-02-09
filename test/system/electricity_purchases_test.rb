@@ -18,9 +18,9 @@ class ElectricityPurchasesTest < ApplicationSystemTestCase
     visit electricity_purchases_url
     click_on "add"
 
-    fill_in "Attendee", with: @electricity_purchase.attendee_id
+    select @electricity_purchase.attendee.name, from: "Attendee"
     fill_in "Happened at", with: @electricity_purchase.happened_at
-    fill_in "Meter", with: @electricity_purchase.meter
+    select @electricity_purchase.meter.name, from: "Meter"
     fill_in "Notes", with: @electricity_purchase.notes
     fill_in "Purchased amount", with: @electricity_purchase.purchased_amount
     click_on "Create Electricity purchase"
@@ -33,9 +33,9 @@ class ElectricityPurchasesTest < ApplicationSystemTestCase
     visit electricity_purchase_url(@electricity_purchase)
     click_on "edit", match: :first
 
-    fill_in "Attendee", with: @electricity_purchase.attendee_id
+    select @electricity_purchase.attendee.name, from: "Attendee"
     fill_in "Happened at", with: @electricity_purchase.happened_at
-    fill_in "Meter", with: @electricity_purchase.meter
+    select @electricity_purchase.meter.name, from: "Meter"
     fill_in "Notes", with: @electricity_purchase.notes
     fill_in "Purchased amount", with: @electricity_purchase.purchased_amount
     click_on "Update Electricity purchase"

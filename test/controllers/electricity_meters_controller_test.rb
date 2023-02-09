@@ -17,7 +17,7 @@ class ElectricityMetersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create electricity_meter" do
     assert_difference("ElectricityMeter.count") do
-      post electricity_meters_url, params: { electricity_meter: { meter_number: @electricity_meter.meter_number, name: @electricity_meter.name, reorder_point: @electricity_meter.reorder_point } }
+      post electricity_meters_url, params: { electricity_meter: { meter_number: "P171010831", name: "Cantonments", reorder_point: @electricity_meter.reorder_point } }
     end
 
     assert_redirected_to electricity_meter_url(ElectricityMeter.last)

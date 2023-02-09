@@ -15,9 +15,9 @@ class ElectricityBalancesTest < ApplicationSystemTestCase
     visit electricity_balances_url
     click_on "add"
 
-    fill_in "Attendee", with: @electricity_balance.attendee_id
+    select @electricity_balance.attendee.name, from: "Attendee"
     fill_in "Happened at", with: @electricity_balance.happened_at
-    fill_in "Meter", with: @electricity_balance.meter
+    select @electricity_balance.meter.name, from: "Meter"
     fill_in "Meter balance", with: @electricity_balance.meter_balance
     fill_in "Notes", with: @electricity_balance.notes
     click_on "Create Electricity balance"
@@ -30,7 +30,7 @@ class ElectricityBalancesTest < ApplicationSystemTestCase
     visit electricity_balance_url(@electricity_balance)
     click_on "edit", match: :first
 
-    fill_in "Attendee", with: @electricity_balance.attendee_id
+    select @electricity_balance.attendee.name, from: "Attendee"
     fill_in "Happened at", with: @electricity_balance.happened_at
     fill_in "Meter", with: @electricity_balance.meter
     fill_in "Meter balance", with: @electricity_balance.meter_balance
