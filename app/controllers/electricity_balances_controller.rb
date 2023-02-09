@@ -12,7 +12,7 @@ class ElectricityBalancesController < ApplicationController
 
   # GET /electricity_balances/new
   def new
-    @electricity_balance = ElectricityBalance.new
+    @electricity_balance = ElectricityBalance.new(happened_at: Time.zone.now)
   end
 
   # GET /electricity_balances/1/edit

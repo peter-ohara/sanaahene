@@ -12,7 +12,7 @@ class InventoryEntriesController < ApplicationController
 
   # GET /inventory_entries/new
   def new
-    @inventory_entry = InventoryEntry.new
+    @inventory_entry = InventoryEntry.new(happened_at: Time.zone.now)
   end
 
   # GET /inventory_entries/1/edit

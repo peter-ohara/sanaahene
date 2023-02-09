@@ -10,4 +10,12 @@ class ElectricityPurchase < InventoryEntry
   def leading_content
     :cart
   end
+
+  def delta
+    purchased_amount
+  end
+
+  def balance
+    previous_balance + purchased_amount
+  end
 end

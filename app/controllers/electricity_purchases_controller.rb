@@ -12,7 +12,7 @@ class ElectricityPurchasesController < ApplicationController
 
   # GET /electricity_purchases/new
   def new
-    @electricity_purchase = ElectricityPurchase.new
+    @electricity_purchase = ElectricityPurchase.new(happened_at: Time.zone.now)
   end
 
   # GET /electricity_purchases/1/edit
