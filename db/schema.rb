@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_07_113802) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_09_101310) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "electricity_meters", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "meter_number", null: false
+    t.decimal "reorder_point", precision: 8, scale: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meter_number"], name: "index_electricity_meters_on_meter_number", unique: true
+    t.index ["name"], name: "index_electricity_meters_on_name", unique: true
+  end
 
   create_table "inventory_entries", force: :cascade do |t|
     t.datetime "happened_at", null: false
@@ -24,8 +34,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_113802) do
     t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "meter_id", null: false
     t.index ["attendee_id"], name: "index_inventory_entries_on_attendee_id"
     t.index ["item_id"], name: "index_inventory_entries_on_item_id"
+    t.index ["meter_id"], name: "index_inventory_entries_on_meter_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -63,6 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_113802) do
     t.index ["phone_number"], name: "index_users_on_phone_number", unique: true
   end
 
+  add_foreign_key "inventory_entries", "electricity_meters", column: "meter_id"
   add_foreign_key "inventory_entries", "items"
   add_foreign_key "inventory_entries", "users", column: "attendee_id"
   add_foreign_key "taggings", "inventory_entries"

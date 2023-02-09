@@ -4,7 +4,7 @@
   
   .form-inputs
     = f.input :happened_at, html5: true
-    = f.input :meter, collection: ElectricityPurchase.meters, as: :radio_buttons
+    = f.association :meter
     = f.input :purchased_amount, prepend: "GHS"
     = f.association :attendee
     = f.input :notes

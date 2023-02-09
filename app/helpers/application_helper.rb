@@ -34,6 +34,12 @@ module ApplicationHelper
 		end
 	end
 
+	def format_meter(meter)
+		if meter.balance < meter.reorder_point
+			"text-red-500"
+		end
+	end
+
 	def fab(icon_name, url)
 		render 'shared/fab', icon_name: icon_name, url: url
 	end

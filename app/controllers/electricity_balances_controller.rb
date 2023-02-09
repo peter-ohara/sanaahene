@@ -53,6 +53,6 @@ class ElectricityBalancesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def electricity_balance_params
-      params.require(:electricity_balance).permit(:happened_at, :meter, :meter_balance, :attendee_id, :notes)
+      params.require(:electricity_balance).permit(:happened_at, :meter_id, :meter_balance, :attendee_id, :notes)
     end
 end

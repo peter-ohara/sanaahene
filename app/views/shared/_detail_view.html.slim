@@ -4,7 +4,9 @@
       .table-cell.text-gray-700
         = field.to_s.humanize
       .table-cell.text-lg
-        - if item.send(field).class == 'datetime'
+        - if item.class.reflect_on_association(field)
+          = item.send(field).name
+        - elsif item.send(field).class == 'datetime'
           = l(item.send(field), format: :short)
         - else
           = item.send(field)

@@ -53,6 +53,6 @@ class ElectricityPurchasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def electricity_purchase_params
-      params.require(:electricity_purchase).permit(:happened_at, :meter, :purchased_amount, :attendee_id, :notes)
+      params.require(:electricity_purchase).permit(:happened_at, :meter_id, :purchased_amount, :attendee_id, :notes)
     end
 end

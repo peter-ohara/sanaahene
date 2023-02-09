@@ -10,4 +10,12 @@ class ElectricityBalance < InventoryEntry
   def leading_content
     :dial
   end
+
+  def delta
+    meter_balance - previous_balance
+  end
+
+  def balance
+    meter_balance
+  end
 end

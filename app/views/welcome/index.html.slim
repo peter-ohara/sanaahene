@@ -1,4 +1,24 @@
 = render('shared/navigation_bar')
 
-.mt-5
-  = link_to 'Add Electricity Purchase', new_electricity_purchase_path, class: 'rounded bg-red-500 text-white p-2 mx-3'
+= panel do
+  .my-5
+    = link_to 'Add Electricity Purchase', new_electricity_purchase_path, class: 'rounded bg-red-500 text-white p-2 mx-3'
+    
+  table.table-auto.border.border-slate-400
+    thead
+      tr
+        th.border.border-slate-300.p-2.font-bold
+          | Tag
+        th.border.border-slate-300.p-2
+          | Current level
+        th.border.border-slate-300.p-2
+          | Re-order point
+    tbody
+      - ElectricityMeter.all.each do |meter|
+        tr[class="#{format_meter(meter)}"]
+          td.border.border-slate-300.p-2.font-bold
+            = link_to meter.name, meter
+          td.border.border-slate-300.p-2
+            = meter.balance
+          td.border.border-slate-300.p-2
+            = meter.reorder_point
