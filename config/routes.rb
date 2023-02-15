@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
+  get 'internet/index'
+  resources :internet_balances, except: :index
+  resources :internet_purchases, except: :index
   resources :internet_accounts
+
+  get 'electricity/index'
+  resources :electricity_balances, except: :index
+  resources :electricity_purchases, except: :index
   resources :electricity_meters
-  get 'electricity/index', as: :electricity_entries
-  resources :electricity_balances
-  resources :electricity_purchases
-  resources :inventory_entries
+
   resources :tags
   resources :items
   resources :users

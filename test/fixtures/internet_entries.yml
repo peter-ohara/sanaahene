@@ -1,0 +1,48 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  happened_at: 2023-01-04 12:17:35
+  internet_account: one
+  amount: 1000.00
+  quantity: 1000.00
+  attendee: one
+  notes: Some notes I left
+  type: InternetPurchase
+
+two:
+  happened_at: 2023-01-05 12:17:36
+  internet_account: two
+  amount: 500.00
+  quantity: 500.00
+  attendee: two
+  notes: Some notes I left
+  type: InternetPurchase
+
+
+three:
+  happened_at: 2023-02-06 12:17:35
+  internet_account: one
+  amount: 800.00
+  quantity: 800.00
+  attendee: one
+  notes: Some notes I left
+  type: InternetBalance
+
+four:
+  happened_at: 2023-02-07 12:17:36
+  internet_account: two
+  amount: 400.00
+  quantity: 400.00
+  attendee: two
+  notes: Some notes I left
+  type: InternetBalance
+
+
+five:
+  happened_at: 2023-02-08 13:17:36
+  internet_account: two
+  amount: 50.00
+  quantity: 50.00
+  attendee: two
+  notes: Topped up with 50 cedis
+  type: InternetPurchase

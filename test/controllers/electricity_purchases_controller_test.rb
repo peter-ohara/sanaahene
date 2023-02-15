@@ -6,7 +6,7 @@ class ElectricityPurchasesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get electricity_purchases_url
+    get electricity_index_url
     assert_response :success
   end
 
@@ -43,6 +43,6 @@ class ElectricityPurchasesControllerTest < ActionDispatch::IntegrationTest
       delete electricity_purchase_url(@electricity_purchase)
     end
 
-    assert_redirected_to electricity_purchases_url
+    assert_redirected_to electricity_index_url
   end
 end

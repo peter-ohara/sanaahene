@@ -1,15 +1,13 @@
-= simple_form_for(@inventory_entry) do |f|
+= simple_form_for(@internet_balance) do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
-  
+
   .form-inputs
     = f.input :happened_at, html5: true
-    = f.association :item
-    = f.input :amount
+    = f.association :internet_account
     = f.input :quantity
     = f.association :attendee
     = f.input :notes
-    = f.input :type
-
+  
   = navigation_bar do
-    = f.button :submit, class: "flex flex-col text-center block py-2 px-3 text-indigo-700 text-lg font-extrabold"
+    = f.button :submit

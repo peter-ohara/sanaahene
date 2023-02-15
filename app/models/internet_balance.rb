@@ -1,0 +1,2 @@
+class InternetBalance < InternetEntry
+end

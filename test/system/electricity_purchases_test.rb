@@ -6,17 +6,17 @@ class ElectricityPurchasesTest < ApplicationSystemTestCase
   end
 
   test "visiting the index" do
-    skip("Will be moved into general Electricity test")
-    visit electricity_purchases_url
+    visit electricity_index_url
     inventory_entries.each do |entry|
-      assert_text entry.item.name
-      assert_text "purchased (GHS #{entry.amount})"
+      if entry.type == "ElectricityPurchase"
+        assert_text "#{entry.attendee.first_name} purchased GHS #{entry.amount}"
+      end
     end
   end
 
   test "should create electricity purchase" do
-    visit electricity_purchases_url
-    click_on "add"
+    visit electricity_index_url
+    click_on "add_electricity_purchase"
 
     select @electricity_purchase.attendee.name, from: "Attendee"
     fill_in "Happened at", with: @electricity_purchase.happened_at

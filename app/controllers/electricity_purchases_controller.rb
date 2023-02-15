@@ -1,11 +1,6 @@
 class ElectricityPurchasesController < ApplicationController
   before_action :set_electricity_purchase, only: %i[ show edit update destroy ]
 
-  # GET /electricity_purchases
-  def index
-    @electricity_purchases = ElectricityPurchase.all
-  end
-
   # GET /electricity_purchases/1
   def show
   end
@@ -42,7 +37,7 @@ class ElectricityPurchasesController < ApplicationController
   # DELETE /electricity_purchases/1
   def destroy
     @electricity_purchase.destroy
-    redirect_to electricity_purchases_url, notice: "Electricity purchase was successfully destroyed."
+    redirect_to electricity_index_url, notice: "Electricity purchase was successfully destroyed."
   end
 
   private

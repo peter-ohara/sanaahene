@@ -1,0 +1,14 @@
+= simple_form_for(@internet_purchase) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :happened_at, html5: true
+    = f.association :internet_account
+    = f.input :amount
+    = f.input :quantity
+    = f.association :attendee
+    = f.input :notes
+  
+  = navigation_bar do
+    = f.button :submit

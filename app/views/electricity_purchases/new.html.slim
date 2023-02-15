@@ -1,5 +1,5 @@
 = content_for(:top_app_bar) do
-  = toolbar(navigation_icon: link_to(icon(:arrow_back), electricity_entries_path, class: "flex items-center"))
+  = toolbar(navigation_icon: link_to(icon(:arrow_back), electricity_index_path, class: "flex items-center"))
 
 = panel do
   == render "form", electricity_purchase: @electricity_purchase

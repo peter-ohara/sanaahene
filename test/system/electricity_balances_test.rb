@@ -6,14 +6,15 @@ class ElectricityBalancesTest < ApplicationSystemTestCase
   end
 
   test "visiting the index" do
-    skip("Will be moved into general Electricity test")
-    visit electricity_balances_url
-    assert_selector "h1", text: "Electricity balances"
+    visit electricity_index_url
+    inventory_entries.each do |entry|
+      assert_text entry.amount
+    end
   end
 
   test "should create electricity balance" do
-    visit electricity_balances_url
-    click_on "add"
+    visit electricity_index_url
+    click_on "add_electricity_balance"
 
     select @electricity_balance.attendee.name, from: "Attendee"
     fill_in "Happened at", with: @electricity_balance.happened_at

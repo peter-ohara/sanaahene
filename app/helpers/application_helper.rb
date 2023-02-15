@@ -40,8 +40,8 @@ module ApplicationHelper
 		end
 	end
 
-	def fab(icon_name, url)
-		render 'shared/fab', icon_name: icon_name, url: url
+	def fab(icon, url, id='', classes='')
+		render 'shared/fab', icon_name: icon, url: url, id: id, classes: classes
 	end
 
 	def delete_button(resource)

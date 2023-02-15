@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_15_081352) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_15_090354) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_081352) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_internet_accounts_on_name", unique: true
+  end
+
+  create_table "internet_entries", force: :cascade do |t|
+    t.datetime "happened_at", null: false
+    t.bigint "internet_account_id", null: false
+    t.decimal "amount", precision: 8, scale: 2
+    t.decimal "quantity", precision: 8, scale: 2, null: false
+    t.bigint "attendee_id", null: false
+    t.text "notes"
+    t.string "type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attendee_id"], name: "index_internet_entries_on_attendee_id"
+    t.index ["internet_account_id"], name: "index_internet_entries_on_internet_account_id"
   end
 
   create_table "inventory_entries", force: :cascade do |t|
@@ -87,6 +101,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_081352) do
     t.index ["phone_number"], name: "index_users_on_phone_number", unique: true
   end
 
+  add_foreign_key "internet_entries", "internet_accounts"
+  add_foreign_key "internet_entries", "users", column: "attendee_id"
   add_foreign_key "inventory_entries", "electricity_meters", column: "meter_id"
   add_foreign_key "inventory_entries", "items"
   add_foreign_key "inventory_entries", "users", column: "attendee_id"

@@ -1,0 +1,7 @@
+= content_for(:top_app_bar) do
+  = toolbar(navigation_icon: link_to(icon(:arrow_back), internet_index_path, class: "flex items-center"), menu_items: [delete_button(@internet_balance)])
+
+= panel do
+  == render @internet_balance
+
+= fab(icon='edit', url=edit_internet_balance_path(@internet_balance))

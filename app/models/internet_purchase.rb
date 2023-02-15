@@ -1,0 +1,2 @@
+class InternetPurchase < InternetEntry
+end

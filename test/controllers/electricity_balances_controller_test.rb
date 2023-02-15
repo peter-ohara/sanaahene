@@ -6,7 +6,7 @@ class ElectricityBalancesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get electricity_balances_url
+    get electricity_index_url
     assert_response :success
   end
 
@@ -43,6 +43,6 @@ class ElectricityBalancesControllerTest < ActionDispatch::IntegrationTest
       delete electricity_balance_url(@electricity_balance)
     end
 
-    assert_redirected_to electricity_balances_url
+    assert_redirected_to electricity_index_url
   end
 end

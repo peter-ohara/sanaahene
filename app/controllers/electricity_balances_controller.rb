@@ -1,11 +1,6 @@
 class ElectricityBalancesController < ApplicationController
   before_action :set_electricity_balance, only: %i[ show edit update destroy ]
 
-  # GET /electricity_balances
-  def index
-    @electricity_balances = ElectricityBalance.all
-  end
-
   # GET /electricity_balances/1
   def show
   end
@@ -42,7 +37,7 @@ class ElectricityBalancesController < ApplicationController
   # DELETE /electricity_balances/1
   def destroy
     @electricity_balance.destroy
-    redirect_to electricity_balances_url, notice: "Electricity balance was successfully destroyed."
+    redirect_to electricity_index_url, notice: "Electricity balance was successfully destroyed."
   end
 
   private
