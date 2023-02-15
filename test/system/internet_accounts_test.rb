@@ -7,15 +7,17 @@ class InternetAccountsTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit internet_accounts_url
-    assert_selector "h1", text: "Internet accounts"
+    internet_accounts.each do |internet_account|
+      assert_text internet_account.name
+    end
   end
 
   test "should create internet account" do
     visit internet_accounts_url
-    click_on "New internet account"
+    click_on "add"
 
     fill_in "Account number", with: @internet_account.account_number
-    fill_in "Name", with: @internet_account.name
+    fill_in "Name", with: @internet_account.name + "random string"
     fill_in "Phone number", with: @internet_account.phone_number
     fill_in "Reorder point", with: @internet_account.reorder_point
     fill_in "Service name", with: @internet_account.service_name
@@ -23,12 +25,12 @@ class InternetAccountsTest < ApplicationSystemTestCase
     click_on "Create Internet account"
 
     assert_text "Internet account was successfully created"
-    click_on "Back"
+    click_on "arrow_back"
   end
 
   test "should update Internet account" do
     visit internet_account_url(@internet_account)
-    click_on "Edit this internet account", match: :first
+    click_on "edit", match: :first
 
     fill_in "Account number", with: @internet_account.account_number
     fill_in "Name", with: @internet_account.name
@@ -39,12 +41,14 @@ class InternetAccountsTest < ApplicationSystemTestCase
     click_on "Update Internet account"
 
     assert_text "Internet account was successfully updated"
-    click_on "Back"
+    click_on "arrow_back"
   end
 
   test "should destroy Internet account" do
     visit internet_account_url(@internet_account)
-    click_on "Destroy this internet account", match: :first
+    accept_alert do
+        click_on "delete", match: :first
+    end
 
     assert_text "Internet account was successfully destroyed"
   end
