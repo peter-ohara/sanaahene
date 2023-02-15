@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :internet_accounts
   resources :electricity_meters
   get 'electricity/index', as: :electricity_entries
   resources :electricity_balances

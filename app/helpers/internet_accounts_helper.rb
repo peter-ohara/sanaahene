@@ -1,0 +1,2 @@
+module InternetAccountsHelper
+end

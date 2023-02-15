@@ -1,0 +1,57 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Brickhouse MTN Turbonet
+  usage_type: backup
+  account_number: P0392010
+  phone_number: 0500011506
+  service_name: Ndifereke Neware Anwanakak
+  reorder_point: 20.00
+
+two:
+  name: CityDia Vodafone Fibre
+  usage_type: main
+  account_number: P0392011
+  phone_number: 0500011507
+  service_name: PAdu
+  reorder_point: 20.00
+
+three:
+  name: CityDia Vodafone Sim Card
+  usage_type: backup
+  account_number: P0392012
+  phone_number: 0500011508
+  service_name: Nana Akua Boatemaa Amponsa
+  reorder_point: 20.00
+
+four:
+  name: Tina's Court Vodafone Fibre
+  usage_type: main
+  account_number: P0392013
+  phone_number: 0500011509
+  service_name: PEEKAY
+  reorder_point: 20.00
+
+five:
+  name: Tina's Court MTN Fibre
+  usage_type: backup
+  account_number: P0392014
+  phone_number: 0500011510
+  service_name: PAdu
+  reorder_point: 20.00
+
+six:
+  name: Tina's Court MTN Turbonet
+  usage_type: backup
+  account_number: P0392015
+  phone_number: 0500011511
+  service_name: Peter O'Hara Adu
+  reorder_point: 20.00
+
+seven:
+  name: Brickhouse Vodafone Fibre
+  usage_type: main
+  account_number: P0392009
+  phone_number: 0500011505
+  service_name: PeterAdu
+  reorder_point: 20.00

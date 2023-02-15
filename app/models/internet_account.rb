@@ -1,0 +1,2 @@
+class InternetAccount < ApplicationRecord
+end
