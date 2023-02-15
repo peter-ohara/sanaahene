@@ -2,7 +2,7 @@ require "test_helper"
 
 class ElectricityBalancesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @electricity_balance = inventory_entries(:three)
+    @electricity_balance = electricity_entries(:three)
   end
 
   test "should get index" do

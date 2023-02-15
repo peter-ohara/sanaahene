@@ -1,5 +1,5 @@
-class ElectricityPurchase < InventoryEntry
-  include ElectricityEntry
+class ElectricityPurchase < ElectricityEntry
+  include ElectricityEntryable
 
   alias_attribute :purchased_amount, :amount
 

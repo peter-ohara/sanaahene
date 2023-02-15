@@ -10,9 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_15_090354) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_15_105553) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "electricity_entries", force: :cascade do |t|
+    t.datetime "happened_at", null: false
+    t.bigint "item_id", null: false
+    t.decimal "amount", precision: 8, scale: 2
+    t.decimal "quantity", precision: 8, scale: 2
+    t.bigint "attendee_id", null: false
+    t.text "notes"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "meter_id", null: false
+    t.index ["attendee_id"], name: "index_electricity_entries_on_attendee_id"
+    t.index ["item_id"], name: "index_electricity_entries_on_item_id"
+    t.index ["meter_id"], name: "index_electricity_entries_on_meter_id"
+  end
 
   create_table "electricity_meters", force: :cascade do |t|
     t.string "name", null: false
@@ -50,22 +66,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_090354) do
     t.index ["internet_account_id"], name: "index_internet_entries_on_internet_account_id"
   end
 
-  create_table "inventory_entries", force: :cascade do |t|
-    t.datetime "happened_at", null: false
-    t.bigint "item_id", null: false
-    t.decimal "amount", precision: 8, scale: 2
-    t.decimal "quantity", precision: 8, scale: 2
-    t.bigint "attendee_id", null: false
-    t.text "notes"
-    t.string "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "meter_id", null: false
-    t.index ["attendee_id"], name: "index_inventory_entries_on_attendee_id"
-    t.index ["item_id"], name: "index_inventory_entries_on_item_id"
-    t.index ["meter_id"], name: "index_inventory_entries_on_meter_id"
-  end
-
   create_table "items", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -75,10 +75,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_090354) do
 
   create_table "taggings", force: :cascade do |t|
     t.bigint "tag_id", null: false
-    t.bigint "inventory_entry_id", null: false
+    t.bigint "electricity_entry_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["inventory_entry_id"], name: "index_taggings_on_inventory_entry_id"
+    t.index ["electricity_entry_id"], name: "index_taggings_on_electricity_entry_id"
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
   end
 
@@ -101,11 +101,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_090354) do
     t.index ["phone_number"], name: "index_users_on_phone_number", unique: true
   end
 
+  add_foreign_key "electricity_entries", "electricity_meters", column: "meter_id"
+  add_foreign_key "electricity_entries", "items"
+  add_foreign_key "electricity_entries", "users", column: "attendee_id"
   add_foreign_key "internet_entries", "internet_accounts"
   add_foreign_key "internet_entries", "users", column: "attendee_id"
-  add_foreign_key "inventory_entries", "electricity_meters", column: "meter_id"
-  add_foreign_key "inventory_entries", "items"
-  add_foreign_key "inventory_entries", "users", column: "attendee_id"
-  add_foreign_key "taggings", "inventory_entries"
+  add_foreign_key "taggings", "electricity_entries"
   add_foreign_key "taggings", "tags"
 end

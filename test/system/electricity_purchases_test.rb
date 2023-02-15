@@ -2,12 +2,12 @@ require "application_system_test_case"
 
 class ElectricityPurchasesTest < ApplicationSystemTestCase
   setup do
-    @electricity_purchase = inventory_entries(:one)
+    @electricity_purchase = electricity_entries(:one)
   end
 
   test "visiting the index" do
     visit electricity_index_url
-    inventory_entries.each do |entry|
+    electricity_entries.each do |entry|
       if entry.type == "ElectricityPurchase"
         assert_text "#{entry.attendee.first_name} purchased GHS #{entry.amount}"
       end

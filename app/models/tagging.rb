@@ -1,4 +1,4 @@
 class Tagging < ApplicationRecord
   belongs_to :tag
-  belongs_to :inventory_entry
+  belongs_to :electricity_entry
 end

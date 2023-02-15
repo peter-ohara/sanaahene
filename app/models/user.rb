@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-  has_many :inventory_entries, foreign_key: :attendee_id, dependent: :destroy
+  has_many :electricity_entries, foreign_key: :attendee_id, dependent: :destroy
   has_many :internet_entries, foreign_key: :attendee_id, dependent: :destroy
 
   def name

@@ -2,12 +2,12 @@ require "application_system_test_case"
 
 class ElectricityBalancesTest < ApplicationSystemTestCase
   setup do
-    @electricity_balance = inventory_entries(:three)
+    @electricity_balance = electricity_entries(:three)
   end
 
   test "visiting the index" do
     visit electricity_index_url
-    inventory_entries.each do |entry|
+    electricity_entries.each do |entry|
       assert_text entry.amount
     end
   end

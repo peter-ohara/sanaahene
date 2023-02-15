@@ -1,4 +1,4 @@
-module ElectricityEntry
+module ElectricityEntryable
   extend ActiveSupport::Concern
 
   included do
@@ -16,7 +16,7 @@ module ElectricityEntry
     end
 
     def previous_balance
-      previous_electricity_balance = self.meter.inventory_entries
+      previous_electricity_balance = self.meter.electricity_entries
                                          .where(happened_at: ...self.happened_at)
                                          .order(:happened_at)
                                          .last

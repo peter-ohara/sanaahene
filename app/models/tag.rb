@@ -1,4 +1,4 @@
 class Tag < ApplicationRecord
   has_many :taggings, dependent: :destroy
-  has_many :inventory_entries, through: :taggings
+  has_many :electricity_entries, through: :taggings
 end

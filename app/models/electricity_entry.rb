@@ -1,4 +1,4 @@
-class InventoryEntry < ApplicationRecord
+class ElectricityEntry < ApplicationRecord
   include Entryable
 
   belongs_to :item

@@ -1,5 +1,5 @@
-class ElectricityBalance < InventoryEntry
-  include ElectricityEntry
+class ElectricityBalance < ElectricityEntry
+  include ElectricityEntryable
 
   alias_attribute :meter_balance, :amount
 

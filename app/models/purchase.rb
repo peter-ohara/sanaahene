@@ -1,2 +1,2 @@
-class Purchase < InventoryEntry
+class Purchase < ElectricityEntry
 end

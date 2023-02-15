@@ -2,10 +2,10 @@
   = toolbar(navigation_icon: sidenav_icon)
 
 = grouped_deck(@internet_entries,
-        headline_text: :happened_at,
-        supporting_text: :updated_at,
-        leading_content: :person,
-        trailing_content: :amount)
+        headline_text: :headline_text,
+        supporting_text: :supporting_text,
+        leading_content: :leading_content,
+        trailing_content: :trailing_content)
 
 = fab(icon='add', url=new_internet_balance_path, id='add_internet_balance', classes='bottom-40')
 = fab(icon='add_shopping_cart', url=new_internet_purchase_path, id='add_internet_purchase')
