@@ -1,8 +1,5 @@
 class InternetController < ApplicationController
   def index
-    @internet_entries = InternetEntry.order(happened_at: :desc)
-                                     .group_by(&:entry_date)
-
-
+    @internet_entries = InternetEntry.group_by_day
   end
 end

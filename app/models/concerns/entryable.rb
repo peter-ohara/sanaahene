@@ -3,6 +3,8 @@ module Entryable
 
   included do
 
+    scope :group_by_day, -> { order(happened_at: :desc, created_at: :asc).group_by(&:entry_date) }
+
     def entry_date
       happened_at.to_date
     end

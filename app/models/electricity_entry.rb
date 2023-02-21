@@ -1,4 +1,6 @@
 class ElectricityEntry < ApplicationRecord
+  include Entryable
+
   belongs_to :attendee, class_name: "User"
   belongs_to :meter, class_name: "ElectricityMeter"
 

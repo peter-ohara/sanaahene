@@ -1,8 +1,5 @@
 class ElectricityController < ApplicationController
   def index
-    @electricity_entries = ElectricityEntry.order(happened_at: :desc)
-                                           .group_by(&:entry_date)
-
-
+    @electricity_entries = ElectricityEntry.grouped_by_day
   end
 end
