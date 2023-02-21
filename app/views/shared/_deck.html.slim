@@ -7,4 +7,4 @@
         div = item.send(headline_text) if headline_text.present?
         .text-sm = item.send(supporting_text) if supporting_text.present?
       .self-start
-        = l(item.send(trailing_content), format: :short) if trailing_content.present?
+        = item.send(trailing_content) if trailing_content.present?

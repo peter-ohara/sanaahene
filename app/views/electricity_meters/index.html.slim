@@ -3,9 +3,9 @@
 
 = deck(@electricity_meters,
     headline_text: :name,
-    supporting_text: :updated_at,
-    leading_content: :person,
-    trailing_content: :created_at)
+    supporting_text: :meter_number,
+    leading_content: :bolt,
+    trailing_content: :amount_balance)
 
 = fab(icon='add', url=new_electricity_meter_path)
 
