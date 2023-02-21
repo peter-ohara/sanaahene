@@ -1,11 +1,10 @@
 class InternetBalance < InternetEntry
+  include BalanceEntryable
 
-  def headline_text
-    internet_account.name
-  end
+  alias_attribute :data_balance, :quantity
 
   def supporting_text
-    "#{attendee.first_name} checked balance. (#{used_amount} GB used)"
+    "#{attendee.first_name} checked balance. (#{quantity_used} GB used)"
   end
 
   def leading_content
@@ -14,18 +13,6 @@ class InternetBalance < InternetEntry
 
   def trailing_content
     "#{amount} GB"
-  end
-
-  def delta
-    amount - previous_balance
-  end
-
-  def used_amount
-    delta * -1
-  end
-
-  def balance
-    amount
   end
 
 end

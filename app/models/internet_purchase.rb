@@ -1,10 +1,11 @@
 class InternetPurchase < InternetEntry
-  def headline_text
-    internet_account.name
-  end
+  include PurchaseEntryable
+
+  alias_attribute :purchased_amount, :amount
+  alias_attribute :purchased_quantity, :amount
 
   def supporting_text
-    "#{attendee.first_name} purchased #{amount} GB"
+    "#{attendee.first_name} purchased #{quantity} GB"
   end
 
   def leading_content
@@ -12,19 +13,7 @@ class InternetPurchase < InternetEntry
   end
 
   def trailing_content
-    "#{amount} GB"
-  end
-
-  def delta
-    amount
-  end
-
-  def used_amount
-    delta * -1
-  end
-
-  def balance
-    previous_balance + amount
+    nil
   end
 
 end

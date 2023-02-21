@@ -1,9 +1,6 @@
 = render('shared/navigation_bar')
 
 = panel do
-  .my-5
-    = link_to 'Add Electricity Purchase', new_electricity_purchase_path, class: 'rounded bg-red-500 text-white p-2 mx-3'
-    
   table.table-auto.border.border-slate-400
     thead
       tr
@@ -19,6 +16,9 @@
           td.border.border-slate-300.p-2.font-bold
             = link_to meter.name, meter
           td.border.border-slate-300.p-2
-            = meter.balance
+            = meter.quantity_balance
           td.border.border-slate-300.p-2
             = meter.reorder_point
+
+  .my-5
+    = line_chart(ElectricityMeter.all.map { |meter| {name: meter.name, data: meter.usage_by_day(Date.today.at_beginning_of_month..Date.today)}})

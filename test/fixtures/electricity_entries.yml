@@ -2,16 +2,14 @@
 
 one:
   happened_at: 2023-01-04 12:17:35
-  item: one
   meter: one
-  amount: 1000.00
+  amount: 100.00
   attendee: one
   notes: Some notes I left
   type: ElectricityPurchase
 
 two:
   happened_at: 2023-01-05 12:17:36
-  item: two
   meter: two
   amount: 500.00
   attendee: two
@@ -21,16 +19,14 @@ two:
 
 three:
   happened_at: 2023-02-06 12:17:35
-  item: one
   meter: one
-  amount: 800.00
+  amount: 47
   attendee: one
   notes: Some notes I left
   type: ElectricityBalance
 
 four:
   happened_at: 2023-02-07 12:17:36
-  item: one
   meter: two
   amount: 400.00
   attendee: two
@@ -40,7 +36,6 @@ four:
 
 five:
   happened_at: 2023-02-08 13:17:36
-  item: one
   meter: two
   amount: 50.00
   attendee: two

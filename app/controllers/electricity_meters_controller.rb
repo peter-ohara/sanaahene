@@ -8,6 +8,9 @@ class ElectricityMetersController < ApplicationController
 
   # GET /electricity_meters/1
   def show
+    @electricity_entries = @electricity_meter.electricity_entries.order(happened_at: :desc)
+                                           .group_by(&:entry_date)
+
   end
 
   # GET /electricity_meters/new

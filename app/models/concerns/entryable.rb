@@ -3,20 +3,37 @@ module Entryable
 
   included do
 
-    def creation_date
+    def entry_date
       happened_at.to_date
     end
 
-    def delta
+    def quantity_delta
+      raise "method should be implemented in concrete class"
+    end
+
+    def quantity_balance
+      raise "method should be implemented in concrete class"
+    end
+
+    def quantity_previous_balance
+      return previous_entry.quantity_balance if previous_entry
+
       0.to_d
     end
 
-    def balance
+    def amount_delta
+      raise "method should be implemented in concrete class"
+    end
+
+    def amount_balance
+      raise "method should be implemented in concrete class"
+    end
+
+    def amount_previous_balance
+      return previous_entry.amount_balance if previous_entry
+
       0.to_d
     end
 
-    def previous_balance
-      0.to_d
-    end
   end
 end

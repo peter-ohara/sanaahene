@@ -35,7 +35,7 @@ module ApplicationHelper
 	end
 
 	def format_meter(meter)
-		if meter.balance < meter.reorder_point
+		if meter.quantity_balance < meter.reorder_point
 			"text-red-500"
 		end
 	end

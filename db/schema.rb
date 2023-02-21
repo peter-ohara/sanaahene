@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_15_105553) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_19_200014) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "electricity_entries", force: :cascade do |t|
     t.datetime "happened_at", null: false
-    t.bigint "item_id", null: false
     t.decimal "amount", precision: 8, scale: 2
     t.decimal "quantity", precision: 8, scale: 2
     t.bigint "attendee_id", null: false
@@ -26,7 +25,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_105553) do
     t.datetime "updated_at", null: false
     t.bigint "meter_id", null: false
     t.index ["attendee_id"], name: "index_electricity_entries_on_attendee_id"
-    t.index ["item_id"], name: "index_electricity_entries_on_item_id"
     t.index ["meter_id"], name: "index_electricity_entries_on_meter_id"
   end
 
@@ -102,7 +100,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_105553) do
   end
 
   add_foreign_key "electricity_entries", "electricity_meters", column: "meter_id"
-  add_foreign_key "electricity_entries", "items"
   add_foreign_key "electricity_entries", "users", column: "attendee_id"
   add_foreign_key "internet_entries", "internet_accounts"
   add_foreign_key "internet_entries", "users", column: "attendee_id"

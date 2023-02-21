@@ -1,5 +1,5 @@
 class ElectricityPurchase < ElectricityEntry
-  include ElectricityEntryable
+  include PurchaseEntryable
 
   alias_attribute :purchased_amount, :amount
 
@@ -11,11 +11,8 @@ class ElectricityPurchase < ElectricityEntry
     :cart
   end
 
-  def delta
-    purchased_amount
+  def trailing_content
+    nil
   end
 
-  def balance
-    previous_balance + purchased_amount
-  end
 end

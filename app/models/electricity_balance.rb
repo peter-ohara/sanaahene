@@ -1,25 +1,18 @@
 class ElectricityBalance < ElectricityEntry
-  include ElectricityEntryable
+  include BalanceEntryable
 
   alias_attribute :meter_balance, :amount
 
   def supporting_text
-    "#{attendee.first_name} checked balance. (GHS #{used_amount} used)"
+    "#{attendee.first_name} checked balance. (GHS #{amount_used} used)"
   end
 
   def leading_content
     :speed
   end
 
-  def delta
-    meter_balance - previous_balance
+  def trailing_content
+    "GHS #{amount}"
   end
 
-  def used_amount
-    delta * -1
-  end
-
-  def balance
-    meter_balance
-  end
 end

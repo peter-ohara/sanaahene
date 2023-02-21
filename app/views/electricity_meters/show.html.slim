@@ -1,7 +1,19 @@
 = content_for(:top_app_bar) do
-  = toolbar(navigation_icon: link_to(icon(:arrow_back), electricity_meters_path, class: "flex items-center"), menu_items: [delete_button(@electricity_meter)])
+  = toolbar(navigation_icon: link_to(icon(:arrow_back), root_path, class: "flex items-center"), menu_items: [delete_button(@electricity_meter)])
 
 = panel do
   == render @electricity_meter
+  
+  .my-5
+    = line_chart([ \
+        {name: "Used", data: @electricity_meter.usage_by_day(Date.today.at_beginning_of_month..Date.today)} \
+      ])
+
+
+= grouped_deck(@electricity_entries,
+        headline_text: :headline_text,
+        supporting_text: :supporting_text,
+        leading_content: :leading_content,
+        trailing_content: :trailing_content)
 
 = fab(icon='edit', url=edit_electricity_meter_path(@electricity_meter))
