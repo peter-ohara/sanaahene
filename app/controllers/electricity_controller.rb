@@ -7,6 +7,7 @@ class ElectricityController < ApplicationController
     @start_date = chart_params[:start_date].to_date
     @end_date = chart_params[:end_date].to_date
     @period = chart_params[:period]
+    @date_range = @start_date..@end_date
 
     @chart_data = ElectricityMeter.all.map do |meter|
       { name: meter.name, data: meter.usage_by_day(@start_date..@end_date) }

@@ -59,6 +59,6 @@ class ElectricityMeterTest < ActiveSupport::TestCase
     assert_equal(20, balance4.amount_used)
     assert_equal(90, balance4.amount_balance)
 
-    assert_equal(20, @meter.total_amount_used('2023-02-01'.to_date.beginning_of_day..'2023-02-01'.to_date.end_of_day))
+    assert_equal(20, @meter.amount_used('2023-02-01'.to_date.beginning_of_day..'2023-02-01'.to_date.end_of_day))
   end
 end
