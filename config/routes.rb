@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :electricity_balances, except: :index
   resources :electricity_purchases, except: :index
   resources :electricity_meters
+  get 'electricity/usage_chart'
 
   resources :tags
   resources :items

@@ -1,0 +1,15 @@
+turbo-frame#electricity_usage_chart
+  = form_with(url: electricity_usage_chart_path(start_date: @start_date, end_date: @end_date, period: @period), method: :get)
+    .flex.justify-end.gap-5
+      div
+        = label_tag :start_date, "Start", class: "text-sm font-medium text-gray-700 mr-2"
+        = date_field_tag :start_date, @start_date, class: "border border-gray-300 rounded shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-bold", onchange: 'this.form.requestSubmit()'
+
+      div
+        = label_tag :end_date, "End", class: "text-sm font-medium text-gray-700 mr-2"
+        = date_field_tag :end_date, @end_date, class: "border border-gray-300 rounded shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-bold", onchange: 'this.form.requestSubmit()'
+      div
+        = label_tag :period, "Period", class: "text-sm font-medium text-gray-700 mr-2"
+        = date_field_tag :period, @period, class: "border border-gray-300 rounded shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-bold", onchange: 'this.form.requestSubmit()'
+      
+  = line_chart @chart_data

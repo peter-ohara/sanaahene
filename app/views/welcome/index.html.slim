@@ -1,24 +1,26 @@
 = render('shared/navigation_bar')
 
-= panel do
-  table.table-auto.border.border-slate-400
-    thead
-      tr
-        th.border.border-slate-300.p-2.font-bold
-          | Tag
-        th.border.border-slate-300.p-2
-          | Current level
-        th.border.border-slate-300.p-2
-          | Re-order point
-    tbody
-      - ElectricityMeter.all.each do |meter|
-        tr[class="#{format_meter(meter)}"]
-          td.border.border-slate-300.p-2.font-bold
-            = link_to meter.name, meter
-          td.border.border-slate-300.p-2
-            = meter.quantity_balance
-          td.border.border-slate-300.p-2
-            = meter.reorder_point
+div.flex.justify-center.h-full.mt-5
+  div class="bg-white rounded shadow p-7 basis-full md:basis-1/2 xl:basis-1/3 mx-3"
+    table.table-auto.border.border-slate-400
+      thead
+        tr
+          th.border.border-slate-300.p-2.font-bold
+            | Tag
+          th.border.border-slate-300.p-2
+            | Current level
+          th.border.border-slate-300.p-2
+            | Re-order point
+      tbody
+        - ElectricityMeter.all.each do |meter|
+          tr[class="#{format_meter(meter)}"]
+            td.border.border-slate-300.p-2.font-bold
+              = link_to meter.name, meter
+            td.border.border-slate-300.p-2
+              = meter.quantity_balance
+            td.border.border-slate-300.p-2
+              = meter.reorder_point
 
-  .my-5
-    = line_chart(ElectricityMeter.all.map { |meter| {name: meter.name, data: meter.usage_by_day(Date.today.at_beginning_of_month..Date.today)}})
+div.flex.justify-center.h-full
+  div class="bg-white rounded shadow p-7 basis-full m-3"
+    turbo-frame[id="electricity_usage_chart" src="#{electricity_usage_chart_path(start_date: Date.today.at_beginning_of_year, end_date: Date.today, period: :daily)}"]
