@@ -1,45 +1,41 @@
 require 'csv'
+require 'securerandom'
+
 
 namespace :backfill do
   desc "Backfill with past data from csv file"
 
-  task users: :environment do
-    puts "Importing users..."
-    user_count = 0
-    CSV.foreach(ENV['CSV_FILE'], headers: true) do |row|
-      User.find_or_create_by!(
+  task :from_csv, [:folder_path] =>  [:environment] do |t, args|
+    read_csv_file(args[:folder_path], 'users') do |i, row|
+      puts "#{row['email']}..."
+      User.create_with(
+        first_name: row['first_name'],
+        last_name: row['last_name'],
+        other_names: row['other_names'],
+        email: row['email'],
+        password: SecureRandom.hex(8),
+        phone_number: row['phone_number']
+      ).find_or_create_by!(
         first_name: row['first_name'],
         last_name: row['last_name'],
         other_names: row['other_names'],
         email: row['email'],
         phone_number: row['phone_number']
       )
-      user_count += 1
-      puts "#{user_count} imported: #{row['email']}"
     end
-    puts "Completed importing #{user_count} users!"
-  end
 
-  task electricity_meters: :environment do
-    puts "Importing electricity_meters..."
-    meter_count = 0
-    CSV.foreach(ENV['CSV_FILE'], headers: true) do |row|
+    read_csv_file(args[:folder_path], 'electricity_meters') do |i, row|
+      puts "#{row['Name']}..."
       ElectricityMeter.find_or_create_by!(
         name: row['Name'],
         meter_number: row['Meter Number'],
         reorder_point: row['Minimum Inventory Level'],
-      )
-      meter_count += 1
-      puts "#{meter_count} imported: #{row['Name']}"
+        )
     end
-    puts "Completed importing #{meter_count} meters!"
-  end
 
-  task electricity_entries: :environment do
-    puts "Importing electricity_entries..."
-    entry_count = 0
-    CSV.foreach(ENV['CSV_FILE'], headers: true) do |row|
+    read_csv_file(args[:folder_path], 'electricity_entries') do |i, row|
       if row['Entry Type'] == 'Purchase'
+        puts "#{row['Entry Type'].ljust(15)} #{row["Datetime"].to_date.iso8601} #{row['Meter'].rjust(15)} #{row['Purchased Amount'].rjust(9)}  #{row['Attendee']}..."
         ElectricityPurchase.find_or_create_by!(
           happened_at: row['Datetime'],
           meter: ElectricityMeter.find_by!(name: row['Meter']),
@@ -48,6 +44,7 @@ namespace :backfill do
           notes: row['Notes']
         )
       elsif row['Entry Type'] == 'Meter Balance'
+        puts "#{row['Entry Type'].ljust(15)} #{row["Datetime"].to_date.iso8601} #{row['Meter'].rjust(15)} #{row['Meter Balance'].rjust(9)}  #{row['Attendee']}..."
         ElectricityBalance.find_or_create_by!(
           happened_at: row['Datetime'],
           meter: ElectricityMeter.find_by!(name: row['Meter']),
@@ -56,10 +53,59 @@ namespace :backfill do
           notes: row['Notes']
         )
       end
-      entry_count += 1
-      puts "#{entry_count} imported: #{row['Datetime']} #{row['Attendee']} #{row['Entry Type']} #{row['Meter Balance']}"
     end
-    puts "Completed importing #{entry_count} electricity_entries!"
+
+    read_csv_file(args[:folder_path], 'internet_accounts') do |i, row|
+      puts "#{row['Name']}..."
+      InternetAccount.find_or_create_by!(
+        name: row['Name'],
+        usage_type: row['Usage Type'],
+        account_number: row['Account Number'],
+        phone_number: row['Phone number'],
+        service_name: row['Service Name'],
+        reorder_point: row['Minimum Inventory Level'],
+        )
+    end
+
+    # read_csv_file(args[:folder_path], 'internet_entries') do |i, row|
+    #   if row['Entry Type'] == 'Bought'
+    #     puts "#{row['Entry Type'].ljust(15)} #{row["Datetime"].to_date.iso8601} #{row['Internet Account'].rjust(15)} #{row['Purchased Amount'].rjust(9)}  #{row['Attendee']}..."
+    #     InternetPurchase.find_or_create_by!(
+    #       happened_at: row['Datetime'],
+    #       meter: InternetAccount.find_by!(name: row['Internet Account']),
+    #       amount: row['Purchased Amount'],
+    #       attendee: User.find_by!(email: row['Attendee']),
+    #       notes: row['Notes']
+    #     )
+    #   elsif row['Entry Type'] == 'Used'
+    #     puts "#{row['Entry Type'].ljust(15)} #{row["Datetime"].to_date.iso8601} #{row['Internet Account'].rjust(15)} #{row['Internet Account Balance'].rjust(9)}  #{row['Attendee']}..."
+    #     InternetBalance.find_or_create_by!(
+    #       happened_at: row['Datetime'],
+    #       meter: InternetAccount.find_by!(name: row['Internet Account']),
+    #       amount: row['Internet Account Balance'],
+    #       attendee: User.find_by!(email: row['Attendee']),
+    #       notes: row['Notes']
+    #     )
+    #   end
+    # end
+
   end
 
+end
+
+
+def read_csv_file(folder_path, name)
+  filepath = "#{folder_path}/#{name}.csv"
+
+  row_count = `wc -l #{filepath}`.to_i
+  puts "Importing #{row_count} rows from #{name}..."
+
+  i = 1
+  CSV.foreach(filepath, headers: true) do |row|
+    print "#{i}/#{row_count}  "
+    yield i, row
+    i += 1
+  end
+
+  puts
 end
