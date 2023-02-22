@@ -1,13 +1,15 @@
 = simple_form_for(@user) do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
-  
+
   .form-inputs
     = f.input :first_name
     = f.input :last_name
     = f.input :other_names
-    = f.input :email
     = f.input :phone_number
+    = f.input :email
+    = f.input :password
+    = f.input :password_confirmation
   
   = navigation_bar do
     = f.button :submit, class: "flex flex-col text-center block py-2 px-3 text-indigo-700 text-lg font-extrabold"

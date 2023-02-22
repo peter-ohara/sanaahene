@@ -2,6 +2,7 @@ require "application_system_test_case"
 
 class UsersTest < ApplicationSystemTestCase
   setup do
+    sign_in users(:one)
     @user = users(:one)
   end
 
@@ -16,11 +17,13 @@ class UsersTest < ApplicationSystemTestCase
     visit users_url
     click_on "add"
 
-    fill_in "Email", with: "gob3@gmail.com"
     fill_in "First name", with: @user.first_name
     fill_in "Last name", with: @user.last_name
     fill_in "Other names", with: @user.other_names
     fill_in "Phone number", with: "+233987456789"
+    fill_in "Email", with: "gob3@gmail.com"
+    fill_in "Password", with: "password"
+    fill_in "Password confirmation", with: "password"
     click_on "Create User"
 
     assert_text "User was successfully created"
@@ -31,11 +34,13 @@ class UsersTest < ApplicationSystemTestCase
     visit user_url(@user)
     click_on "edit", match: :first
 
-    fill_in "Email", with: @user.email
     fill_in "First name", with: @user.first_name
     fill_in "Last name", with: @user.last_name
     fill_in "Other names", with: @user.other_names
     fill_in "Phone number", with: @user.phone_number
+    fill_in "Email", with: "gob3@gmail.com"
+    fill_in "Password", with: "password"
+    fill_in "Password confirmation", with: "password"
     click_on "Update User"
 
     assert_text "User was successfully updated"

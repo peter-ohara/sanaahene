@@ -2,6 +2,7 @@ require "application_system_test_case"
 
 class ElectricityBalancesTest < ApplicationSystemTestCase
   setup do
+    sign_in users(:one)
     @electricity_balance = electricity_entries(:three)
   end
 

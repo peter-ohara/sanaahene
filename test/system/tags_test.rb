@@ -2,6 +2,7 @@ require "application_system_test_case"
 
 class TagsTest < ApplicationSystemTestCase
   setup do
+    sign_in users(:one)
     @tag = tags(:one)
   end
 

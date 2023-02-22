@@ -2,6 +2,7 @@ require "application_system_test_case"
 
 class ElectricityMetersTest < ApplicationSystemTestCase
   setup do
+    sign_in users(:one)
     @electricity_meter = electricity_meters(:one)
   end
 

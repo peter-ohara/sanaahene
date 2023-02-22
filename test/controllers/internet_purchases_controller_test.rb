@@ -2,6 +2,7 @@ require "test_helper"
 
 class InternetPurchasesControllerTest < ActionDispatch::IntegrationTest
   setup do
+    sign_in users(:one)
     @internet_purchase = internet_entries(:one)
   end
 

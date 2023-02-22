@@ -2,6 +2,7 @@ require "test_helper"
 
 class ElectricityPurchasesControllerTest < ActionDispatch::IntegrationTest
   setup do
+    sign_in users(:one)
     @electricity_purchase = electricity_entries(:one)
   end
 
