@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'internet/index'
   resources :internet_balances, except: :index
   resources :internet_purchases, except: :index

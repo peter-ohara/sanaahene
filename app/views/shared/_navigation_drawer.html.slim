@@ -24,4 +24,8 @@
             |  Tags
           
         .border-b.mx-5
+        
+      .flex.justify-between.p-5
+        = current_user.name
+        = button_to "Sign out", destroy_user_session_path, method: :delete
     .flex-shrink-0.w-14
