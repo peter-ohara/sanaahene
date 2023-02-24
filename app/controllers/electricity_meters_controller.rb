@@ -9,6 +9,16 @@ class ElectricityMetersController < ApplicationController
   # GET /electricity_meters/1
   def show
     @electricity_entries = @electricity_meter.electricity_entries.group_by_day
+    # @chart_data = @electricity_meter.usage_by_day(Date.today.beginning_of_year..Date.today)
+    @chart_data = @electricity_meter.usage_by_day("2023-01-01".to_date.."2023-01-31".to_date)
+    @chart_data = @chart_data.map do |key, value|
+      {
+        date: key,
+        used: value,
+        purchased: '100'.to_d,
+        balance: ['50.00'.to_d]
+      }
+    end
   end
 
   # GET /electricity_meters/new

@@ -1,19 +1,48 @@
 = content_for(:top_app_bar) do
   = toolbar(navigation_icon: link_to(icon(:arrow_back), root_path, class: "flex items-center"), menu_items: [delete_button(@electricity_meter)])
-
-= panel do
-  == render @electricity_meter
   
-  .my-5
-    = line_chart([ \
-        {name: "Used", data: @electricity_meter.usage_by_day(Date.today.at_beginning_of_month..Date.today)} \
-      ])
 
+h1.text-center.text-xl.mt-3
+  = @electricity_meter.name
+  
+.my-5 data-controller="chart" data-chart-series-value=@chart_data.to_json
+  div data-chart-target="chartArea"
+  .rounded.bg-white.shadow.p-7
+    .table
+      .table-row
+        .table-cell.text-gray-700
+          | Date
+        .table-cell.text-lg
+          div data-chart-target="date" 30
+      .table-row
+        .table-cell.text-gray-700
+          | Used
+        .table-cell.text-lg
+          div data-chart-target="used" 30
+      .table-row
+        .table-cell.text-gray-700
+          | Purchased
+        .table-cell.text-lg
+          div data-chart-target="purchased" 30
+      .table-row
+        .table-cell.text-gray-700
+          | Balance
+        .table-cell.text-lg
+          div data-chart-target="balance" 30
+          
+        
 
-= grouped_deck(@electricity_entries,
-        headline_text: :headline_text,
-        supporting_text: :supporting_text,
-        leading_content: :leading_content,
-        trailing_content: :trailing_content)
+.grid.grid-cols-1.lg:grid-cols-3.xl:grid-cols-4.gap-5.lg:px-3.my-5
+  div
+    .rounded.bg-white.shadow.p-7
+      == render @electricity_meter
+  div
+    .rounded.shadow
+      = grouped_deck(@electricity_entries,
+              headline_text: :headline_text,
+              supporting_text: :supporting_text,
+              leading_content: :leading_content,
+              trailing_content: :trailing_content)
+    
 
 = fab(icon='edit', url=edit_electricity_meter_path(@electricity_meter))

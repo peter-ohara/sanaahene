@@ -37,5 +37,14 @@ module Entryable
       0.to_d
     end
 
+    private
+
+    def number_to_cedis(number)
+      helpers.number_to_currency number, unit: "₵"
+    end
+
+    def helpers
+      ActionController::Base.helpers
+    end
   end
 end

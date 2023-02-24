@@ -33,28 +33,6 @@ namespace :backfill do
         )
     end
 
-    read_csv_file(args[:folder_path], 'electricity_entries') do |i, row|
-      if row['Entry Type'] == 'Purchase'
-        puts "#{row['Entry Type'].ljust(15)} #{row["Datetime"].to_date.iso8601} #{row['Meter'].rjust(15)} #{row['Purchased Amount'].rjust(9)}  #{row['Attendee']}..."
-        ElectricityPurchase.find_or_create_by!(
-          happened_at: row['Datetime'],
-          meter: ElectricityMeter.find_by!(name: row['Meter']),
-          amount: row['Purchased Amount'],
-          attendee: User.find_by!(email: row['Attendee']),
-          notes: row['Notes']
-        )
-      elsif row['Entry Type'] == 'Meter Balance'
-        puts "#{row['Entry Type'].ljust(15)} #{row["Datetime"].to_date.iso8601} #{row['Meter'].rjust(15)} #{row['Meter Balance'].rjust(9)}  #{row['Attendee']}..."
-        ElectricityBalance.find_or_create_by!(
-          happened_at: row['Datetime'],
-          meter: ElectricityMeter.find_by!(name: row['Meter']),
-          amount: row['Meter Balance'],
-          attendee: User.find_by!(email: row['Attendee']),
-          notes: row['Notes']
-        )
-      end
-    end
-
     read_csv_file(args[:folder_path], 'internet_accounts') do |i, row|
       puts "#{row['Name']}..."
       InternetAccount.find_or_create_by!(
@@ -66,31 +44,7 @@ namespace :backfill do
         reorder_point: row['Minimum Inventory Level'],
         )
     end
-
-    # read_csv_file(args[:folder_path], 'internet_entries') do |i, row|
-    #   if row['Entry Type'] == 'Bought'
-    #     puts "#{row['Entry Type'].ljust(15)} #{row["Datetime"].to_date.iso8601} #{row['Internet Account'].rjust(15)} #{row['Purchased Amount'].rjust(9)}  #{row['Attendee']}..."
-    #     InternetPurchase.find_or_create_by!(
-    #       happened_at: row['Datetime'],
-    #       meter: InternetAccount.find_by!(name: row['Internet Account']),
-    #       amount: row['Purchased Amount'],
-    #       attendee: User.find_by!(email: row['Attendee']),
-    #       notes: row['Notes']
-    #     )
-    #   elsif row['Entry Type'] == 'Used'
-    #     puts "#{row['Entry Type'].ljust(15)} #{row["Datetime"].to_date.iso8601} #{row['Internet Account'].rjust(15)} #{row['Internet Account Balance'].rjust(9)}  #{row['Attendee']}..."
-    #     InternetBalance.find_or_create_by!(
-    #       happened_at: row['Datetime'],
-    #       meter: InternetAccount.find_by!(name: row['Internet Account']),
-    #       amount: row['Internet Account Balance'],
-    #       attendee: User.find_by!(email: row['Attendee']),
-    #       notes: row['Notes']
-    #     )
-    #   end
-    # end
-
   end
-
 end
 
 

@@ -4,7 +4,7 @@ class ElectricityBalance < ElectricityEntry
   alias_attribute :meter_balance, :amount
 
   def supporting_text
-    "#{attendee.first_name} checked balance. (GHS #{amount_used} used)"
+    "#{happened_at.to_time.strftime("%l:%M %P")} used #{number_to_cedis amount_used}"
   end
 
   def leading_content
@@ -12,7 +12,6 @@ class ElectricityBalance < ElectricityEntry
   end
 
   def trailing_content
-    "GHS #{amount}"
+    number_to_cedis amount
   end
-
 end

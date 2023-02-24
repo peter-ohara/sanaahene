@@ -6,8 +6,10 @@
     "@hotwired/turbo-rails": "^7.2.4",
     "autoprefixer": "^10.4.13",
     "chart.js": "^4.2.1",
+    "chartjs-plugin-zoom": "^2.0.0",
     "chartkick": "^5.0.1",
     "esbuild": "^0.17.5",
+    "highcharts": "^10.3.3",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.4",
     "tailwindcss-stimulus-components": "^3.0.4"

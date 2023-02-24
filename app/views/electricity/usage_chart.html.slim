@@ -1,5 +1,5 @@
 turbo-frame#electricity_usage_chart
-  = form_with(url: electricity_usage_chart_path(start_date: @start_date, end_date: @end_date, period: @period), method: :get)
+  = form_with(url: electricity_usage_chart_path(start_date: @start_date, end_date: @end_date, period: @period), method: :get, class: "px-3")
     .flex.justify-end.gap-5
       div
         = label_tag :start_date, "Start", class: "text-sm font-medium text-gray-700 mr-2"
@@ -12,42 +12,42 @@ turbo-frame#electricity_usage_chart
         = label_tag :period, "Period", class: "text-sm font-medium text-gray-700 mr-2"
         = date_field_tag :period, @period, class: "border border-gray-300 rounded shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-bold", onchange: 'this.form.requestSubmit()'
       
-  = line_chart @chart_data
+  = line_chart(@chart_data, title: "Electricity Used")
 
 
-  table.table-auto.border.border-slate-400.mt-5
-    thead
-      tr.bg-slate-300
-        th.border.border-slate-300.p-2.font-bold
-          | Meter
-        th.border.border-slate-300.p-2
-          | Starting Balance
-        th.border.border-slate-300.p-2
-          | Ending Balance
-        th.border.border-slate-300.p-2
-          | Purchased
-        th.border.border-slate-300.p-2
-          | Used
-    tbody.text-right
-      - ElectricityMeter.all.each do |meter|
-        tr
-          td.border.border-slate-300.p-2.font-bold.text-left
-            = link_to meter.name, meter
-          td.border.border-slate-300.p-2
-            = number_with_precision(meter.amount_starting_balance(@date_range), precision: 2, delimiter: ',')
-          td.border.border-slate-300.p-2
-            = number_with_precision(meter.amount_ending_balance(@date_range), precision: 2, delimiter: ',')
-          td.border.border-slate-300.p-2
-            = number_with_precision(meter.amount_purchased(@date_range), precision: 2, delimiter: ',')
-          td.border.border-slate-300.p-2
-            = number_with_precision(meter.amount_used(@date_range), precision: 2, delimiter: ',')
-      tr.bg-slate-300
-        td.border.border-slate-300.p-2.font-bold[colspan="3"]
-          | Total
-        td.border.border-slate-300.p-2
-          = number_with_precision(ElectricityMeter.amount_purchased(@date_range), precision: 2, delimiter: ',')
-        td.border.border-slate-300.p-2
-          = number_with_precision(ElectricityMeter.amount_used(@date_range), precision: 2, delimiter: ',')
-        
-          
-          
+  / table.table-auto.border.border-slate-400.mt-5
+  /   thead
+  /     tr.bg-slate-300
+  /       th.border.border-slate-300.p-2.font-bold
+  /         | Meter
+  /       th.border.border-slate-300.p-2
+  /         | Starting Balance
+  /       th.border.border-slate-300.p-2
+  /         | Ending Balance
+  /       th.border.border-slate-300.p-2
+  /         | Purchased
+  /       th.border.border-slate-300.p-2
+  /         | Used
+  /   tbody.text-right
+  /     - ElectricityMeter.all.each do |meter|
+  /       tr
+  /         td.border.border-slate-300.p-2.font-bold.text-left
+  /           = link_to meter.name, meter
+  /         td.border.border-slate-300.p-2
+  /           = number_with_precision(meter.amount_starting_balance(@date_range), precision: 2, delimiter: ',')
+  /         td.border.border-slate-300.p-2
+  /           = number_with_precision(meter.amount_ending_balance(@date_range), precision: 2, delimiter: ',')
+  /         td.border.border-slate-300.p-2
+  /           = number_with_precision(meter.amount_purchased(@date_range), precision: 2, delimiter: ',')
+  /         td.border.border-slate-300.p-2
+  /           = number_with_precision(meter.amount_used(@date_range), precision: 2, delimiter: ',')
+  /     tr.bg-slate-300
+  /       td.border.border-slate-300.p-2.font-bold[colspan="3"]
+  /         | Total
+  /       td.border.border-slate-300.p-2
+  /         = number_with_precision(ElectricityMeter.amount_purchased(@date_range), precision: 2, delimiter: ',')
+  /       td.border.border-slate-300.p-2
+  /         = number_with_precision(ElectricityMeter.amount_used(@date_range), precision: 2, delimiter: ',')
+  /
+  /
+  /
