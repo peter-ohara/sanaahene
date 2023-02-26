@@ -84,6 +84,7 @@ GEM
       xpath (~> 3.2)
     chartkick (5.0.1)
     concurrent-ruby (1.2.2)
+    connection_pool (2.3.0)
     crass (1.0.6)
     cssbundling-rails (1.1.2)
       railties (>= 6.0.0)
@@ -97,6 +98,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dockerfile-rails (1.2.1)
+      rails
     erubi (1.12.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -178,6 +181,10 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    redis (5.0.6)
+      redis-client (>= 0.9.0)
+    redis-client (0.12.2)
+      connection_pool
     regexp_parser (2.7.0)
     reline (0.3.2)
       io-console (~> 0.5)
@@ -252,12 +259,14 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise
+  dockerfile-rails (>= 1.2)
   factory_bot_rails
   heroicon
   jsbundling-rails
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.2)
+  redis (~> 5.0)
   selenium-webdriver
   simple_form
   simple_form_tailwind_css
