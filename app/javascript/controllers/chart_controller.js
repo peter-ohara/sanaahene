@@ -37,6 +37,9 @@ export default class extends Controller {
             chart: {
                 type: 'column',
                 zoomType: 'x',
+                scrollablePlotArea: {
+                    minWidth: 640
+                }
             },
             title: false,
             xAxis: {
