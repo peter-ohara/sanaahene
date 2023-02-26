@@ -6,8 +6,8 @@ options:
   cache: false
   ci: false
   compose: false
-  fullstaq: false
-  jemalloc: false
+  fullstaq: true
+  jemalloc: true
   label:
     fly_launch_runtime: rails
   mysql: false
