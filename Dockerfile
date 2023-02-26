@@ -19,13 +19,18 @@ ARG BUNDLER_VERSION=2.3.26
 RUN gem update --system --no-document && \
     gem install -N bundler -v ${BUNDLER_VERSION}
 
+# Install packages needed to install charlock_holmes
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y libicu-dev zlib1g-dev && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
 # Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential curl libpq-dev node-gyp pkg-config python-is-python3 redis libicu-dev
+    apt-get install --no-install-recommends -y build-essential curl libpq-dev node-gyp pkg-config python-is-python3 redis
 
 # Install JavaScript dependencies
 ARG NODE_VERSION=19.2.0
@@ -66,7 +71,6 @@ RUN apt-get update -qq && \
 
 # Run and own the application files as a non-root user for security
 RUN useradd rails
-USER rails:rails
 
 # Copy built application from previous stage
 COPY --from=build --chown=rails:rails /rails /rails
