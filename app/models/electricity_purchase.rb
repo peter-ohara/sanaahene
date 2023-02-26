@@ -8,7 +8,7 @@ class ElectricityPurchase < ElectricityEntry
   end
 
   def leading_content
-    :cart
+    :shopping_cart
   end
 
   def trailing_content

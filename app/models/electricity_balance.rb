@@ -8,7 +8,7 @@ class ElectricityBalance < ElectricityEntry
   end
 
   def leading_content
-    :speed
+    :notes
   end
 
   def trailing_content

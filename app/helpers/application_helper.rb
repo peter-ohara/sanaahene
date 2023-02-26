@@ -60,21 +60,20 @@ module ApplicationHelper
 		render 'shared/sidenav_icon'
 	end
 
-	def deck(items, headline_text: nil, supporting_text: nil, leading_content: nil, trailing_content: nil)
+	def deck(items, title: nil, headline_text: nil, supporting_text: nil, leading_content: nil, trailing_content: nil)
 		render('shared/deck',
-				items: items, headline_text: headline_text, supporting_text: supporting_text, leading_content: leading_content, trailing_content: trailing_content
+				items: items, title: title, headline_text: headline_text, supporting_text: supporting_text, leading_content: leading_content, trailing_content: trailing_content
 		)
 	end
 
-	def grouped_deck(groups, headline_text: nil, supporting_text: nil, leading_content: nil, trailing_content: nil)
-		render('shared/grouped_deck', groups: groups, headline_text: headline_text, supporting_text: supporting_text, leading_content: leading_content, trailing_content: trailing_content)
+	def grouped_deck(groups, title: nil, headline_text: nil, supporting_text: nil, leading_content: nil, trailing_content: nil)
+		render('shared/grouped_deck', groups: groups, title: title, headline_text: headline_text, supporting_text: supporting_text, leading_content: leading_content, trailing_content: trailing_content)
 	end
 
 	def resolve_leading_content(item, leading_content)
 		return nil if leading_content.blank?
 
-		# return image_tag(item.send(leading_content), class: "flex-none w-6 h-full") if item.respond_to?(leading_content)
-
-		content_tag(:div, icon(leading_content), class: "flex-none w-6 h-full")
+		icon_name = item.send(leading_content) if item.respond_to?(leading_content)
+		content_tag(:div, icon(icon_name), class: "flex-none w-6 h-full")
 	end
 end

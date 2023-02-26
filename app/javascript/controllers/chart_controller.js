@@ -1,11 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
 import Highcharts from 'highcharts'
-import exporting from "highcharts/modules/exporting"
-import offlineExporting from "highcharts/modules/offline-exporting"
-
-
-exporting(Highcharts)
-offlineExporting(Highcharts)
 
 
 function getCategories(data) {
@@ -21,27 +15,34 @@ function getSeries(data) {
 
 export default class extends Controller {
     static values = {
-        series: Array
+        series: Array,
+        title: String,
+        type: String,
     }
+
     static targets = ["chartArea", "date", "used", "purchased", "balance" ]
 
     connect() {
         const data = this.seriesValue
+        const title = this.titleValue
+        const chartType = this.typeValue
         const dateTarget = this.dateTarget
         const usedTarget = this.usedTarget
         const purchasedTarget = this.purchasedTarget
         const balanceTarget = this.balanceTarget
         const chartArea = this.chartAreaTarget
 
-        const chart = Highcharts.chart(chartArea, {
+        Highcharts.chart(chartArea, {
             chart: {
-                type: 'column',
+                type: chartType,
                 zoomType: 'x',
                 scrollablePlotArea: {
                     minWidth: 640
                 }
             },
-            title: false,
+            title: {
+                text: title,
+            },
             xAxis: {
                 categories: getCategories(data)
             },
@@ -50,6 +51,7 @@ export default class extends Controller {
             },
             series: [{
                 name: "Electricity Used",
+                showInLegend: false,
                 data: getSeries(data),
                 allowPointSelect: true,
                 states: {
@@ -60,6 +62,7 @@ export default class extends Controller {
             }],
             plotOptions: {
                 series: {
+                    pointWidth: 19,
                     cursor: 'pointer',
                     point: {
                         events: {
