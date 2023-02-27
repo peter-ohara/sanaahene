@@ -4,7 +4,7 @@ class ElectricityPurchase < ElectricityEntry
   alias_attribute :purchased_amount, :amount
 
   def supporting_text
-    "#{happened_at.to_time.strftime("%l:%M %P")} purchased #{number_to_cedis amount}"
+    "#{number_to_cedis amount} at #{happened_at.to_time.strftime("%l:%M %P")}"
   end
 
   def leading_content
@@ -12,6 +12,6 @@ class ElectricityPurchase < ElectricityEntry
   end
 
   def trailing_content
-    nil
+    amount_delta
   end
 end

@@ -74,6 +74,6 @@ module ApplicationHelper
 		return nil if leading_content.blank?
 
 		icon_name = item.send(leading_content) if item.respond_to?(leading_content)
-		content_tag(:div, icon(icon_name), class: "flex-none w-6 h-full")
+		icon(icon_name)
 	end
 end

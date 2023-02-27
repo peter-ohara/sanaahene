@@ -4,14 +4,14 @@ class ElectricityBalance < ElectricityEntry
   alias_attribute :meter_balance, :amount
 
   def supporting_text
-    "#{happened_at.to_time.strftime("%l:%M %P")} used #{number_to_cedis amount_used}"
+    "#{number_to_cedis amount} at #{happened_at.to_time.strftime("%l:%M %P")}"
   end
 
   def leading_content
-    :notes
+    :create
   end
 
   def trailing_content
-    number_to_cedis amount
+    amount_delta
   end
 end
