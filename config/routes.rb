@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'categorize/index'
+  resources :momo_import_lines
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   get 'internet/index'

@@ -1,0 +1,10 @@
+.grid.grid-cols-4.gap-2.pt-5.px-2 data-controller="sortable"
+  - MomoImportLine.pnl_types.keys.each do |pnl_type|
+    div
+      .bg-gray-300.rounded.p-2
+        .flex.justify-between
+          .font-bold.text-sm.my-1.mx-3.mb-2 = pnl_type
+          .text-sm.my-1.mx-3.mb-2 = number_to_currency @transactions.send(pnl_type).sum(&:amount), unit: "GHS "
+        div class="overflow-y-auto min-h-[5rem] max-h-[75vh]" data-sortable-target="list" data-pnl-type="#{pnl_type}"
+          - @transactions.send(pnl_type).each do |tx|
+            = render tx

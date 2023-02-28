@@ -1,0 +1,8 @@
+= content_for(:top_app_bar) do
+  = toolbar(navigation_icon: link_to(icon(:arrow_back), momo_import_lines_path, class: "flex items-center"), menu_items: [delete_button(@momo_import_line)])
+
+= panel do
+  = turbo_frame_tag "modal"
+    = detail_view(@momo_import_line, [:transaction_date, :from_acct, :from_name, :from_no, :trans_type, :amount, :fees, :e_levy, :bal_before, :bal_after, :to_no, :to_name, :to_acct, :f_id, :ref, :ova])
+
+= fab(icon='edit', url=edit_momo_import_line_path(@momo_import_line))

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_22_085924) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_28_080407) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -69,6 +69,237 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_22_085924) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_items_on_name", unique: true
+  end
+
+  create_table "momo_import_lines", force: :cascade do |t|
+    t.datetime "transaction_date"
+    t.string "from_acct"
+    t.string "from_name"
+    t.string "from_no"
+    t.string "trans_type"
+    t.decimal "amount", precision: 8, scale: 2
+    t.decimal "fees", precision: 8, scale: 2
+    t.decimal "e_levy", precision: 8, scale: 2
+    t.decimal "bal_before", precision: 8, scale: 2
+    t.decimal "bal_after", precision: 8, scale: 2
+    t.string "to_no"
+    t.string "to_name"
+    t.string "to_acct"
+    t.string "f_id"
+    t.string "ref"
+    t.string "ova"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "pnl_type", default: "uncategorized"
+  end
+
+  create_table "out-page-1-table-1", id: false, force: :cascade do |t|
+    t.text "TRANSACTION DATE"
+    t.integer "FROM ACCT"
+    t.text "FROM NAME"
+    t.decimal "FROM NO."
+    t.text "TRANS. TYPE"
+    t.decimal "amount"
+    t.decimal "fees"
+    t.decimal "E-LEVY"
+    t.decimal "BAL BEFORE"
+    t.decimal "BAL AFTER"
+    t.decimal "TO NO."
+    t.text "TO NAME"
+    t.integer "TO ACCT"
+    t.decimal "f_id"
+    t.text "ref"
+    t.text "ova"
+  end
+
+  create_table "out-page-10-table-1", id: false, force: :cascade do |t|
+    t.text "TRANSACTION DATE"
+    t.integer "FROM ACCT"
+    t.text "FROM NAME"
+    t.decimal "FROM NO."
+    t.text "TRANS. TYPE"
+    t.decimal "amount"
+    t.decimal "fees"
+    t.integer "E-LEVY"
+    t.decimal "BAL BEFORE"
+    t.decimal "BAL AFTER"
+    t.decimal "TO NO."
+    t.text "TO NAME"
+    t.integer "TO ACCT"
+    t.decimal "f_id"
+    t.text "ref"
+    t.text "ova"
+  end
+
+  create_table "out-page-11-table-1", id: false, force: :cascade do |t|
+    t.text "TRANSACTION DATE"
+    t.integer "FROM ACCT"
+    t.text "FROM NAME"
+    t.decimal "FROM NO."
+    t.text "TRANS. TYPE"
+    t.integer "amount"
+    t.decimal "fees"
+    t.integer "E-LEVY"
+    t.decimal "BAL BEFORE"
+    t.decimal "BAL AFTER"
+    t.decimal "TO NO."
+    t.text "TO NAME"
+    t.integer "TO ACCT"
+    t.decimal "f_id"
+    t.text "ref"
+    t.text "ova"
+  end
+
+  create_table "out-page-2-table-1", id: false, force: :cascade do |t|
+    t.text "TRANSACTION DATE"
+    t.integer "FROM ACCT"
+    t.text "FROM NAME"
+    t.decimal "FROM NO."
+    t.text "TRANS. TYPE"
+    t.decimal "amount"
+    t.decimal "fees"
+    t.decimal "E-LEVY"
+    t.decimal "BAL BEFORE"
+    t.decimal "BAL AFTER"
+    t.decimal "TO NO."
+    t.text "TO NAME"
+    t.integer "TO ACCT"
+    t.decimal "f_id"
+    t.text "ref"
+    t.text "ova"
+  end
+
+  create_table "out-page-3-table-1", id: false, force: :cascade do |t|
+    t.text "TRANSACTION DATE"
+    t.integer "FROM ACCT"
+    t.text "FROM NAME"
+    t.decimal "FROM NO."
+    t.text "TRANS. TYPE"
+    t.decimal "amount"
+    t.decimal "fees"
+    t.decimal "E-LEVY"
+    t.decimal "BAL BEFORE"
+    t.decimal "BAL AFTER"
+    t.decimal "TO NO."
+    t.text "TO NAME"
+    t.integer "TO ACCT"
+    t.decimal "f_id"
+    t.text "ref"
+    t.text "ova"
+  end
+
+  create_table "out-page-4-table-1", id: false, force: :cascade do |t|
+    t.text "TRANSACTION DATE"
+    t.integer "FROM ACCT"
+    t.text "FROM NAME"
+    t.decimal "FROM NO."
+    t.text "TRANS. TYPE"
+    t.decimal "amount"
+    t.decimal "fees"
+    t.decimal "E-LEVY"
+    t.decimal "BAL BEFORE"
+    t.decimal "BAL AFTER"
+    t.decimal "TO NO."
+    t.text "TO NAME"
+    t.integer "TO ACCT"
+    t.decimal "f_id"
+    t.text "ref"
+    t.text "ova"
+  end
+
+  create_table "out-page-5-table-1", id: false, force: :cascade do |t|
+    t.text "TRANSACTION DATE"
+    t.integer "FROM ACCT"
+    t.text "FROM NAME"
+    t.decimal "FROM NO."
+    t.text "TRANS. TYPE"
+    t.decimal "amount"
+    t.decimal "fees"
+    t.decimal "E-LEVY"
+    t.decimal "BAL BEFORE"
+    t.decimal "BAL AFTER"
+    t.decimal "TO NO."
+    t.text "TO NAME"
+    t.integer "TO ACCT"
+    t.decimal "f_id"
+    t.text "ref"
+    t.text "ova"
+  end
+
+  create_table "out-page-6-table-1", id: false, force: :cascade do |t|
+    t.text "TRANSACTION DATE"
+    t.integer "FROM ACCT"
+    t.text "FROM NAME"
+    t.decimal "FROM NO."
+    t.text "TRANS. TYPE"
+    t.integer "amount"
+    t.decimal "fees"
+    t.decimal "E-LEVY"
+    t.decimal "BAL BEFORE"
+    t.decimal "BAL AFTER"
+    t.decimal "TO NO."
+    t.text "TO NAME"
+    t.integer "TO ACCT"
+    t.decimal "f_id"
+    t.text "ref"
+    t.text "ova"
+  end
+
+  create_table "out-page-7-table-1", id: false, force: :cascade do |t|
+    t.text "TRANSACTION DATE"
+    t.integer "FROM ACCT"
+    t.text "FROM NAME"
+    t.decimal "FROM NO."
+    t.text "TRANS. TYPE"
+    t.integer "amount"
+    t.decimal "fees"
+    t.decimal "E-LEVY"
+    t.decimal "BAL BEFORE"
+    t.decimal "BAL AFTER"
+    t.decimal "TO NO."
+    t.text "TO NAME"
+    t.integer "TO ACCT"
+    t.decimal "f_id"
+    t.text "ref"
+    t.text "ova"
+  end
+
+  create_table "out-page-8-table-1", id: false, force: :cascade do |t|
+    t.text "TRANSACTION DATE"
+    t.integer "FROM ACCT"
+    t.text "FROM NAME"
+    t.decimal "FROM NO."
+    t.text "TRANS. TYPE"
+    t.decimal "amount"
+    t.decimal "fees"
+    t.decimal "E-LEVY"
+    t.decimal "BAL BEFORE"
+    t.decimal "BAL AFTER"
+    t.decimal "TO NO."
+    t.text "TO NAME"
+    t.integer "TO ACCT"
+    t.decimal "f_id"
+    t.text "ref"
+    t.text "ova"
+  end
+
+  create_table "out-page-9-table-1", id: false, force: :cascade do |t|
+    t.text "TRANSACTION DATE"
+    t.integer "FROM ACCT"
+    t.text "FROM NAME"
+    t.decimal "FROM NO."
+    t.text "TRANS. TYPE"
+    t.decimal "amount"
+    t.decimal "fees"
+    t.decimal "E-LEVY"
+    t.decimal "BAL BEFORE"
+    t.decimal "BAL AFTER"
+    t.decimal "TO NO."
+    t.text "TO NAME"
+    t.integer "TO ACCT"
+    t.decimal "f_id"
+    t.text "ref"
+    t.text "ova"
   end
 
   create_table "taggings", force: :cascade do |t|

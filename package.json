@@ -13,6 +13,7 @@
     "postcss": "^8.4.21",
     "rails_admin": "3.1.1",
     "sass": "^1.58.3",
+    "sortablejs": "^1.15.0",
     "tailwindcss": "^3.2.4",
     "tailwindcss-stimulus-components": "^3.0.4"
   },

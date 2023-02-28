@@ -1,0 +1,24 @@
+= simple_form_for(@momo_import_line) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :transaction_date
+    = f.input :from_acct
+    = f.input :from_name
+    = f.input :from_no
+    = f.input :trans_type
+    = f.input :amount
+    = f.input :fees
+    = f.input :e_levy
+    = f.input :bal_before
+    = f.input :bal_after
+    = f.input :to_no
+    = f.input :to_name
+    = f.input :to_acct
+    = f.input :f_id
+    = f.input :ref
+    = f.input :ova
+  
+  = navigation_bar do
+    = f.button :submit
