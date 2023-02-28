@@ -1,5 +1,5 @@
 = content_for(:top_app_bar) do
-  = toolbar(navigation_icon: sidenav_icon)
+  = toolbar(navigation_icon: sidenav_icon, menu_items: [import_button(new_momo_import_line_path)])
 
 = grouped_deck(@momo_import_lines,
     headline_text: :headline_text,

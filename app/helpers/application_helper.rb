@@ -48,6 +48,10 @@ module ApplicationHelper
                                        class: 'flex items-center')
   end
 
+  def import_button(url)
+    render('shared/import_form', url: url)
+  end
+
   def icon(name, classes: nil, color: 'text-gray-500')
     content_tag(:span, name, class: "material-icons #{classes} #{color}")
   end
