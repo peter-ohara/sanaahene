@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class UserSignOutTest < ApplicationSystemTestCase
   setup do
-    @user = users(:one)
+    @user = create(:user)
     @user.update!(password: "password")
     sign_in @user
   end

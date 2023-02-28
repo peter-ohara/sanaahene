@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :user, aliases: [:attendee] do
-    first_name { "John" }
+    sequence(:first_name, 5006) { |n| "John #{n}" }
     last_name { "Smith" }
     other_names { "Adenuga" }
     sequence(:email) { |n| "person#{n}@example.com" }

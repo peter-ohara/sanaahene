@@ -2,14 +2,13 @@ require "application_system_test_case"
 
 class MomoImportLinesTest < ApplicationSystemTestCase
   setup do
-    @momo_import_line = momo_import_lines(:one)
+    sign_in create(:user)
+    @momo_import_line = create(:momo_import_line)
   end
 
   test "visiting the index" do
     visit momo_import_lines_url
-    momo_import_lines.each do |momo_import_line|
-      assert_text momo_import_line.name
-    end
+    assert_text @momo_import_line.name
   end
 
   test "should create momo import line" do

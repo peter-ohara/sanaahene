@@ -3,7 +3,7 @@ require "test_helper"
 class ElectricityMetersControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
-    @electricity_meter = electricity_meters(:one)
+    @electricity_meter = create(:electricity_meter)
   end
 
   test "should get index" do

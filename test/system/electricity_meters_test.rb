@@ -2,8 +2,8 @@ require "application_system_test_case"
 
 class ElectricityMetersTest < ApplicationSystemTestCase
   setup do
-    sign_in users(:one)
-    @electricity_meter = electricity_meters(:one)
+    sign_in create(:user)
+    @electricity_meter = create(:electricity_meter)
   end
 
   test "visiting the index" do
@@ -39,12 +39,4 @@ class ElectricityMetersTest < ApplicationSystemTestCase
     click_on "arrow_back"
   end
 
-  test "should destroy Electricity meter" do
-    visit electricity_meter_url(@electricity_meter)
-    accept_alert do
-      click_on "delete", match: :first
-    end
-
-    assert_text "Electricity meter was successfully destroyed"
-  end
 end

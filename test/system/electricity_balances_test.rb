@@ -2,8 +2,8 @@ require "application_system_test_case"
 
 class ElectricityBalancesTest < ApplicationSystemTestCase
   setup do
-    sign_in users(:one)
-    @electricity_balance = electricity_entries(:three)
+    sign_in create(:user)
+    @electricity_balance = create(:electricity_balance)
   end
 
   test "visiting the index" do

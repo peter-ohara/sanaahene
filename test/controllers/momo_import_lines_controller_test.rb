@@ -2,7 +2,8 @@ require "test_helper"
 
 class MomoImportLinesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @momo_import_line = momo_import_lines(:one)
+    sign_in users(:one)
+    @momo_import_line = create(:momo_import_line)
   end
 
   test "should get index" do

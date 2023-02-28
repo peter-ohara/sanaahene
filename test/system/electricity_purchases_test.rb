@@ -2,8 +2,8 @@ require "application_system_test_case"
 
 class ElectricityPurchasesTest < ApplicationSystemTestCase
   setup do
-    sign_in users(:one)
-    @electricity_purchase = electricity_entries(:one)
+    sign_in create(:user)
+    @electricity_purchase = create(:electricity_purchase)
   end
 
   test "visiting the index" do

@@ -2,7 +2,7 @@ require "test_helper"
 
 class WelcomeControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users(:one)
+    sign_in create(:user)
   end
 
   test "should get index" do

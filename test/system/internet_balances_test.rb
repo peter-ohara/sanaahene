@@ -2,8 +2,8 @@ require "application_system_test_case"
 
 class InternetBalancesTest < ApplicationSystemTestCase
   setup do
-    sign_in users(:one)
-    @internet_balance = internet_entries(:three)
+    sign_in create(:user)
+    @internet_balance = create(:internet_balance)
   end
 
   test "visiting the index" do

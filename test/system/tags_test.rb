@@ -2,8 +2,8 @@ require "application_system_test_case"
 
 class TagsTest < ApplicationSystemTestCase
   setup do
-    sign_in users(:one)
-    @tag = tags(:one)
+    sign_in create(:user)
+    @tag = create(:tag)
   end
 
   test "visiting the index" do

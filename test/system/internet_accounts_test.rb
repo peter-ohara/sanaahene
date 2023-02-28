@@ -2,8 +2,8 @@ require "application_system_test_case"
 
 class InternetAccountsTest < ApplicationSystemTestCase
   setup do
-    sign_in users(:one)
-    @internet_account = internet_accounts(:one)
+    sign_in create(:user)
+    @internet_account = create(:internet_account)
   end
 
   test "visiting the index" do

@@ -2,8 +2,8 @@ require "application_system_test_case"
 
 class ItemsTest < ApplicationSystemTestCase
   setup do
-    sign_in users(:one)
-    @item = items(:one)
+    sign_in create(:user)
+    @item = create(:item)
   end
 
   test "visiting the index" do

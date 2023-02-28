@@ -3,7 +3,7 @@ require "test_helper"
 class InternetPurchasesControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
-    @internet_purchase = internet_entries(:one)
+    @internet_purchase = create(:internet_purchase)
   end
 
   test "should get index" do

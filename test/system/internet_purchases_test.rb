@@ -2,8 +2,8 @@ require "application_system_test_case"
 
 class InternetPurchasesTest < ApplicationSystemTestCase
   setup do
-    sign_in users(:one)
-    @internet_purchase = internet_entries(:one)
+    sign_in create(:user)
+    @internet_purchase = create(:internet_purchase)
   end
 
   test "visiting the index" do

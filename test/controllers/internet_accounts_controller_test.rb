@@ -3,7 +3,7 @@ require "test_helper"
 class InternetAccountsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:one)
-    @internet_account = internet_accounts(:one)
+    @internet_account = create(:internet_account)
   end
 
   test "should get index" do
