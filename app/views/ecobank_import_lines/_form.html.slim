@@ -1,0 +1,16 @@
+= simple_form_for(@ecobank_import_line) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :transaction_date
+    = f.input :description
+    = f.input :reference
+    = f.input :debit
+    = f.input :credit
+    = f.input :balance
+    = f.input :pnl_type
+    = f.input :notes
+  
+  = navigation_bar do
+    = f.button :submit

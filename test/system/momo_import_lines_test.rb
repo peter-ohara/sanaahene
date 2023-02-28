@@ -8,7 +8,7 @@ class MomoImportLinesTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit momo_import_lines_url
-    assert_text @momo_import_line.name
+    assert_text @momo_import_line.headline_text
   end
 
   test "should create momo import line" do

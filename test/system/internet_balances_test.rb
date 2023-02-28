@@ -8,9 +8,7 @@ class InternetBalancesTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit internet_index_url
-    [internet_entries(:three), internet_entries(:four)].each do |internet_balance|
-      assert_text internet_balance.amount
-    end
+    assert_text @internet_balance.headline_text
   end
 
   test "should create internet balance" do

@@ -1,0 +1,5 @@
+= content_for(:top_app_bar) do
+  = toolbar(navigation_icon: link_to(icon(:arrow_back), @ecobank_import_line, class: "flex items-center"))
+
+= panel do
+  == render "form", ecobank_import_line: @ecobank_import_line

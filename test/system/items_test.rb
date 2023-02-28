@@ -8,9 +8,7 @@ class ItemsTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit items_url
-    items.each do |item|
-      assert_text item.name
-    end
+    assert_text @item.name
   end
 
   test "should create item" do

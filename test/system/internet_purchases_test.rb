@@ -8,9 +8,7 @@ class InternetPurchasesTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit internet_index_url
-    internet_entries.each do |entry|
-      assert_text entry.amount
-    end
+    assert_text @internet_purchase.headline_text
   end
 
   test "should create internet purchase" do

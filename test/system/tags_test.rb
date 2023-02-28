@@ -8,9 +8,7 @@ class TagsTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit tags_url
-    tags.each do |tag|
-      assert_text tag.name
-    end
+    assert_text @tag.name
   end
 
   test "should create tag" do

@@ -6,5 +6,6 @@
   .grow
     div = momo_import_line.headline_text
     .text-sm = momo_import_line.supporting_text
+    span.text-sm.rounded.bg-red-300.p-1 = momo_import_line.transaction_date.to_formatted_s(:short)
   .self-start
     = momo_import_line.trailing_content

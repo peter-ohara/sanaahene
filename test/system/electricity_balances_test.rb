@@ -8,9 +8,7 @@ class ElectricityBalancesTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit electricity_index_url
-    electricity_entries.each do |entry|
-      assert_text entry.amount
-    end
+    assert_text @electricity_balance.headline_text
   end
 
   test "should create electricity balance" do

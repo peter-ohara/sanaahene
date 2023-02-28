@@ -1,6 +1,14 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   get 'categorize/index'
+
+  resources :ecobank_import_lines
+  post 'ecobank_import_lines/import'
+
   resources :momo_import_lines
+  post 'momo_import_lines/import'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   get 'internet/index'
@@ -20,5 +28,5 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "welcome#index"
+  root 'welcome#index'
 end

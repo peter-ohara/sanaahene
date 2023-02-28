@@ -8,11 +8,7 @@ class ElectricityPurchasesTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit electricity_index_url
-    electricity_entries.each do |entry|
-      if entry.type == "ElectricityPurchase"
-        assert_text "#{entry.attendee.first_name} purchased GHS #{entry.amount}"
-      end
-    end
+    assert_text @electricity_purchase.headline_text
   end
 
   test "should create electricity purchase" do

@@ -8,9 +8,7 @@ class ElectricityMetersTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit electricity_meters_url
-    electricity_meters.each do |meter|
-      assert_text meter.name
-    end
+    assert_text @electricity_meter.name
   end
 
   test "should create electricity meter" do

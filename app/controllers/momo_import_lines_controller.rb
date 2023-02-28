@@ -19,6 +19,36 @@ class MomoImportLinesController < ApplicationController
   # GET /momo_import_lines/1/edit
   def edit; end
 
+  # POST /momo_import_lines/import
+  def import
+    return redirect_to request.referer, notice: 'No files added' if params[:files].nil?
+
+    params[:files].each do |file|
+      return redirect_to request.referer, notice: 'Only CSV files allowed' unless file.content_type == 'text/csv'
+
+      CsvImportService.new.call(file, MomoImportLine, mapping: {
+                                  transaction_date: 'TRANSACTION DATE',
+                                  from_acct: 'FROM ACCT',
+                                  from_name: 'FROM NAME',
+                                  from_no: 'FROM NO.',
+                                  trans_type: 'TRANS. TYPE',
+                                  amount: 'AMOUNT',
+                                  fees: 'FEES',
+                                  e_levy: 'E-LEVY',
+                                  bal_before: 'BAL BEFORE',
+                                  bal_after: 'BAL AFTER',
+                                  to_no: 'TO NO.',
+                                  to_name: 'TO NAME',
+                                  to_acct: 'TO ACCT',
+                                  f_id: 'F_ID',
+                                  ref: 'REF',
+                                  ova: 'OVA'
+                                })
+    end
+
+    redirect_to momo_import_lines_url, notice: 'Imported successfully!'
+  end
+
   # POST /momo_import_lines
   def create
     @momo_import_line = MomoImportLine.new(momo_import_line_params)

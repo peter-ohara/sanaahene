@@ -4,7 +4,17 @@
       .bg-gray-300.rounded.p-2
         .flex.justify-between
           .font-bold.text-sm.my-1.mx-3.mb-2 = pnl_type
-          .text-sm.my-1.mx-3.mb-2 = number_to_currency @transactions.send(pnl_type).sum(&:amount), unit: "GHS "
-        div class="overflow-y-auto min-h-[5rem] max-h-[75vh]" data-sortable-target="list" data-pnl-type="#{pnl_type}"
-          - @transactions.send(pnl_type).each do |tx|
-            = render tx
+          .text-sm.my-1.mx-3.mb-2 = number_to_currency @transactions.select{ |tx| tx.pnl_type == pnl_type}.sum(&:abs_delta), unit: "GHS "
+        div class="overflow-y-auto min-h-[30rem] max-h-[85vh]" data-sortable-target="list" data-pnl-type="#{pnl_type}"
+          - @transactions.select{ |tx| tx.pnl_type == pnl_type}.each do |tx|
+            = link_to(tx, class: "flex px-3 py-3 items-center text-gray-600 font-medium bg-white rounded shadow my-2", data: { "sortable-target": :card, turbo_frame: "modal" }, id: dom_id(tx)) do
+              = form_for(tx) do |f|
+                = f.hidden_field :pnl_type
+              div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full mr-3 #{tx.received? ? "bg-green-100" : "bg-red-100"}"
+                = resolve_leading_content(tx, :leading_content)
+              .grow
+                div = tx.headline_text
+                .text-sm = tx.supporting_text
+                span.text-sm.rounded.bg-gray-100.p-1 = tx.transaction_date.to_formatted_s(:short)
+              .self-start
+                = number_with_precision tx.delta, precision: 2, delimiter: ","

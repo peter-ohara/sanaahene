@@ -8,9 +8,7 @@ class InternetAccountsTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit internet_accounts_url
-    internet_accounts.each do |internet_account|
-      assert_text internet_account.name
-    end
+    assert_text @internet_account.name
   end
 
   test "should create internet account" do

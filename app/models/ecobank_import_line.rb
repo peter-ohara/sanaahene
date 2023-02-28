@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class MomoImportLine < ApplicationRecord
+class EcobankImportLine < ApplicationRecord
   enum pnl_type: {
     "uncategorized": 'uncategorized',
     "income": 'income',
@@ -12,18 +12,14 @@ class MomoImportLine < ApplicationRecord
 
   def headline_text
     if received?
-      from_name.to_s
+      'Received'
     else
-      to_name.to_s
+      'Sent'
     end
   end
 
   def supporting_text
-    if received?
-      "Received (#{ref})"
-    else
-      "Sent (#{ref})"
-    end
+    description
   end
 
   def leading_content
@@ -35,7 +31,7 @@ class MomoImportLine < ApplicationRecord
   end
 
   def trailing_content
-    amount
+    credit || debit
   end
 
   def transaction_day
@@ -43,11 +39,11 @@ class MomoImportLine < ApplicationRecord
   end
 
   def received?
-    delta.positive?
+    credit.present?
   end
 
   def delta
-    bal_after - bal_before
+    credit || -debit
   end
 
   def abs_delta

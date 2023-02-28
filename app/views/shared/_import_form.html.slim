@@ -1,6 +1,6 @@
-= form_tag(url, multipart: true) do |f|
-  = label_tag 'file', nil, class: "flex items-center cursor-pointer"
+= form_tag(url, method: :post, multipart: true) do |f|
+  = label_tag :files, nil, class: "flex items-center cursor-pointer"
     span.material-icons.w-6.h-6.text-gray-500 file_upload
-    = file_field_tag :file, class: "hidden", onchange: "this.form.requestSubmit()"
+    = file_field_tag :files, accept: ".csv", multiple: true, name: 'files[]', class: "hidden", onchange: "this.form.requestSubmit()"
   
   

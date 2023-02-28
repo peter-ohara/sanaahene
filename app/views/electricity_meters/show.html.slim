@@ -1,7 +1,7 @@
 = content_for(:top_app_bar) do
   = toolbar(navigation_icon: link_to(icon(:arrow_back), root_path, class: "flex items-center"))
 
-.grid.grid-cols-1.lg:grid-cols-3.gap-5.lg:px-3
+.grid.grid-cols-1.lg:grid-cols-3.gap-5.lg:p-3
 
   div.lg:col-span-2
     .bg-white.shadow.pt-5 [data-controller="chart"
@@ -26,12 +26,20 @@
   
   div.lg:row-span-2
     .rounded.shadow
-      = grouped_deck(@electricity_entries,
-              title: "Electricity",
-              headline_text: :headline_text,
-              supporting_text: :supporting_text,
-              leading_content: :leading_content,
-              trailing_content: :trailing_content)
+      .bg-white.p-2.border-b.shadow
+        | Electricity
+      div class="lg:overflow-y-auto lg:h-[75vh]"
+        - @electricity_entries.each do |header, entry|
+          .px-3.pt-2
+            span.text-md.mr-3
+              = header
+            span.text-gray-500.bg-gray-200
+          / = items.count
+          = deck(entry,
+                  headline_text: :headline_text,
+                  supporting_text: :supporting_text,
+                  leading_content: :leading_content,
+                  trailing_content: :trailing_content)
 
   div.lg:col-span-2
     .bg-white.p-7.rounded.shadow
