@@ -3,7 +3,7 @@
     div
       .bg-gray-300.rounded.p-2
         .flex.justify-between
-          .font-bold.text-sm.my-1.mx-3.mb-2 = pnl_type
+          .font-bold.text-sm.my-1.mx-3.mb-2 = "#{pnl_type.titleize} (#{@transactions.select{ |tx| tx.pnl_type == pnl_type}.count})"
           .text-sm.my-1.mx-3.mb-2 = number_to_currency @transactions.select{ |tx| tx.pnl_type == pnl_type}.sum(&:abs_delta), unit: "GHS "
         div class="overflow-y-auto min-h-[30rem] max-h-[85vh]" data-sortable-target="list" data-pnl-type="#{pnl_type}"
           - @transactions.select{ |tx| tx.pnl_type == pnl_type}.each do |tx|
