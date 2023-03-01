@@ -23,8 +23,8 @@ export default class extends Controller {
         onMove: function(evt) {
           const card = evt.dragged
           const pnlType= evt.to.getAttribute('data-pnl-type')
-          const form = card.querySelector('form.edit_momo_import_line')
-          const input = form.querySelector('input[name="momo_import_line[pnl_type]"]')
+          const form = card.querySelector('form.edit_momo_import_line') || card.querySelector('form.edit_ecobank_import_line')
+          const input = form.querySelector('input[name="momo_import_line[pnl_type]"]') || form.querySelector('input[name="ecobank_import_line[pnl_type]"]')
           input.value = pnlType
 
           form.requestSubmit()

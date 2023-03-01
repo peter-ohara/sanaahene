@@ -53,7 +53,14 @@ class EcobankImportLinesController < ApplicationController
   # PATCH/PUT /ecobank_import_lines/1
   def update
     if @ecobank_import_line.update(ecobank_import_line_params)
-      redirect_to @ecobank_import_line, notice: 'Ecobank import line was successfully updated.'
+      respond_to do |format|
+        format.turbo_stream do
+          # TODO Update something to show that the pnl_type was persisted
+          # render turbo_stream: turbo_stream.replace(@momo_import_line)
+        end
+
+        format.html { redirect_to @ecobank_import_line, notice: 'Ecobank import line was successfully updated.' }
+      end
     else
       render :edit, status: :unprocessable_entity
     end
