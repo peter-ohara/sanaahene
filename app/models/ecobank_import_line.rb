@@ -11,11 +11,11 @@ class EcobankImportLine < ApplicationRecord
   scope :group_by_day, -> { order(transaction_date: :desc, created_at: :asc).group_by(&:transaction_day) }
 
   def headline_text
-    if received?
-      'Received'
-    else
-      'Sent'
-    end
+    counterparty
+  end
+
+  def counterparty
+    nil
   end
 
   def supporting_text
@@ -49,4 +49,43 @@ class EcobankImportLine < ApplicationRecord
   def abs_delta
     delta.abs
   end
+
+  def bank
+    'Ecobank'
+  end
+
+  def amount
+    debit || credit
+  end
+
+  TANSACTION_TYPES = [
+    'RVSLREF',
+    'RVSLELEVY',
+    'RVSLCHARGE',
+    'RVSL OF UNSUCCESSFUL',
+    'CHARGE GRA_ELEVYREF',
+    'CHARGE REF',
+    'ELEVY ON REF',
+    'MTN_MOBILE_MONEY MOBILE',
+    'REMOTE-ON-US',
+    'Bank2Wallet',
+    'Wallet2Bank',
+    'LAUNDRY CHIEF LIMITED',
+    'ATM WITHDRAWAL CHARGE',
+    'ATM CASH WITHDRAWAL',
+    'AIRTIME PURCHASE',
+    'owners draw',
+    "owner's draw",
+  ].freeze
+  def trans_type
+    TANSACTION_TYPES.each do |type|
+      return type if description.downcase.include? type.downcase
+    end
+
+    return "IFO" if description.include? "IFO"
+
+    'Unknown'
+  end
+
+  def ova; end
 end

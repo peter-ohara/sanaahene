@@ -11,6 +11,10 @@ class MomoImportLine < ApplicationRecord
   scope :group_by_day, -> { order(transaction_date: :desc, created_at: :asc).group_by(&:transaction_day) }
 
   def headline_text
+    counterparty
+  end
+
+  def counterparty
     if received?
       from_name.to_s
     else
@@ -19,11 +23,7 @@ class MomoImportLine < ApplicationRecord
   end
 
   def supporting_text
-    if received?
-      "Received (#{ref})"
-    else
-      "Sent (#{ref})"
-    end
+    ref
   end
 
   def leading_content
@@ -52,5 +52,9 @@ class MomoImportLine < ApplicationRecord
 
   def abs_delta
     delta.abs
+  end
+
+  def bank
+    'Momo'
   end
 end
