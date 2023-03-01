@@ -1,14 +1,7 @@
 # frozen_string_literal: true
 
 class MomoImportLine < ApplicationRecord
-  enum pnl_type: {
-    "uncategorized": 'uncategorized',
-    "income": 'income',
-    "expense": 'expense',
-    "transfer": 'transfer'
-  }
-
-  scope :group_by_day, -> { order(transaction_date: :desc, created_at: :asc).group_by(&:transaction_day) }
+  include Transactionable
 
   def headline_text
     counterparty

@@ -80,6 +80,7 @@ class BinanceImportLinesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def binance_import_line_params
     params.require(:binance_import_line).permit(:order_number, :order_type, :asset_type, :fiat_type, :total_price,
-                                                :price, :quantity, :exchange_rate, :couterparty, :status, :created_time)
+                                                :price, :quantity, :exchange_rate, :couterparty, :status, :created_time,
+                                                :pnl_type, :notes)
   end
 end

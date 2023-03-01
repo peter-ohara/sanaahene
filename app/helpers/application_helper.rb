@@ -39,6 +39,27 @@ module ApplicationHelper
     'text-red-500'
   end
 
+  def bank_color(bank)
+    colors = {
+      'Momo' => 'bg-yellow-200',
+      'Binance' => 'bg-slate-300',
+      'Ecobank' => 'bg-blue-200'
+    }
+
+    colors[bank]
+  end
+
+  def pnl_color(pnl_type)
+    colors = {
+      'uncategorized' => 'bg-gray-200',
+      'expense' => 'bg-red-300',
+      'income' => 'bg-green-200',
+      'transfer' => 'bg-gray-200'
+    }
+
+    colors[pnl_type]
+  end
+
   def fab(icon, url, id = '', classes = '')
     render 'shared/fab', icon_name: icon, url:, id:, classes:
   end
@@ -49,7 +70,7 @@ module ApplicationHelper
   end
 
   def import_button(url)
-    render('shared/import_form', url: url)
+    render('shared/import_button', url:)
   end
 
   def icon(name, classes: nil, color: 'text-gray-500')

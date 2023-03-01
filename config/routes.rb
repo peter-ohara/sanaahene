@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   get 'categorize/index'
+  get 'categorize/deck'
 
   resources :binance_import_lines, except: %i[new create]
   post 'binance_import_lines/import'

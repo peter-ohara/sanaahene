@@ -91,6 +91,7 @@ class MomoImportLinesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def momo_import_line_params
     params.require(:momo_import_line).permit(:transaction_date, :from_acct, :from_name, :from_no, :trans_type,
-                                             :amount, :fees, :e_levy, :bal_before, :bal_after, :to_no, :to_name, :to_acct, :f_id, :ref, :ova, :pnl_type)
+                                             :amount, :fees, :e_levy, :bal_before, :bal_after, :to_no, :to_name,
+                                             :to_acct, :f_id, :ref, :ova, :pnl_type, :notes)
   end
 end

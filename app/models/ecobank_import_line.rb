@@ -1,21 +1,16 @@
 # frozen_string_literal: true
 
 class EcobankImportLine < ApplicationRecord
-  enum pnl_type: {
-    "uncategorized": 'uncategorized',
-    "income": 'income',
-    "expense": 'expense',
-    "transfer": 'transfer'
-  }
+  include Transactionable
 
-  scope :group_by_day, -> { order(transaction_date: :desc, created_at: :asc).group_by(&:transaction_day) }
+  alias_attribute :reference_number, :reference
 
   def headline_text
     counterparty
   end
 
   def counterparty
-    nil
+    'Unknown'
   end
 
   def supporting_text
@@ -75,14 +70,14 @@ class EcobankImportLine < ApplicationRecord
     'ATM CASH WITHDRAWAL',
     'AIRTIME PURCHASE',
     'owners draw',
-    "owner's draw",
+    "owner's draw"
   ].freeze
   def trans_type
     TANSACTION_TYPES.each do |type|
       return type if description.downcase.include? type.downcase
     end
 
-    return "IFO" if description.include? "IFO"
+    return 'IFO' if description.include? 'IFO'
 
     'Unknown'
   end

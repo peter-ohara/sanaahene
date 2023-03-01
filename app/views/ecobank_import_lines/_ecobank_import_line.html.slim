@@ -1,11 +1,1 @@
-= link_to(ecobank_import_line, class: "flex px-3 py-3 items-center text-gray-600 font-medium bg-white rounded shadow my-2", data: { "sortable-target": :card, turbo_frame: "modal" }, id: dom_id(ecobank_import_line)) do
-  = form_for(ecobank_import_line) do |f|
-    = f.hidden_field :pnl_type
-  div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full mr-3"
-    = resolve_leading_content(ecobank_import_line, :leading_content)
-  .grow
-    div = ecobank_import_line.headline_text
-    .text-sm = ecobank_import_line.supporting_text
-    span.text-sm.rounded.bg-red-300.p-1 = ecobank_import_line.transaction_date.to_formatted_s(:short)
-  .self-start
-    = ecobank_import_line.trailing_content
+= detail_view(@ecobank_import_line, [:transaction_date, :debit, :credit, :description, :balance, :reference_number])

@@ -1,12 +1,14 @@
-.table.w-full
+.table.w-full.border.rounded
   - fields.each do |field|
-    .table-row
-      .table-cell.text-gray-700
+    .table-row class="even:bg-amber-100 odd:bg-blue-100"
+      .table-cell.text-gray-700.p-1
         = field.to_s.humanize
-      .table-cell.text-lg
+      .table-cell.text-lg.p-1
         - if item.class.reflect_on_association(field)
           = item.send(field).name
-        - elsif item.send(field).class == 'datetime'
-          = l(item.send(field), format: :short)
+        - elsif item.send(field).class == ActiveSupport::TimeWithZone
+          = item.send(field).to_formatted_s(:long_with_meridian)
+        - elsif item.send(field).class == BigDecimal
+          = number_with_delimiter item.send(field)
         - else
           = item.send(field)
