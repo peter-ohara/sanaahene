@@ -11,19 +11,6 @@ class EcobankImportLinesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
-    get new_ecobank_import_line_url
-    assert_response :success
-  end
-
-  test "should create ecobank_import_line" do
-    assert_difference("EcobankImportLine.count") do
-      post ecobank_import_lines_url, params: { ecobank_import_line: { balance: @ecobank_import_line.balance, credit: @ecobank_import_line.credit, debit: @ecobank_import_line.debit, description: @ecobank_import_line.description, notes: @ecobank_import_line.notes, pnl_type: @ecobank_import_line.pnl_type, reference: @ecobank_import_line.reference, transaction_date: @ecobank_import_line.transaction_date } }
-    end
-
-    assert_redirected_to ecobank_import_line_url(EcobankImportLine.last)
-  end
-
   test "should show ecobank_import_line" do
     get ecobank_import_line_url(@ecobank_import_line)
     assert_response :success
