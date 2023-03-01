@@ -1,0 +1,5 @@
+= content_for(:top_app_bar) do
+  = toolbar(navigation_icon: link_to(icon(:arrow_back), binance_import_lines_path, class: "flex items-center"))
+
+= panel do
+  == render "form", binance_import_line: @binance_import_line

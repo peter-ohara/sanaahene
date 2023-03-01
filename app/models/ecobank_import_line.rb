@@ -88,4 +88,8 @@ class EcobankImportLine < ApplicationRecord
   end
 
   def ova; end
+
+  def fiat_type
+    'GHS'
+  end
 end

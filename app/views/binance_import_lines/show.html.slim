@@ -1,0 +1,8 @@
+= content_for(:top_app_bar) do
+  = toolbar(navigation_icon: link_to(icon(:arrow_back), binance_import_lines_path, class: "flex items-center"), menu_items: [delete_button(@binance_import_line)])
+
+= panel do
+  = turbo_frame_tag "modal"
+    == render @binance_import_line
+
+= fab(icon='edit', url=edit_binance_import_line_path(@binance_import_line))

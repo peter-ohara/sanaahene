@@ -1,0 +1,12 @@
+= content_for(:top_app_bar) do
+  = toolbar(navigation_icon: sidenav_icon, menu_items: [import_button(binance_import_lines_import_path)])
+
+= grouped_deck(@binance_import_lines,
+    headline_text: :headline_text,
+    supporting_text: :supporting_text,
+    leading_content: :leading_content,
+    trailing_content: :trailing_content)
+
+= fab(icon='add', url=new_binance_import_line_path)
+
+= render('shared/navigation_bar')

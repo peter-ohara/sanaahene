@@ -12,7 +12,7 @@
                 = f.hidden_field :pnl_type
               .flex.justify-between.mb-2
                 div class="#{tx.received? ? "text-green-500" : "text-red-500"}"
-                  = number_to_currency tx.amount, unit: "GHS "
+                  = number_to_currency tx.amount, unit: "#{tx.fiat_type} "
                 .text-sm.self-center
                   = tx.transaction_date.to_formatted_s(:short)
               .flex.justify-between.mb-2

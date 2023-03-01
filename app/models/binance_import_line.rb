@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class MomoImportLine < ApplicationRecord
+class BinanceImportLine < ApplicationRecord
   enum pnl_type: {
     "uncategorized": 'uncategorized',
     "income": 'income',
@@ -8,22 +8,14 @@ class MomoImportLine < ApplicationRecord
     "transfer": 'transfer'
   }
 
-  scope :group_by_day, -> { order(transaction_date: :desc, created_at: :asc).group_by(&:transaction_day) }
+  scope :group_by_day, -> { order(created_time: :desc, created_at: :asc).group_by(&:transaction_day) }
 
   def headline_text
     counterparty
   end
 
-  def counterparty
-    if received?
-      from_name.to_s
-    else
-      to_name.to_s
-    end
-  end
-
   def supporting_text
-    ref
+    "#{order_type} #{quantity} #{asset_type} at #{price}"
   end
 
   def leading_content
@@ -35,19 +27,29 @@ class MomoImportLine < ApplicationRecord
   end
 
   def trailing_content
-    amount
+    "#{fiat_type} #{total_price}"
+  end
+
+  def transaction_date
+    created_time
   end
 
   def transaction_day
     transaction_date.to_date
   end
 
+  def counterparty
+    couterparty
+  end
+
   def received?
-    delta.positive?
+    order_type == 'Buy'
   end
 
   def delta
-    bal_after - bal_before
+    -total_price if received?
+
+    total_price
   end
 
   def abs_delta
@@ -55,10 +57,16 @@ class MomoImportLine < ApplicationRecord
   end
 
   def bank
-    'Momo'
+    'Binance'
   end
 
-  def fiat_type
-    'GHS'
+  def amount
+    total_price
   end
+
+  def trans_type
+    order_type
+  end
+
+  def ova; end
 end

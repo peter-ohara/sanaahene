@@ -3,6 +3,9 @@
 Rails.application.routes.draw do
   get 'categorize/index'
 
+  resources :binance_import_lines
+  post 'binance_import_lines/import'
+
   resources :ecobank_import_lines
   post 'ecobank_import_lines/import'
 

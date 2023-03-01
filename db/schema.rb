@@ -10,9 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_28_172455) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_01_101310) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "binance_import_lines", force: :cascade do |t|
+    t.string "order_number"
+    t.string "order_type"
+    t.string "asset_type"
+    t.string "fiat_type"
+    t.decimal "total_price", precision: 8, scale: 2
+    t.decimal "price", precision: 10, scale: 4
+    t.decimal "quantity", precision: 8, scale: 2
+    t.decimal "exchange_rate", precision: 8, scale: 2
+    t.string "couterparty"
+    t.string "status"
+    t.datetime "created_time"
+    t.string "pnl_type", default: "uncategorized", null: false
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "ecobank_import_lines", force: :cascade do |t|
     t.datetime "transaction_date"

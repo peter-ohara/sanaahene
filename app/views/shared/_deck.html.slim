@@ -1,6 +1,6 @@
 .border-y.divide-y.bg-white
   - items.each do |item|
-    = link_to(item, class: "flex px-3 py-3 items-center text-gray-600 font-medium transition duration-300") do
+    = link_to(item, class: "flex px-3 py-3 items-center text-gray-600 font-medium transition duration-300", data: { turbo_frame: "modal" }) do
       - if leading_content.present?
         div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full mr-3"
           = resolve_leading_content(item, leading_content)

@@ -1,0 +1,19 @@
+= simple_form_for(@binance_import_line) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :order_number
+    = f.input :order_type
+    = f.input :asset_type
+    = f.input :fiat_type
+    = f.input :total_price
+    = f.input :price
+    = f.input :quantity
+    = f.input :exchange_rate
+    = f.input :couterparty
+    = f.input :status
+    = f.input :created_time
+  
+  = navigation_bar do
+    = f.button :submit
