@@ -3,13 +3,13 @@
 Rails.application.routes.draw do
   get 'categorize/index'
 
-  resources :binance_import_lines
+  resources :binance_import_lines, except: %i[new create]
   post 'binance_import_lines/import'
 
-  resources :ecobank_import_lines
+  resources :ecobank_import_lines, except: %i[new create]
   post 'ecobank_import_lines/import'
 
-  resources :momo_import_lines
+  resources :momo_import_lines, except: %i[new create]
   post 'momo_import_lines/import'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
