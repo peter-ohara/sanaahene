@@ -43,9 +43,9 @@ class MomoImportLine < ApplicationRecord
 
   def delta
     if received?
-      -(amount + fees + e_levy)
-    else
       amount
+    else
+      -(amount + fees + e_levy)
     end
   end
 
