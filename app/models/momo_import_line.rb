@@ -3,6 +3,8 @@
 class MomoImportLine < ApplicationRecord
   include Transactionable
 
+  COMPANY_ACCOUNT_NUMBER = '233555673531'
+
   def headline_text
     counterparty
   end
@@ -36,11 +38,15 @@ class MomoImportLine < ApplicationRecord
   end
 
   def received?
-    delta.positive?
+    to_no == COMPANY_ACCOUNT_NUMBER
   end
 
   def delta
-    bal_after - bal_before
+    if received?
+      -(amount + fees + e_levy)
+    else
+      amount
+    end
   end
 
   def abs_delta

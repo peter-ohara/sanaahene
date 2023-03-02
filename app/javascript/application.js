@@ -3,9 +3,8 @@ import "@hotwired/turbo-rails"
 import "./controllers"
 
 import "chartkick"
+import "chartkick/chart.js"
 
-
-// import "chartkick/chart.js"
 // import { Chart } from 'chart.js';
 // import zoomPlugin from 'chartjs-plugin-zoom';
 //

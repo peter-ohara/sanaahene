@@ -8,9 +8,14 @@ module Transactionable
 
     belongs_to :category, optional: true
 
-    scope :group_by_day, lambda {
-      all.sort_by { |tx| [tx.transaction_date, tx.created_at] }.reverse.group_by(&:transaction_day)
-    }
+    delegate :account_type, to: :category, allow_nil: true
+    delegate :name, to: :category, prefix: true, allow_nil: true
+
+    scope :group_by_day, -> { all.sort_by(&:sort_order).reverse.group_by(&:transaction_day) }
+
+    def sort_order
+      [transaction_date, created_at]
+    end
 
     private
 

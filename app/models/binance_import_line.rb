@@ -40,9 +40,9 @@ class BinanceImportLine < ApplicationRecord
   end
 
   def delta
-    -total_price if received?
+    quantity if received?
 
-    total_price
+    - quantity
   end
 
   def abs_delta

@@ -1,13 +1,16 @@
 = content_for(:top_app_bar) do
   = toolbar(navigation_icon: sidenav_icon)
+  
+= pie_chart(@sum_txs_by_account_type, title: "Transactions sum by Account Type", donut: true, prefix: "GHS")
+= pie_chart(@count_txs_by_category, title: "Transaction count by Category", donut: true)
 
 .rounded.shadow
   div
-    - @transactions.each do |header, items|
+    - @transactions_by_day.each do |day, txs|
       .px-3.py-3
         span.mr-3.text-gray-500
-          = header
-      - items.each do |tx|
+          = day
+      - txs.each do |tx|
         = link_to(tx, class: "flex flex-col px-3 py-2 my-2 text-gray-600 font-medium bg-white rounded shadow #{'brightness-90' if tx.uncategorized?}", data: { "sortable-target": :card, turbo_frame: "modal" }, id: dom_id(tx)) do
           = form_for(tx) do |f|
             = f.hidden_field :pnl_type
