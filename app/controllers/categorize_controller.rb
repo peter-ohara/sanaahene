@@ -7,7 +7,7 @@ class CategorizeController < ApplicationController
   end
 
   def deck
-    @transactions = MomoImportLine.all + EcobankImportLine.all
+    @transactions = BinanceImportLine.all + MomoImportLine.all + EcobankImportLine.all
 
     @sum_txs_by_account_type = @transactions.group_by(&:account_type).map { |at, txs| [at, txs.sum(&:delta)] }
     @count_txs_by_category = @transactions.group_by(&:category_name).map { |c, txs| [c, txs.count] }
