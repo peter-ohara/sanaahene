@@ -3,5 +3,6 @@
 
 = panel do
   = turbo_frame_tag "modal"
+    = render 'shared/import_line_category_form', import_line: @binance_import_line
     = render @binance_import_line
-    = render 'shared/import_line_form', import_line: @binance_import_line
+    = render 'shared/import_line_notes_form', import_line: @binance_import_line

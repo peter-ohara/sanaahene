@@ -1,4 +1,0 @@
-.mt-3.border.p-5.rounded
-  = simple_form_for(import_line) do |f|
-    = f.association :category, input_html: { onchange: "this.form.requestSubmit()", data: { controller: 'enahanced-select' } }
-    = f.input :notes, input_html: { onchange: "this.form.requestSubmit()" }

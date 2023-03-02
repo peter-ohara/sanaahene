@@ -7,11 +7,11 @@ import { application } from "./application"
 import ChartController from "./chart_controller"
 application.register("chart", ChartController)
 
-import EnhancedSelectController from "./enhanced_select_controller"
-application.register("enhanced-select", EnhancedSelectController)
-
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import SelectController from "./select_controller"
+application.register("select", SelectController)
 
 import SortableController from "./sortable_controller"
 application.register("sortable", SortableController)
