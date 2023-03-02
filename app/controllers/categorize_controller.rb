@@ -12,6 +12,6 @@ class CategorizeController < ApplicationController
     @sum_txs_by_account_type = @transactions.group_by(&:account_type).map { |at, txs| [at, txs.sum(&:delta)] }
     @count_txs_by_category = @transactions.group_by(&:category_name).map { |c, txs| [c, txs.count] }
 
-    @transactions_by_day = @transactions.sort_by(&:sort_order).reverse.group_by(&:transaction_day)
+    @uncategorized_transactions = @transactions.select(&:uncategorized?).group_by(&:transaction_day)
   end
 end
