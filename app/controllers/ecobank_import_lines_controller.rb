@@ -82,6 +82,6 @@ class EcobankImportLinesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def ecobank_import_line_params
     params.require(:ecobank_import_line).permit(:transaction_date, :description, :reference, :debit, :credit,
-                                                :balance, :pnl_type, :notes)
+                                                :balance, :pnl_type, :notes, :category_id)
   end
 end

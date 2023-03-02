@@ -1,0 +1,8 @@
+= content_for(:top_app_bar) do
+  = toolbar(navigation_icon: link_to(icon(:arrow_back), categories_path, class: "flex items-center"), menu_items: [delete_button(@category)])
+
+= panel do
+  = turbo_frame_tag "modal"
+    = render @category
+
+= fab(icon='edit', url=edit_category_path(@category))
