@@ -1,0 +1,21 @@
+= link_to(tx,
+        class: "flex flex-col px-3 py-2 my-2 text-gray-600 font-medium bg-white rounded shadow #{'brightness-90' if tx.uncategorized?}",
+        data: { "sortable-target": :card, turbo_frame: "modal" },
+        id: dom_id(tx)) do
+  = form_for(tx) do |f|
+    = f.hidden_field :pnl_type
+  .flex.justify-between.mb-1
+    .text-sm.font-bold = tx.headline_text&.squish
+    div.text-sm class="#{tx.received? ? "text-green-500" : "text-red-500"}"
+      = number_to_currency tx.amount, unit: "#{tx.fiat_type} "
+  .text-xs.mb-2
+    = tx.transaction_date.to_formatted_s(:time_only_with_meridian)
+  p.text-xs.mb-2 = tx.supporting_text&.squish
+  .flex.gap-2
+    .text-xs.rounded.p-1 class="#{bank_color(tx.bank)}" = tx.bank
+    .text-xs.rounded.bg-gray-200.p-1 = tx.trans_type
+    - if tx.ova.present?
+      .text-xs.rounded.bg-gray-200.p-1 = tx.ova
+    .grow
+    - unless tx.uncategorized?
+      .text-xs.rounded.p-1.justify-self-end class="#{pnl_color(tx.pnl_type)}" = tx.category_name
