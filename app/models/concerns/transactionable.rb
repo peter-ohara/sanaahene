@@ -4,8 +4,6 @@ module Transactionable
   extend ActiveSupport::Concern
 
   included do
-    enum pnl_type: %i[uncategorized income expense transfer].index_with(&:to_s)
-
     belongs_to :category, optional: true
 
     delegate :account_type, to: :category, allow_nil: true
@@ -15,6 +13,10 @@ module Transactionable
 
     def sort_order
       [transaction_date, created_at]
+    end
+
+    def uncategorized?
+      category.nil?
     end
 
     private

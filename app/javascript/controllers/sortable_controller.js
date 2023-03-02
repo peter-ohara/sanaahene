@@ -10,6 +10,8 @@ export default class extends Controller {
   connect() {
     const sortableSpeed = 100;
 
+    return;
+
 
     this.listTargets.forEach(function (listTarget, index) {
       const defaultSortable = Sortable.create(listTarget, {
@@ -22,13 +24,11 @@ export default class extends Controller {
 
         onMove: function(evt) {
           const card = evt.dragged
-          const pnlType= evt.to.getAttribute('data-pnl-type')
-          const form = card.querySelector('form.edit_momo_import_line') || card.querySelector('form.edit_ecobank_import_line')
-          const input = form.querySelector('input[name="momo_import_line[pnl_type]"]') || form.querySelector('input[name="ecobank_import_line[pnl_type]"]')
-          input.value = pnlType
-
+          const category = evt.to.getAttribute('data-category')
+          const form = card.querySelector('#hidden_category_form')
+          const input = form.querySelector('#hidden_category_field')
+          input.value = category
           form.requestSubmit()
-
         },
         onSort: function(evt) {
           // evt.from.classList.remove("adding");

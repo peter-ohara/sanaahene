@@ -1,15 +1,39 @@
 .grid.grid-cols-4.gap-2.pt-5.px-2 data-controller="sortable"
-  - MomoImportLine.pnl_types.keys.each do |pnl_type|
+  div.row-span-2
+    .bg-gray-300.rounded.p-2
+      .flex.justify-between
+        .font-bold.text-sm.my-1.mx-3.mb-2 = "Uncategorized (#{@transactions.select { |tx| tx.category.nil? }.count})"
+        .text-sm.my-1.mx-3.mb-2
+      div class="overflow-y-auto min-h-[30rem] max-h-[85vh]" data-sortable-target="list" data-category=""
+        - @transactions.select { |tx| tx.category.nil? }.each do |tx|
+          = link_to(tx, class: "flex flex-col px-3 py-3 text-gray-600 font-medium bg-white rounded shadow my-2", data: { "sortable-target": :card, turbo_frame: "modal" }, id: dom_id(tx)) do
+            = form_for(tx, html: { id: :hidden_category_form }) do |f|
+              = f.hidden_field :category_id, id: :hidden_category_field
+            .flex.justify-between.mb-2
+              div class="#{tx.received? ? "text-green-500" : "text-red-500"}"
+                = number_to_currency tx.amount, unit: "#{tx.fiat_type} "
+              .text-sm.self-center
+                = tx.transaction_date.to_formatted_s(:short)
+            .flex.justify-between.mb-2
+              span.text-sm.rounded.p-1 class="#{bank_color(tx.bank)}" = tx.bank
+              span.text-sm.rounded.bg-gray-100.p-1 = tx.trans_type
+            - if tx.counterparty.present?
+              .text-sm.mb-2.font-bold = tx.headline_text&.squish
+            .text-xs.rounded.bg-gray-100.min-h-10.border.p-2.mb-2 = tx.supporting_text&.squish
+            - if tx.ova.present?
+              div
+                span.text-sm.rounded.bg-gray-100.p-1 = tx.ova
+  - Category.all.each do |category|
     div
       .bg-gray-300.rounded.p-2
         .flex.justify-between
-          .font-bold.text-sm.my-1.mx-3.mb-2 = "#{pnl_type.titleize} (#{@transactions.select{ |tx| tx.pnl_type == pnl_type}.count})"
-          .text-sm.my-1.mx-3.mb-2 = number_to_currency @transactions.select{ |tx| tx.pnl_type == pnl_type}.sum(&:abs_delta), unit: "GHS "
-        div class="overflow-y-auto min-h-[30rem] max-h-[85vh]" data-sortable-target="list" data-pnl-type="#{pnl_type}"
-          - @transactions.select{ |tx| tx.pnl_type == pnl_type}.each do |tx|
+          .font-bold.text-sm.my-1.mx-3.mb-2 = "#{category.name} (#{category.transactions.count})"
+          .text-sm.my-1.mx-3.mb-2 = number_to_currency category.transactions.sum(&:abs_delta), unit: "GHS "
+        div class="overflow-y-auto h-96" data-sortable-target="list" data-category="#{category.id}"
+          - category.transactions.select{ |tx| tx.category == category}.each do |tx|
             = link_to(tx, class: "flex flex-col px-3 py-3 text-gray-600 font-medium bg-white rounded shadow my-2", data: { "sortable-target": :card, turbo_frame: "modal" }, id: dom_id(tx)) do
-              = form_for(tx) do |f|
-                = f.hidden_field :pnl_type
+              = form_for(tx, html: { id: :hidden_category_form }) do |f|
+                = f.hidden_field :category, id: :hidden_category_field
               .flex.justify-between.mb-2
                 div class="#{tx.received? ? "text-green-500" : "text-red-500"}"
                   = number_to_currency tx.amount, unit: "#{tx.fiat_type} "
