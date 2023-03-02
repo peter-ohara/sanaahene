@@ -1,5 +1,5 @@
 = content_for(:top_app_bar) do
-  = toolbar(navigation_icon: sidenav_icon, menu_items: [import_button(ecobank_import_lines_import_path)])
+  = toolbar(navigation_icon: sidenav_icon)
   
 = grouped_deck(@ecobank_import_lines,
     headline_text: :headline_text,

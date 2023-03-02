@@ -6,7 +6,9 @@ module Transactionable
   included do
     enum pnl_type: %i[uncategorized income expense transfer].index_with(&:to_s)
 
-    scope :group_by_day, -> { all.sort_by { |tx| [tx.transaction_date, tx.created_at] }.group_by(&:transaction_day) }
+    scope :group_by_day, lambda {
+      all.sort_by { |tx| [tx.transaction_date, tx.created_at] }.reverse.group_by(&:transaction_day)
+    }
 
     private
 

@@ -1,4 +1,7 @@
 .mt-3.border.p-5.rounded
   = simple_form_for(import_line) do |f|
     = f.input :pnl_type, collection: import_line.class.pnl_types.keys, label_method: :titleize, as: :radio_buttons, input_html: { onchange: "this.form.requestSubmit()" }
+    / = f.input :category, collection: import_line.categories, input_html: { onchange: "this.form.requestSubmit()", data: { controller: 'enhanced-select' } }
+    / div class="relative flex w-full"
+    /   = f.input_field :category, collection: import_line.categories, class: "block w-full rounded-sm cursor-pointer focus:outline-none", onchange: "this.form.requestSubmit()", data: { controller: 'enhanced-select' }
     = f.input :notes, input_html: { onchange: "this.form.requestSubmit()" }

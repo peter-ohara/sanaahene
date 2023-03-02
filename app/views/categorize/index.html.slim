@@ -16,11 +16,11 @@
                 .text-sm.self-center
                   = tx.transaction_date.to_formatted_s(:short)
               .flex.justify-between.mb-2
-                span.text-sm.rounded.bg-gray-100.p-1 = tx.bank
+                span.text-sm.rounded.p-1 class="#{bank_color(tx.bank)}" = tx.bank
                 span.text-sm.rounded.bg-gray-100.p-1 = tx.trans_type
               - if tx.counterparty.present?
-                .text-sm.mb-2.font-bold = tx.headline_text.squish
-              .text-xs.rounded.bg-gray-100.min-h-10.border.p-2.mb-2 = tx.supporting_text.squish
+                .text-sm.mb-2.font-bold = tx.headline_text&.squish
+              .text-xs.rounded.bg-gray-100.min-h-10.border.p-2.mb-2 = tx.supporting_text&.squish
               - if tx.ova.present?
                 div
                   span.text-sm.rounded.bg-gray-100.p-1 = tx.ova
