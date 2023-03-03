@@ -9,14 +9,18 @@ class CategorizeController < ApplicationController
   def deck
     @transactions = BinanceImportLine.cedi_transactions + MomoImportLine.all + EcobankImportLine.all + NonBankTransaction.all
 
-    @sum_txs_by_account_type = @transactions.group_by(&:account_type).map { |at, txs| [at, txs.sum(&:delta)] }
-    @count_txs_by_category = @transactions.group_by(&:category_name).map { |c, txs| [c, txs.count] }
+    expense_account_types = ['Cost of Service', 'Expenses']
+    income_account_types = %w[Income Revenue]
 
-    if params[:category] == 'null'
-      @transactions = @transactions.select(&:uncategorized?)
-    elsif Category.all.map(&:name).include?(params[:category])
-      @transactions = @transactions.select { |tx| tx.category_name == params[:category] }
+    @sum_txs_by_account_type = @transactions.group_by(&:account_type).map { |at, txs| [at, txs.sum(&:delta)] }
+    @expenses_by_month = @transactions.group_by(&:transaction_month).map do |month, txs|
+      [month, - (txs.select { |tx| expense_account_types.include?(tx.account_type) }.sum(&:delta))]
     end
+    @income_by_month = @transactions.group_by(&:transaction_month).map do |month, txs|
+      [month, txs.select { |tx| income_account_types.include?(tx.account_type) }.sum(&:delta)]
+    end
+
+    @transactions = @transactions.select(&:uncategorized?) if params[:category] == 'null'
     @uncategorized_transactions = @transactions.sort_by(&:sort_order).group_by(&:transaction_day)
   end
 end

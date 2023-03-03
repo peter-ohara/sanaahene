@@ -35,10 +35,6 @@ class BinanceImportLine < ApplicationRecord
     created_time
   end
 
-  def transaction_day
-    transaction_date.to_date
-  end
-
   def received?
     order_type == 'Buy'
   end

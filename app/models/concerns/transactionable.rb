@@ -27,6 +27,14 @@ module Transactionable
       end
     end
 
+    def transaction_day
+      transaction_date.to_date
+    end
+
+    def transaction_month
+      transaction_date.beginning_of_month
+    end
+
     private
 
     def number_to_cedis(number)

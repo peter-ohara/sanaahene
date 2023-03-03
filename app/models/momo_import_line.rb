@@ -33,10 +33,6 @@ class MomoImportLine < ApplicationRecord
     ActionController::Base.helpers.number_to_currency amount, unit: 'GHS '
   end
 
-  def transaction_day
-    transaction_date.to_date
-  end
-
   def received?
     to_no == COMPANY_ACCOUNT_NUMBER
   end
