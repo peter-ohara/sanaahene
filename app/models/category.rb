@@ -4,9 +4,10 @@ class Category < ApplicationRecord
   has_many :binance_import_lines
   has_many :ecobank_import_lines
   has_many :momo_import_lines
+  has_many :non_bank_transactions
 
   def transactions
-    (binance_import_lines.cedi_transactions + ecobank_import_lines + momo_import_lines).sort_by(&:sort_order)
+    (binance_import_lines.cedi_transactions + ecobank_import_lines + momo_import_lines + non_bank_transactions).sort_by(&:sort_order)
   end
 
   def transactions_by_day
