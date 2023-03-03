@@ -12,9 +12,10 @@ div.flex.justify-center.h-full
         = "(#{@category.transaction_count})"
       .text-md = @category.trailing_content
     - @category.transactions_by_day.each do |day, txs|
-      .px-3.py-3
-        span.mr-3.text-gray-500
-          = day
+      .pl-3.pt-5
+        div.mr-3.text-gray-500.flex.justify-between
+          .text-md = day
+          .text-xs = number_to_currency txs.sum(&:delta), unit: 'GHS '
       - txs.each do |tx|
         = render 'shared/transaction', tx: tx
 
