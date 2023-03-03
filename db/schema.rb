@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_02_144351) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_03_152136) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -139,6 +139,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_02_144351) do
     t.index ["category_id"], name: "index_momo_import_lines_on_category_id"
   end
 
+  create_table "non_bank_transactions", force: :cascade do |t|
+    t.datetime "transaction_date", null: false
+    t.string "transaction_type", default: "sent", null: false
+    t.string "counter_party", null: false
+    t.text "ref", null: false
+    t.decimal "amount", precision: 8, scale: 2, null: false
+    t.decimal "fees", precision: 8, scale: 2, default: "0.0"
+    t.decimal "e_levy", precision: 8, scale: 2, default: "0.0"
+    t.bigint "category_id"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_non_bank_transactions_on_category_id"
+  end
+
   create_table "taggings", force: :cascade do |t|
     t.bigint "tag_id", null: false
     t.bigint "electricity_entry_id", null: false
@@ -184,6 +199,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_02_144351) do
   add_foreign_key "internet_entries", "internet_accounts"
   add_foreign_key "internet_entries", "users", column: "attendee_id"
   add_foreign_key "momo_import_lines", "categories"
+  add_foreign_key "non_bank_transactions", "categories"
   add_foreign_key "taggings", "electricity_entries"
   add_foreign_key "taggings", "tags"
 end

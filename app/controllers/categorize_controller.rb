@@ -2,12 +2,12 @@
 
 class CategorizeController < ApplicationController
   def index
-    @transactions = MomoImportLine.cedi_transactions + EcobankImportLine.all + BinanceImportLine.all
+    @transactions = BinanceImportLine.cedi_transactions + MomoImportLine.all + EcobankImportLine.all + NonBankTransaction.all
     @transactions = @transactions.sort_by(&:sort_order)
   end
 
   def deck
-    @transactions = BinanceImportLine.cedi_transactions + MomoImportLine.all + EcobankImportLine.all
+    @transactions = BinanceImportLine.cedi_transactions + MomoImportLine.all + EcobankImportLine.all + NonBankTransaction.all
 
     @sum_txs_by_account_type = @transactions.group_by(&:account_type).map { |at, txs| [at, txs.sum(&:delta)] }
     @count_txs_by_category = @transactions.group_by(&:category_name).map { |c, txs| [c, txs.count] }

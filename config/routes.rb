@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :non_bank_transactions
   resources :categories
   get 'categorize/index'
   get 'categorize/deck'

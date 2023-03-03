@@ -1,0 +1,10 @@
+= content_for(:top_app_bar) do
+  = toolbar(navigation_icon: link_to(icon(:arrow_back), non_bank_transactions_path, class: "flex items-center"), menu_items: [delete_button(@non_bank_transaction)])
+
+= panel do
+  = turbo_frame_tag "modal"
+    = render 'shared/import_line_category_form', import_line: @non_bank_transaction
+    = render @non_bank_transaction
+    = render 'shared/import_line_notes_form', import_line: @non_bank_transaction
+
+= fab(icon='edit', url=edit_non_bank_transaction_path(@non_bank_transaction))

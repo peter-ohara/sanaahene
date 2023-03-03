@@ -19,6 +19,14 @@ module Transactionable
       category.nil?
     end
 
+    def leading_content
+      if received?
+        :arrow_downward
+      else
+        :arrow_upward
+      end
+    end
+
     private
 
     def number_to_cedis(number)

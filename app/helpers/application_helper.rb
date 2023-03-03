@@ -43,21 +43,11 @@ module ApplicationHelper
     colors = {
       'Momo' => 'bg-yellow-200',
       'Binance' => 'bg-slate-300',
-      'Ecobank' => 'bg-blue-200'
+      'Ecobank' => 'bg-blue-200',
+      'NonBank' => 'bg-pink-200'
     }
 
     colors[bank]
-  end
-
-  def pnl_color(pnl_type)
-    colors = {
-      'uncategorized' => 'bg-gray-200',
-      'expense' => 'bg-red-300',
-      'income' => 'bg-green-200',
-      'transfer' => 'bg-gray-200'
-    }
-
-    colors[pnl_type]
   end
 
   def fab(icon, url, id = '', classes = '')

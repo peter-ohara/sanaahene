@@ -3,6 +3,10 @@
 class BinanceImportLine < ApplicationRecord
   include Transactionable
 
+  alias_attribute :trans_type, :order_type
+  alias_attribute :counterparty, :couterparty
+
+
   CEDI = 'GHS'
 
   scope :cedi_transactions, -> { where(fiat_type: CEDI) }
@@ -35,10 +39,6 @@ class BinanceImportLine < ApplicationRecord
     transaction_date.to_date
   end
 
-  def counterparty
-    couterparty
-  end
-
   def received?
     order_type == 'Buy'
   end
@@ -64,10 +64,4 @@ class BinanceImportLine < ApplicationRecord
   def amount
     total_price
   end
-
-  def trans_type
-    order_type
-  end
-
-  def ova; end
 end

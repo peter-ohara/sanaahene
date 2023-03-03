@@ -1,0 +1,17 @@
+= simple_form_for(@non_bank_transaction) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :transaction_date, input_html: { data: { controller: 'select', select_target: "input" } }
+    = f.input :transaction_type, collection: NonBankTransaction.transaction_types, label_method: :first, value_method: :first, as: :radio_buttons
+    = f.input :counter_party
+    = f.input :ref, input_html: { class: 'h-fit' }
+    = f.input :amount
+    = f.input :fees
+    = f.input :e_levy
+    = f.association :category, input_html: { data: { controller: 'select', select_target: "input" } }
+    = f.input :notes
+  
+  = navigation_bar do
+    = f.button :submit
