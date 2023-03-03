@@ -26,7 +26,7 @@ class EcobankImportLine < ApplicationRecord
   end
 
   def trailing_content
-    credit || debit
+    ActionController::Base.helpers.number_to_currency amount, unit: 'GHS '
   end
 
   def transaction_day

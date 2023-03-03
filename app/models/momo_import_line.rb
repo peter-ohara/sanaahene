@@ -30,7 +30,7 @@ class MomoImportLine < ApplicationRecord
   end
 
   def trailing_content
-    amount
+    ActionController::Base.helpers.number_to_currency amount, unit: 'GHS '
   end
 
   def transaction_day

@@ -9,10 +9,10 @@ module Transactionable
     delegate :account_type, to: :category, allow_nil: true
     delegate :name, to: :category, prefix: true, allow_nil: true
 
-    scope :group_by_day, -> { all.sort_by(&:sort_order).reverse.group_by(&:transaction_day) }
+    scope :group_by_day, -> { all.sort_by(&:sort_order).group_by(&:transaction_day) }
 
     def sort_order
-      [transaction_date, created_at]
+      [-transaction_date.to_i, created_at]
     end
 
     def uncategorized?

@@ -20,7 +20,7 @@ class BinanceImportLine < ApplicationRecord
   end
 
   def trailing_content
-    "#{fiat_type} #{total_price}"
+    ActionController::Base.helpers.number_to_currency amount, unit: "#{fiat_type} "
   end
 
   def transaction_date

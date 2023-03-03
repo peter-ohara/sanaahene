@@ -3,7 +3,7 @@
 class CategorizeController < ApplicationController
   def index
     @transactions = MomoImportLine.all + EcobankImportLine.all + BinanceImportLine.all
-    @transactions = @transactions.sort_by(&:sort_order).reverse
+    @transactions = @transactions.sort_by(&:sort_order)
   end
 
   def deck
@@ -17,6 +17,6 @@ class CategorizeController < ApplicationController
     elsif Category.all.map(&:name).include?(params[:category])
       @transactions = @transactions.select { |tx| tx.category_name == params[:category] }
     end
-    @uncategorized_transactions = @transactions.group_by(&:transaction_day)
+    @uncategorized_transactions = @transactions.sort_by(&:sort_order).group_by(&:transaction_day)
   end
 end
