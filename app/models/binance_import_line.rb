@@ -3,6 +3,10 @@
 class BinanceImportLine < ApplicationRecord
   include Transactionable
 
+  CEDI = 'GHS'
+
+  scope :cedi_transactions, -> { where(fiat_type: CEDI) }
+
   def headline_text
     counterparty
   end
@@ -40,7 +44,7 @@ class BinanceImportLine < ApplicationRecord
   end
 
   def delta
-    return 0 unless fiat_type == 'GHS'
+    return 0 unless fiat_type == CEDI
 
     if received?
       total_price
