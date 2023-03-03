@@ -1,5 +1,5 @@
 = link_to(tx,
-        class: "flex flex-col px-3 py-2 my-2 text-gray-600 font-medium bg-white rounded shadow #{'brightness-90' if tx.uncategorized?}",
+        class: "flex flex-col px-3 py-2 my-2 text-gray-600 font-medium bg-white rounded shadow #{'brightness-75' if tx.uncategorized?}",
         data: { "sortable-target": :card, turbo_frame: "modal" },
         id: dom_id(tx)) do
   = form_for(tx) do |f|
