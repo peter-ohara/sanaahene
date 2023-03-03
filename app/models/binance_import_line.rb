@@ -40,7 +40,13 @@ class BinanceImportLine < ApplicationRecord
   end
 
   def delta
-    0
+    return 0 unless fiat_type == 'GHS'
+
+    if received?
+      total_price
+    else
+      -total_price
+    end
   end
 
   def abs_delta
