@@ -9,6 +9,14 @@ class Category < ApplicationRecord
     (binance_import_lines + ecobank_import_lines + momo_import_lines).sort_by(&:sort_order)
   end
 
+  def transactions_by_day
+    transactions.group_by(&:transaction_day)
+  end
+
+  def transaction_count
+    transactions.count
+  end
+
   def delta
     transactions.sum(&:delta)
   end

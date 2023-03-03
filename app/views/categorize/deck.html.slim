@@ -1,11 +1,16 @@
 = content_for(:top_app_bar) do
   = toolbar(navigation_icon: sidenav_icon)
   
-= pie_chart(@sum_txs_by_account_type, title: "Transactions sum by Account Type", donut: true, prefix: "GHS")
+= pie_chart(@sum_txs_by_account_type, title: "Transactions sum by Account Type", donut: true, prefix: "GHS ")
 = pie_chart(@count_txs_by_category, title: "Transaction count by Category", donut: true)
 
-.rounded.shadow
-  div
+div.flex.justify-center.h-full
+  div class="basis-full md:basis-1/2 xl:basis-1/3"
+    .mt-5.pb-1.px-3.border-b-2.flex.justify-between
+      .text-md
+        | Transactions
+        = "(#{@transactions.count})"
+      .text-md = number_to_currency @transactions.sum(&:delta), unit: 'GHS '
     - @uncategorized_transactions.each do |day, txs|
       .px-3.py-3
         span.mr-3.text-gray-500
