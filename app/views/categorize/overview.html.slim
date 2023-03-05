@@ -1,0 +1,48 @@
+
+.border-b.py-2.text-center Revenues and expenses
+
+.bg-white.rounded.shadow.py-5.md:px-5.m-3
+  = line_chart(@profit_by_month,
+          title: "Revenue and Costs",
+          thousands: ",",
+          zeros: true,
+          adapter: 'highcharts')
+
+.bg-white.rounded.shadow.py-5.md:px-5.m-3
+  = line_chart(@costs_breakdown,
+          title: "Costs breakdown",
+          thousands: ",",
+          zeros: true,
+          stacked: false,
+          adapter: 'highcharts')
+
+.border-b.py-2.text-center Assets and Liabilities
+
+.grid.grid-cols-1.md:grid-cols-2.gap-2.m-3
+  .bg-white.rounded.shadow.py-5
+    = pie_chart(@assets_by_category,
+            title: "Assets breakdown",
+            thousands: ",",
+            zeros: true,
+            donut: true,
+            library: { chart: { zoomType: false, scrollablePlotArea: false } },
+            adapter: 'highcharts')
+    
+  .bg-white.rounded.shadow.py-5
+    = pie_chart(@liabilities_by_category,
+            title: "Liabilities breakdown",
+            thousands: ",",
+            zeros: true,
+            donut: true,
+            library: { chart: { zoomType: false, scrollablePlotArea: false } },
+            adapter: 'highcharts')
+    
+.bg-white.rounded.shadow.py-5.md:px-5.m-3
+  = pie_chart(@equity_by_category,
+          title: "Equity breakdown",
+          thousands: ",",
+          zeros: true,
+          donut: true,
+          library: { chart: { zoomType: false, scrollablePlotArea: false } },
+          adapter: 'highcharts')
+

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :non_bank_transactions
   resources :categories
   get 'categorize/index'
-  get 'categorize/deck'
+  get 'categorize/overview'
 
   resources :binance_import_lines, except: %i[new create]
   post 'binance_import_lines/import'

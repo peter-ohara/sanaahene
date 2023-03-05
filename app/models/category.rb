@@ -6,6 +6,19 @@ class Category < ApplicationRecord
   has_many :momo_import_lines
   has_many :non_bank_transactions
 
+  enum account_type: {
+    transfer: "Transfer",
+    revenue: "Revenue",
+    cost_of_service: "Cost of Service",
+    expense: "Expenses",
+    owners_equity: "Owner's equity",
+    current_assets: "Current assets",
+    fixed_assets: "Fixed Assets",
+    current_liabilities: "Current liabilities",
+    fixed_liabilities: "Fixed liabilities",
+  }
+
+
   def transactions
     (binance_import_lines.cedi_transactions + ecobank_import_lines + momo_import_lines + non_bank_transactions)
       .sort_by(&:sort_order)

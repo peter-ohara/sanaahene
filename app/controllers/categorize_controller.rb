@@ -5,23 +5,26 @@ class CategorizeController < ApplicationController
     @transactions = search_form.transactions.sort_by(&:sort_order)
   end
 
-  def deck
-    @transactions = BinanceImportLine.cedi_transactions + MomoImportLine.all + EcobankImportLine.all + NonBankTransaction.all
-    @transactions = @transactions.sort_by(&:sort_order)
+  def overview
+    @transactions = search_form.transactions
 
-    @by_month = Category.all.map { |category| { name: category.name, data: category.transaction_sum_by_month } }
+    @revenue_by_month = helpers.sum_by_month(@transactions.select { |tx| tx.account_type == :revenue.to_s })
+    @cost_of_service_by_month = helpers.sum_by_month(@transactions.select { |tx| tx.account_type == :cost_of_service.to_s })
 
-    @sum_txs_by_account_type = @transactions.group_by(&:account_type).map { |at, txs| [at, txs.sum(&:delta).abs] }
+    @profit_by_month = [
+      { name: :revenue.to_s.titleize, data: @revenue_by_month },
+      { name: :cost_of_service.to_s.titleize, data: @cost_of_service_by_month },
+      { name: "Profit", data: @cost_of_service_by_month, visible: false }
+    ]
 
-    @revenue_by_month = sum_by_month(@transactions.select { |tx| tx.account_type == REVENUE })
-    @cost_of_service_by_month = sum_by_month(@transactions.select { |tx| tx.account_type == COST_OF_SERVICE })
+    @costs_breakdown = Category.cost_of_service.map { |category| { name: category.name, data: category.transaction_sum_by_month, visible: false } }
 
-    @profit_by_month = [{ name: REVENUE, data: @revenue_by_month },
-                        { name: COST_OF_SERVICE, data: @cost_of_service_by_month }]
-
-    @transactions = @transactions.select(&:uncategorized?) if params[:category] == 'null'
-    @uncategorized_transactions = @transactions.group_by(&:transaction_day)
+    @assets_by_category = sum_by_categories(Category.fixed_assets + Category.current_assets)
+    @liabilities_by_category = sum_by_categories(Category.fixed_liabilities + Category.current_liabilities)
+    @equity_by_category = sum_by_categories(Category.owners_equity.all)
   end
 
-
+  def sum_by_categories(categories)
+    categories.group_by(&:name).map { |c, txs| [c, txs.sum(&:delta).abs] }
+  end
 end
