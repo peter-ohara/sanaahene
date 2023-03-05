@@ -8,7 +8,6 @@ html
     == stylesheet_link_tag "application", "data-turbo-track": "reload"
     == javascript_include_tag "application", "data-turbo-track": "reload", defer: true
     link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"
-    link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"
   
   body
     = render'shared/alert'
@@ -29,7 +28,8 @@ html
       == yield(:top_app_bar).presence || toolbar(navigation_icon: sidenav_icon, title: "Sanaahene")
 
       .min-h-screen.bg-gray-100.pt-12.pb-20
-        == yield
+        .container.mx-auto
+          == yield
         
     div.mt-5[data-controller="modal" data-modal-allow-background-close="true"]
       .hidden.animated.fadeIn.fixed.inset-0.overflow-y-auto.flex.items-center.justify-center[data-modal-target="container" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard turbo:frame-load->modal#open" style="z-index: 9999;"]

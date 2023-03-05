@@ -1,51 +1,36 @@
-.grid.grid-cols-4.gap-2.pt-5.px-2 data-controller="sortable"
-  div.row-span-2
-    .bg-gray-300.rounded.p-2
-      .flex.justify-between
-        .font-bold.text-sm.my-1.mx-3.mb-2 = "Uncategorized (#{@transactions.select { |tx| tx.category.nil? }.count})"
-        .text-sm.my-1.mx-3.mb-2
-      div class="overflow-y-auto min-h-[30rem] max-h-[85vh]" data-sortable-target="list" data-category=""
-        - @transactions.select { |tx| tx.category.nil? }.each do |tx|
-          = link_to(tx, class: "flex flex-col px-3 py-3 text-gray-600 font-medium bg-white rounded shadow my-2", data: { "sortable-target": :card, turbo_frame: "modal" }, id: dom_id(tx)) do
-            = form_for(tx, html: { id: :hidden_category_form }) do |f|
-              = f.hidden_field :category_id, id: :hidden_category_field
-            .flex.justify-between.mb-2
-              div class="#{tx.received? ? "text-green-500" : "text-red-500"}"
-                = number_to_currency tx.amount, unit: "#{tx.fiat_type} "
-              .text-sm.self-center
-                = tx.transaction_date.to_formatted_s(:short)
-            .flex.justify-between.mb-2
-              span.text-sm.rounded.p-1 class="#{bank_color(tx.bank)}" = tx.bank
-              span.text-sm.rounded.bg-gray-100.p-1 = tx.trans_type
-            - if tx.counterparty.present?
-              .text-sm.mb-2.font-bold = tx.headline_text&.squish
-            .text-xs.rounded.bg-gray-100.min-h-10.border.p-2.mb-2 = tx.supporting_text&.squish
-            - if tx.ova.present?
-              div
-                span.text-sm.rounded.bg-gray-100.p-1 = tx.ova
-  - Category.all.each do |category|
-    div
-      .bg-gray-300.rounded.p-2
-        .flex.justify-between
-          .font-bold.text-sm.my-1.mx-3.mb-2 = "#{category.name} (#{category.transactions.count})"
-          .text-sm.my-1.mx-3.mb-2 = number_to_currency category.transactions.sum(&:abs_delta), unit: "GHS "
-        div class="overflow-y-auto h-96" data-sortable-target="list" data-category="#{category.id}"
-          - category.transactions.select{ |tx| tx.category == category}.each do |tx|
-            = link_to(tx, class: "flex flex-col px-3 py-3 text-gray-600 font-medium bg-white rounded shadow my-2", data: { "sortable-target": :card, turbo_frame: "modal" }, id: dom_id(tx)) do
-              = form_for(tx, html: { id: :hidden_category_form }) do |f|
-                = f.hidden_field :category, id: :hidden_category_field
-              .flex.justify-between.mb-2
-                div class="#{tx.received? ? "text-green-500" : "text-red-500"}"
-                  = number_to_currency tx.amount, unit: "#{tx.fiat_type} "
-                .text-sm.self-center
-                  = tx.transaction_date.to_formatted_s(:short)
-              .flex.justify-between.mb-2
-                span.text-sm.rounded.p-1 class="#{bank_color(tx.bank)}" = tx.bank
-                span.text-sm.rounded.bg-gray-100.p-1 = tx.trans_type
-              - if tx.counterparty.present?
-                .text-sm.mb-2.font-bold = tx.headline_text&.squish
-              .text-xs.rounded.bg-gray-100.min-h-10.border.p-2.mb-2 = tx.supporting_text&.squish
-              - if tx.ova.present?
-                div
-                  span.text-sm.rounded.bg-gray-100.p-1 = tx.ova
+= content_for(:top_app_bar) do
+  = toolbar(navigation_icon: sidenav_icon, menu_items: [render('shared/filter_menu')])
+  
 
+.grid.grid-cols-1.lg:grid-cols-3.gap-5.lg:p-3.pt-5
+
+  .lg:col-span-2
+    .m-2.flex.flex-wrap.w-full.justify-content-start.gap-2
+      .text-sm.rounded-full.bg-indigo-300.py-1.px-4.shadow
+        = "#{search_form.start_date.strftime("%-d %b %Y")} - #{search_form.end_date.strftime("%-d %b %Y")}"
+      - search_form.account_types.each do |account_type|
+        .text-sm.rounded-full.bg-indigo-300.py-1.px-4.shadow
+          = account_type
+      - search_form.categories.each do |category|
+        .text-sm.rounded-full.bg-blue-300.py-1.px-4.shadow
+          = category.name
+    
+    = render 'shared/month_chart', transactions: @transactions
+    
+    = render 'shared/average_stats', transactions: @transactions
+
+  .lg:col-span-1
+    .mt-5.pb-1.px-3.border-b-2.flex.justify-between
+      .text-md
+        | Transactions
+        = "(#{@transactions.count})"
+      .text-md = number_to_currency @transactions.sum(&:delta).abs, unit: 'GHS '
+    - @transactions.group_by(&:transaction_day).each do |day, txs|
+      .pl-3.pt-5
+        div.mr-3.text-gray-500.flex.justify-between
+          .text-md = day
+          .text-xs = number_to_currency txs.sum(&:delta), unit: 'GHS '
+      - txs.each do |tx|
+        = render 'shared/transaction', tx: tx
+
+= render('shared/navigation_bar')

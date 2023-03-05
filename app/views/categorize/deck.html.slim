@@ -1,9 +1,13 @@
 = content_for(:top_app_bar) do
   = toolbar(navigation_icon: sidenav_icon)
-  
-= pie_chart(@sum_txs_by_account_type, title: "Transactions sum by Account Type", donut: true, prefix: "GHS ", thousands: ",", zeros: true)
-.my-5
-  = line_chart([ { name: "Income", data: @income_by_month }, { name: "Expenses", data: @expenses_by_month } ], prefix: "GHS ", thousands: ",", zeros: true)
+
+
+.bg-white.rounded.shadow.py-5.md:px-5.m-3
+  = pie_chart(@sum_txs_by_account_type, title: "Transactions sum by Account Type", donut: true, prefix: "GHS ", thousands: ",", zeros: true, adapter: 'highcharts')
+.bg-white.rounded.shadow.py-5.md:px-5.m-3
+  = area_chart(@by_month, prefix: "GHS ", thousands: ",", zeros: true, adapter: 'highcharts', stacked: true)
+.bg-white.rounded.shadow.py-5.md:px-5.m-3
+  = column_chart(@profit_by_month, prefix: "GHS ", thousands: ",", zeros: true, adapter: 'highcharts', library: { xAxis: { labels: { format: '{value:%b %Y}' } } })
 
 div.flex.justify-center.h-full
   div class="basis-full md:basis-1/2 xl:basis-1/3"

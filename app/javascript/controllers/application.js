@@ -7,9 +7,10 @@ application.debug = false
 window.Stimulus   = application
 
 // Import and register TailwindCSS Components
-import { Alert, Slideover, Modal } from "tailwindcss-stimulus-components"
+import { Alert, Slideover, Modal, Dropdown } from "tailwindcss-stimulus-components"
 application.register('slideover', Slideover)
 application.register('alert', Alert)
 application.register('modal', Modal)
+application.register('dropdown', Dropdown)
 
 export { application }

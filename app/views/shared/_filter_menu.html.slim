@@ -1,0 +1,16 @@
+.peter data-controller="dropdown"
+  
+  button.flex.items-center.inline-block.select-none [data-dropdown-target="button"
+    data-action="click->dropdown#toggle click@window->dropdown#hide"]
+    = icon(:filter_alt)
+
+  .absolute.right-0.m-2.hidden data-dropdown-target="menu"
+    .bg-white.rounded.shadow.border.py-2.px-4 class="w-[300px]"
+      = simple_form_for(search_form, method: :get, url: categorize_index_path) do |f|
+        = f.input :account_types, collection: Category.distinct.pluck(:account_type), include_hidden: false, input_html: { multiple: true, data: { controller: 'select', select_target: "input" } }
+        = f.input :category_ids, collection: Category.all, include_hidden: false, input_html: { multiple: true, data: { controller: 'select', select_target: "input" } }, label: "Categories"
+        = f.label "Date Range", class: "block text-sm font-medium text-gray-700 mb-2"
+        = f.input :start_date, as: :date, html5: true
+        = f.input :end_date, as: :date, html5: true
+        .mb-3
+          = f.button :submit, "Search", class: "transition block w-full p-2 rounded-lg shadow-sm sm:text-sm text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-[3px] ring-violet-200 ring-offset-1 focus:ring-violet-20"

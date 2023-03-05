@@ -9,7 +9,7 @@
   .text-xs.mb-2
     = tx.transaction_date.to_formatted_s(:time_only_with_meridian)
   p.text-xs.mb-2 = tx.supporting_text&.squish
-  .flex.gap-2
+  .flex.items-start.gap-2
     .text-xs.rounded.p-1 class="#{bank_color(tx.bank)}" = tx.bank
     .text-xs.rounded.bg-gray-200.p-1 = tx.trans_type
     .grow

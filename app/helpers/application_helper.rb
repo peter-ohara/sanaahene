@@ -50,6 +50,19 @@ module ApplicationHelper
     colors[bank]
   end
 
+  def sum_by_month(transactions)
+    transactions.group_by(&:transaction_month)
+                .sort
+                .map { |month, txs| [month.to_fs(:month_and_year), txs.sum(&:delta).abs] }
+  end
+
+  def monthly_average(transactions)
+    return 0.to_d if transactions.empty?
+
+    values = sum_by_month(transactions).map(&:second)
+    values.sum / values.count
+  end
+
   def fab(icon, url, id = '', classes = '')
     render 'shared/fab', icon_name: icon, url:, id:, classes:
   end

@@ -1,3 +1,5 @@
+@import "choices.js/public/assets/styles/choices.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,5 +12,13 @@
 
     .is-invalid {
         @apply flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300;
+    }
+
+    .btn-primary {
+        @apply flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300;
+    }
+
+    .choices {
+        @apply mb-0
     }
 }
