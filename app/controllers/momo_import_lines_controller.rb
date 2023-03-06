@@ -65,7 +65,7 @@ class MomoImportLinesController < ApplicationController
     if @momo_import_line.update(momo_import_line_params)
       respond_to do |format|
         format.turbo_stream do
-          # render turbo_stream: turbo_stream.replace(@momo_import_line)
+          render turbo_stream: turbo_stream.replace(@momo_import_line)
         end
 
         format.html { redirect_to @momo_import_line, notice: 'Momo import line was successfully updated.' }

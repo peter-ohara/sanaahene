@@ -1,2 +1,1 @@
-= detail_view(@momo_import_line,
-        [:transaction_date, :amount, :from_name, :to_name, :ref, :trans_type, :fees, :e_levy, :bal_before, :bal_after, :from_no, :to_no, :from_acct, :to_acct, :f_id, :ova])
+= render 'shared/transaction', tx: momo_import_line

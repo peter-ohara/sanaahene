@@ -13,7 +13,7 @@ class NonBankTransaction < ApplicationRecord
   end
 
   def supporting_text
-    ActionController::Base.helpers.truncate ref
+    ref
   end
 
   def trailing_content

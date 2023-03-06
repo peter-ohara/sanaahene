@@ -4,6 +4,6 @@
 = panel do
   = turbo_frame_tag "modal"
     = render 'shared/import_line_category_form', import_line: @momo_import_line
-    = render @momo_import_line
+    = detail_view(@momo_import_line, [:transaction_date, :amount, :from_name, :to_name, :ref, :trans_type, :fees, :e_levy, :bal_before, :bal_after, :from_no, :to_no, :from_acct, :to_acct, :f_id, :ova])
     = render 'shared/import_line_notes_form', import_line: @momo_import_line
 

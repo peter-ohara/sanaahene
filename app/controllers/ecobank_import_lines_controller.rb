@@ -55,8 +55,7 @@ class EcobankImportLinesController < ApplicationController
     if @ecobank_import_line.update(ecobank_import_line_params)
       respond_to do |format|
         format.turbo_stream do
-          # TODO Update something to show that the pnl_type was persisted
-          # render turbo_stream: turbo_stream.replace(@momo_import_line)
+          render turbo_stream: turbo_stream.replace(@ecobank_import_line)
         end
 
         format.html { redirect_to @ecobank_import_line, notice: 'Ecobank import line was successfully updated.' }

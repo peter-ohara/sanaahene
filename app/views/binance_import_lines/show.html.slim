@@ -4,5 +4,5 @@
 = panel do
   = turbo_frame_tag "modal"
     = render 'shared/import_line_category_form', import_line: @binance_import_line
-    = render @binance_import_line
+    = detail_view(@binance_import_line, [:created_time, :total_price, :fiat_type, :order_type, :quantity, :asset_type, :price, :exchange_rate, :couterparty, :status, :order_number])
     = render 'shared/import_line_notes_form', import_line: @binance_import_line

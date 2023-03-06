@@ -4,5 +4,5 @@
 = panel do
   = turbo_frame_tag "modal"
     = render 'shared/import_line_category_form', import_line: @ecobank_import_line
-    = render @ecobank_import_line
+    = detail_view(@ecobank_import_line, [:transaction_date, :debit, :credit, :description, :balance, :reference_number])
     = render 'shared/import_line_notes_form', import_line: @ecobank_import_line

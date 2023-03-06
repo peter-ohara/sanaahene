@@ -58,7 +58,13 @@ class BinanceImportLinesController < ApplicationController
   # PATCH/PUT /binance_import_lines/1
   def update
     if @binance_import_line.update(binance_import_line_params)
-      redirect_to @binance_import_line, notice: 'Binance import line was successfully updated.'
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(@binance_import_line)
+        end
+
+        format.html { redirect_to @binance_import_line, notice: 'Binance import line was successfully updated.' }
+      end
     else
       render :edit, status: :unprocessable_entity
     end

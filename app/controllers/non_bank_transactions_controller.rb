@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class NonBankTransactionsController < ApplicationController
-  before_action :set_non_bank_transaction, only: %i[ show edit update destroy ]
+  before_action :set_non_bank_transaction, only: %i[show edit update destroy]
 
   # GET /non_bank_transactions
   def index
@@ -7,8 +9,7 @@ class NonBankTransactionsController < ApplicationController
   end
 
   # GET /non_bank_transactions/1
-  def show
-  end
+  def show; end
 
   # GET /non_bank_transactions/new
   def new
@@ -16,15 +17,14 @@ class NonBankTransactionsController < ApplicationController
   end
 
   # GET /non_bank_transactions/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /non_bank_transactions
   def create
     @non_bank_transaction = NonBankTransaction.new(non_bank_transaction_params)
 
     if @non_bank_transaction.save
-      redirect_to @non_bank_transaction, notice: "Non bank transaction was successfully created."
+      redirect_to @non_bank_transaction, notice: 'Non bank transaction was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,7 +33,13 @@ class NonBankTransactionsController < ApplicationController
   # PATCH/PUT /non_bank_transactions/1
   def update
     if @non_bank_transaction.update(non_bank_transaction_params)
-      redirect_to @non_bank_transaction, notice: "Non bank transaction was successfully updated."
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(@non_bank_transaction)
+        end
+
+        format.html { redirect_to @non_bank_transaction, notice: 'Non bank transaction was successfully updated.' }
+      end
     else
       render :edit, status: :unprocessable_entity
     end
@@ -42,17 +48,19 @@ class NonBankTransactionsController < ApplicationController
   # DELETE /non_bank_transactions/1
   def destroy
     @non_bank_transaction.destroy
-    redirect_to non_bank_transactions_url, notice: "Non bank transaction was successfully destroyed."
+    redirect_to non_bank_transactions_url, notice: 'Non bank transaction was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_non_bank_transaction
-      @non_bank_transaction = NonBankTransaction.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def non_bank_transaction_params
-      params.require(:non_bank_transaction).permit(:transaction_date, :transaction_type, :counter_party, :ref, :amount, :fees, :e_levy, :category_id, :notes)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_non_bank_transaction
+    @non_bank_transaction = NonBankTransaction.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def non_bank_transaction_params
+    params.require(:non_bank_transaction).permit(:transaction_date, :transaction_type, :counter_party, :ref, :amount,
+                                                 :fees, :e_levy, :category_id, :notes)
+  end
 end
