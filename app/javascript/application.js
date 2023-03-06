@@ -11,9 +11,6 @@ window.Highcharts = Highcharts
 
 Chartkick.options = {
     library: {
-        tooltip: {
-            shared: true
-        },
         chart: {
             zoomType: 'x',
             scrollablePlotArea: {

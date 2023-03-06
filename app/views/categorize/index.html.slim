@@ -17,20 +17,20 @@
     
     = render 'shared/month_chart', transactions: @transactions
     
+  
+    .bg-white.rounded.shadow.py-5.my-3
+      = area_chart(@breakdown,
+              title: "Breakdown",
+              thousands: ",",
+              zeros: true,
+              stacked: true,
+              library: { plotOptions: { series: { connectNulls: true } } },
+              adapter: 'highcharts')
+    
     = render 'shared/average_stats', transactions: @transactions
 
   .lg:col-span-1
-    .mt-5.pb-1.px-3.border-b-2.flex.justify-between
-      .text-md
-        | Transactions
-        = "(#{@transactions.count})"
-      .text-md = number_to_currency @transactions.sum(&:delta).abs, unit: 'GHS '
-    - @transactions.group_by(&:transaction_day).each do |day, txs|
-      .pl-3.pt-5
-        div.mr-3.text-gray-500.flex.justify-between
-          .text-md = day
-          .text-xs = number_to_currency txs.sum(&:delta), unit: 'GHS '
-      - txs.each do |tx|
-        = render 'shared/transaction', tx: tx
+    = render 'shared/transaction_list', transactions: @transactions
+
 
 = render('shared/navigation_bar')

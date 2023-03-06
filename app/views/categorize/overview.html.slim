@@ -9,11 +9,12 @@
           adapter: 'highcharts')
 
 .bg-white.rounded.shadow.py-5.md:px-5.m-3
-  = line_chart(@costs_breakdown,
+  = area_chart(@costs_breakdown,
           title: "Costs breakdown",
           thousands: ",",
           zeros: true,
-          stacked: false,
+          stacked: true,
+          library: { plotOptions: { series: { connectNulls: true } } },
           adapter: 'highcharts')
 
 .border-b.py-2.text-center Assets and Liabilities

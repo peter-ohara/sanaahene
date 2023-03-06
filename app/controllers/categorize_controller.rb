@@ -3,6 +3,7 @@
 class CategorizeController < ApplicationController
   def index
     @transactions = search_form.transactions.sort_by(&:sort_order)
+    @breakdown = @transactions.group_by(&:category_name).map { |c, txs| { name: c, data: helpers.sum_by_month(txs) } }
   end
 
   def overview
@@ -17,7 +18,7 @@ class CategorizeController < ApplicationController
       { name: "Profit", data: @cost_of_service_by_month, visible: false }
     ]
 
-    @costs_breakdown = Category.cost_of_service.map { |category| { name: category.name, data: category.transaction_sum_by_month, visible: false } }
+    @costs_breakdown = Category.cost_of_service.map { |category| { name: category.name, data: category.transaction_sum_by_month } }
 
     @assets_by_category = sum_by_categories(Category.fixed_assets + Category.current_assets)
     @liabilities_by_category = sum_by_categories(Category.fixed_liabilities + Category.current_liabilities)
