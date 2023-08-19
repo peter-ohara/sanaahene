@@ -1,24 +1,52 @@
-# README
+# Sanaahene
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Sanaahene is an accounting software tailored for facility managers overseeing short-term rental properties. The software is designed to streamline the financial management of these properties, ensuring that all transactions are accurately recorded and easily accessible.
 
-Things you may want to cover:
+## Features
 
-* Ruby version
+- **Import Transactions**: Seamlessly import transactions from platforms like MTN Mobile Money, Vodafone Cash, and Ecobank.
+  
+- **Multi-Currency Support**: Conduct transactions in both cedis and dollars, providing flexibility for international transactions.
 
-* System dependencies
+- **Intuitive Interface**: The software is built with user-friendliness in mind, ensuring that even those without an accounting background can navigate and utilize its features with ease.
 
-* Configuration
+## Getting Started
 
-* Database creation
+1. **Setup**: Use the `bin/setup` command to install dependencies and set up the database:
+   ```
+   bin/setup
+   ```
 
-* Database initialization
+2. **Running the Server**: Start the Rails server and precompile the CSS and JavaScript using the `bin/dev` command:
+   ```
+   bin/dev
+   ```
 
-* How to run the test suite
+3. **Accessing the Application**: Navigate to `http://localhost:3000` to view the Rails boot screen.
 
-* Services (job queues, cache servers, search engines, etc.)
+### Notes on Setup Scripts
 
-* Deployment instructions
+- **bin/setup**: This script handles the installation of gems, JavaScript dependencies, and sets up the database. It's a reliable tool to ensure a smooth development environment setup.
 
-* ...
+- **bin/dev**: This script installs `foreman` locally and runs the application based on the `Procfile.dev` file. It executes three commands simultaneously:
+   ```
+   # Procfile.dev
+   web: bin/rails server -p 3000
+   js: yarn build --watch
+   css: yarn build:css --watch
+   ```
+   The commands `yarn build --watch` and `yarn build:css --watch` precompile CSS and JavaScript before integrating them into the asset pipeline. The `--watch` option ensures that the code is compiled every time a file is saved.
+
+Both scripts can be found in the `/bin` folder of the Rails application.
+
+## Contributing
+
+Interested in contributing to Sanaahene? We welcome contributions from developers and enthusiasts alike. Feel free to fork the repository, make your changes, and submit a pull request.
+
+## License
+
+The software is open-source and free to use. For licensing details, please refer to the repository.
+
+## Acknowledgements
+
+Special thanks to all contributors and supporters of the Sanaahene project. Your efforts are greatly appreciated.
